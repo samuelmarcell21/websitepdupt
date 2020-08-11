@@ -1,0 +1,491 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-156454913-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-156454913-1');
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <meta name="description" content="myITS SSO">
+    <meta name="author" content="DPTSI ITS">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Icons -->
+    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+    <link rel="shortcut icon" href="https://my.its.ac.id/assets/media/favicons/favicon-web.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://my.its.ac.id/assets/media/favicons/favicon-web.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://my.its.ac.id/assets/plugins/sweetalert2/sweetalert2.min.css">
+    <!-- END Icons -->
+
+    <!-- Stylesheets -->
+
+    <!-- Fonts and Codebase framework -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700">
+    <link rel="stylesheet" id="css-main" href="https://my.its.ac.id/assets/css/codebase.css">
+    <link href="https://my.its.ac.id/assets/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+    <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+    <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
+    <link rel="stylesheet" id="css-theme" href="https://my.its.ac.id/assets/css/themes/corporate.min.css">
+    <link rel="stylesheet" href="https://my.its.ac.id/assets/plugins/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://my.its.ac.id/assets/plugins/cropperjs/dist/cropper.css">
+    <!-- END Stylesheets -->
+
+    <style>
+        .text-primary {
+            color: #013880 !important;
+        }
+
+        .bg-orange{background:#f1c40f;color:#013880}.bg-orange:hover{background:#f39c12}.text-orange{color:#f1c40f}.bg-blue{background:#3498db;color:#fff}
+        .side-menu .active {
+            background: #013880;
+            border: none;
+        }
+
+        .btn-primary {
+            background: #013880;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-primary:focus, .btn-primary:active {
+            background: #013880 !important;
+        }
+
+        .btn-primary.disabled, .btn-primary:disabled {
+            background-color:
+                    #013880;
+            border-color:
+                    #013880;
+        }
+
+        .btn-outline-primary {
+            border: #013880 1px solid;
+            color: #013880;
+            background: transparent;
+        }
+
+        .btn-outline-primary:hover {
+            border: #013880 1px solid;
+            background: #013880;
+            color: #fff;;
+        }
+
+        .btn-outline-primary:focus, .btn-outline-primary:active {
+            border: #013880 1px solid !important;
+            color: #fff !important;
+            background: transparent;
+        }
+
+        .btn-primary:hover, .btn-primary:active {
+            background: #002a61;
+            color: #fff;
+        }
+
+        .block.data-diri {
+            margin-top: -24px !important;
+        }
+
+        .custom-control-input:checked ~ .custom-control-label::before {
+            background-color: #013880 !important;
+            border: #013880 !important;
+        }
+
+        .custom-control-input:active ~ .custom-control-label::before {
+            color: #fff;
+            background-color: #013880 !important;
+            border: #013880 !important;
+        }
+
+        .dropdown-item:hover{
+            background-color: #343a40 !important;
+            color: #fff !important;
+        }
+
+        input::placeholder {
+            font-weight: lighter;
+            color: #cccccc !important;
+        }
+
+        input:active, input:focus {
+            border-color: #013880 !important;
+        }
+
+        .text-primary.text-white-hover:hover {
+            color: #fff !important;
+        }
+
+        .impersonating {
+            padding: 10px;
+            background-color: #fff;
+            position:fixed;
+            top:0;
+            width:100%;
+            z-index:100;
+            /*border-bottom: 1px solid #013880;*/
+        }
+
+        
+        .pic-container{
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .pic-container.pic-medium{
+            width: 96px;
+            height: 96px;
+        }
+
+        .pic-container.pic-circle{
+            border-radius: 50%;
+        }
+
+        .pic-overlay{
+            background-color: #ccc;
+            opacity: 0.5;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            position: relative;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .pic-container:hover .pic-overlay{
+            top: -100%;
+        }
+
+        .pic-overlay a{
+            display: block;
+            padding: 10px;
+        }
+
+        .pic-xs .pic-overlay a{
+            padding: 5px;
+        }
+
+        .info-tooltip {
+            position: absolute; 
+            bottom: 0; 
+            right: 0; 
+            padding: 5px; 
+            margin-right: 10px; 
+            border-bottom-left-radius: 2px;
+            border-bottom-right-radius: 2px
+        }
+
+
+        .btn-outline-danger {
+            color: #ef5350;
+            background-color: transparent;
+            background-image: none;
+            border-color: #ef5350;
+        }
+
+        button.swal2-cancel.swal2-styled {
+            border: #013880 1px solid !important;
+            color: #013880 !important;
+            background: transparent !important;
+        }
+
+        button.swal2-cancel.swal2-styled:hover, button.swal2-cancel.swal2-styled:focus {
+            border: #013880 1px solid !important;
+            background: #013880 !important;
+            color: #fff !important;
+        }
+
+        .button-submit {
+            background-color: #013880; /* Green */
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+    </style>
+    
+
+    
+<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+{% endblock %}
+
+{% block title %}
+    PDUPT
+{% endblock title %}
+
+{% block navbar %}
+
+<div id="page-container" class="sidebar-inverse side-scroll page-header-fixed page-header-glass page-header-inverse main-content-boxed side-trans-enabled">
+    <header id="page-header" class="bg-primary-dark">
+        <!-- Header Content -->
+        <div class="content-header">
+            <!-- Left Section -->
+            <div class="content-header-section">
+                <!-- Logo -->
+                <a class="logo" href="/">
+                    <img srcset="https://my.its.ac.id/assets/media/img/@2x/myits-sso-white.png 2x, https://my.its.ac.id/assets/media/img/myits-sso-white.png 1x" src="https://my.its.ac.id/assets/media/img/myits-sso-white.png" width="100px" alt="home" class="dark-logo">
+                </a>
+                <!-- END Logo -->
+            </div>
+            <!-- END Left Section -->
+
+            <!-- Right Section -->
+            <div class="content-header-section">
+                <!-- Header Navigation -->
+                <!--
+                Desktop Navigation, mobile navigation can be found in #sidebar
+                -->
+                <ul class="nav-main-header">
+                    <li>
+                        <a href="/author">Author</a>
+                    </li>
+                    <li>
+                        <a href="/topic">Topic</a>
+                    </li>
+                    <li>
+                        <a href="/affiliation">Affiliation</a>
+                    </li>
+                </ul>
+
+                <!-- END Header Navigation -->
+
+                <!-- Toggle Sidebar -->
+                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none" data-toggle="layout" data-action="sidebar_toggle">
+                    <i class="fa fa-navicon"></i>
+                </button>
+                <!-- END Toggle Sidebar -->
+            </div>
+            <!-- END Right Section -->
+        </div>
+        <!-- END Header Content -->
+
+        <!-- Header Loader -->
+        <div id="page-header-loader" class="overlay-header bg-primary">
+            <div class="content-header content-header-fullrow text-center">
+                <div class="content-header-item">
+                    <i class="fa fa-sun-o fa-spin text-white"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- END Header Loader -->
+    </header>
+
+{% endblock navbar %}
+
+{% block content %}
+
+{% load static %}
+
+<main id="main-container" style="min-height: 829px;">
+
+    <img style="width:100%" src="{% static "author/img/fotoits.jpg" %}" alt="Background ITS" style="position: relative;">
+
+    <div class="tulisan" style="position: absolute; top:130px; left:390px; font-family: 'Quicksand', sans-serif; font-size:200%; color:white;">
+        Collaborator Finder
+    </div>
+
+    <div class="tulisan2" style="position: absolute; top:170px; left:390px; font-family: 'Quicksand', sans-serif; font-size:100%; color:white;">
+        Established: July 12, 2020
+    </div>
+    
+    <div class="container" style="font-family: 'Quicksand', sans-serif; margin-top:50px; margin-bottom:20px">
+        <div class="text-center">
+            <h1 style="font-weight:bold;">Find Your Collaborator!</h1>
+        </div>
+    </div>
+
+    <div class="container" style="font-family: 'Quicksand', sans-serif; margin-bottom:40px; ">
+        <div class="text-center">
+            Enter title of your paper to easily find papers 
+            <br>
+            or authors that have similar field as yours.
+        </div>
+    </div>
+
+    <div class="container" style="width: 100%;">
+        <form action="/papers/search/" method="post" class="text-center">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="title" style="font-family: 'Quicksand', sans-serif;">Title: </label>
+                <input type="text" class="form-control" placeholder="Enter Title" id="title" name="title" >
+            </div>
+            <button type="Submit" class="btn btn-primary" style="background-color: #013880; font-family: 'Quicksand', sans-serif; margin:30px;">Find Collaborator</button>
+        </form>
+    </div>
+
+    <div class="container" class="text-center">
+        <div class="visualisasi1" style="width: 100%; height: 650px; background-color:white; margin-top: 65px;text-align:center; padding-top:40px; border:1px solid black; margin-bottom:70px; float:left;">
+            <p style="font-family: 'Quicksand', sans-serif;">Affiliations Publications from 2010-2020</p>
+            <img style="width:1050; height:500px" src="{% static "author/img/visualisasi_univ.jpg" %}" alt="Visualisasi Universitas" style="position: relative;">
+        </div>
+    </div>
+
+    <div class="container" class="text-center">
+        <div class="visualisasi1" style="width: 100%; height: 650px; background-color:white; margin-top: 65px;text-align:center; padding-top:40px; border:1px solid black; margin-bottom:70px; float:left;">
+            <p style="font-family: 'Quicksand', sans-serif;">Topics</p>
+            <img style="width:90%; " src="{% static "author/img/SVG.jpg" %}" alt="Visualisasi Topik SVG" style="position: relative;">
+        </div>
+    </div>
+
+    <div class="container">
+        
+    </div>
+
+</main>
+
+
+{% endblock content %}
+
+{% block footer %}
+<footer id="page-footer" class="bg-white opacity-0" style="opacity: 1;">
+    <div class="content py-20 font-size-xs clearfix">
+        <div class="float-left" style="padding-top: 40px">
+            <div class="info">© 2020 Institut Teknologi Sepuluh Nopember</div>
+        </div>
+        <div class="float-right">
+            <img srcset="https://my.its.ac.id/assets/media/img/@2x/Logo-its.png 2x, https://my.its.ac.id/assets/media/img/Logo-its.png 1x" src="https://my.its.ac.id/assets/media/img/Logo-its.png" alt="Logo ITS" class="dark-logo mr-2" width="100px">
+            <img srcset="https://my.its.ac.id/assets/media/img/@2x/logo-ITSsemangatbaru.png 2x, https://my.its.ac.id/assets/media/img/logo-ITSsemangatbaru.png 1x" src="https://my.its.ac.id/assets/media/img/logo-ITSsemangatbaru.png" width="100px" alt="Logo ITS Semangat Baru" class="dark-logo">
+        </div>
+    </div>
+</footer>
+{% endblock %}
+
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://my.its.ac.id/assets/plugins/chartjs/Chart.min.js"></script>
+    <script src="https://my.its.ac.id/assets/js/core/jquery.min.js"></script>
+    <script src="https://my.its.ac.id/assets/js/codebase.core.min.js"></script>
+    <script src="https://my.its.ac.id/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="https://my.its.ac.id/assets/js/codebase.app.min.js"></script>
+    <script src="https://my.its.ac.id/assets/js/pages/db_corporate.min.js"></script>
+    <script src="https://my.its.ac.id/assets/js/webauthn/base64url-arraybuffer.js"></script>
+    <script src="https://my.its.ac.id/assets/js/webauthn/cbor.js"></script>
+    <script src="https://my.its.ac.id/assets/js/webauthn/helpers.js"></script>
+    <script src="https://my.its.ac.id/assets/plugins/cropperjs/dist/cropper.js"></script>
+    <script src="https://my.its.ac.id/assets/plugins/jquery-croppers/dist/jquery-cropper.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script>
+            var $image;
+            var cropper;
+            $(document).on('click', '.change-lang', function(){
+                window.location = $(this).attr('href') + `&continue=${window.location.href}`;
+            });
+
+            const dt = new Date();
+
+            $("#page-footer .info").html(`&copy; ${dt.getFullYear()} Institut Teknologi Sepuluh Nopember`);
+
+            $(".profile-pic").click(function () {
+                $(".profile-pic-modal").modal('show');
+            });
+
+            $("#profilePictureForm").submit(async function (e) {
+                e.preventDefault();
+                cropper = $image.data('cropper');
+                data = $(this).data();
+                result = $image.cropper(data.method, data.option);
+
+                result.toBlob(async function(blob) {
+                    const formData = new FormData();
+                    formData.append("picture", blob);
+                    $(".submit-btn-main").hide();
+                    $(".submit-btn-loading").show();
+
+                    try {
+                        const res = await $.ajax({
+                            url: 'https://my.its.ac.id/sso/account/change-image',
+                            type: 'POST',
+                            data: formData,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                        });
+
+                        $("#imgProfilePic").attr('src', `data:image/png;base64,${res['data']}`);
+                        $('.profile-pic-modal').modal('hide');
+                        Swal.fire(
+                            '',
+                            res['message'],
+                            'success'
+                        );
+                    } catch (e) {
+
+                        Swal.fire(
+                            '',
+                            e.responseJSON.message,
+                            'error'
+                        );
+                        console.log(e.responseJSON.message);
+
+                    } finally {
+                        $(".submit-btn-main").show();
+                        $(".submit-btn-loading").hide();
+                    }
+
+                });
+            });
+
+            function readURL(input) {
+                $('#image-thumbnail').css('display','block')
+                if (input.files && input.files[0]) {
+                    console.log(input.files);
+                    var maxSize = parseInt($("#profilePicture").attr('max-size'),10),
+                    size = input.files[0].size;
+                    if (size > maxSize) {
+                        Swal.fire(
+                            '',
+                            `File too lage`,
+                            'error'
+                        );
+                     return   
+                    }
+                    $image = $('#image-thumbnail');
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#image-thumbnail')
+                            .attr('src', e.target.result)
+                            .width('auto')
+                            .height('auto');
+
+                        $image.cropper('destroy');
+                        $image.cropper({
+                            viewMode: 0,
+                            minCropBoxWidth: 200,
+                            minCropBoxHeight: 200,
+                            dragMode: 'none',
+                            aspectRatio: 1,
+                            crop: function(event) {
+    
+                            }
+                        });
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
+{% endblock %}

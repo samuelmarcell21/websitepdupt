@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+
+        {% endblock title %}
+    </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% block app_css %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/styles.css" %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+    {% endblock app_css %}
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+    <style>
+
+        body{
+            background-color: #F2F5F5;
+        }
+
+        .navbar-default .navbar-nav > .active > a,
+        .navbar-default .navbar-nav > .active > a:hover,
+        .navbar-default .navbar-nav > .active > a:focus {
+        color: #013880; /* <—– change your color here*/
+        background-color: transparent;
+        }
+
+        #todays-table {
+            margin-left: 300px;
+            margin-top:100px;
+            margin-right:300px;
+        }
+
+        .list-group-mine .list-group-item {
+            background-color: #013880;
+            border-top: 1px solid #0091b5;
+            border-left-color: #fff;
+            border-right-color: #fff;
+        }
+
+}
+    </style>
+
+{% block head %}
+
+{% endblock %}
+
+</head>
+<body>
+
+    {% block navbar %}
+
+    {% endblock navbar %}
+
+    {% block content %}
+    
+    {% endblock content %}
+
+    {% block footer %}
+    
+    {% endblock %}
+
+    {% block script %}
+    
+    {% endblock %}
+    
+</body>
+</html>
