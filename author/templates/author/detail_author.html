@@ -1,6 +1,32 @@
 {% extends "base.html" %}
 
 {% block head %}
+<style>
+    .grid-container {
+    display: grid;
+    grid-template-columns: 0.4fr 1.6fr;
+    grid-template-rows: 0.6fr 1.4fr 1fr;
+    gap: 5px 5px;
+    grid-template-areas: "FOTO DATAAUTH" "VISUALISASI VISUALISASI" "FILTER DATAPUB";
+    }
+
+    .VISUALISASI { grid-area: VISUALISASI; }
+
+    .FILTER { grid-area: FILTER; }
+
+    .DATAPUB { grid-area: DATAPUB; }
+
+    .FOTO { grid-area: FOTO; }
+
+    .DATAAUTH {
+    display: grid;
+    grid-template-columns: ;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 1px 1px;
+    grid-template-areas: "." "." "." ".";
+    grid-area: DATAAUTH;
+    }
+    </style>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-156454913-1"></script>
     <script>
@@ -42,10 +68,10 @@
     <link rel="stylesheet" href="https://my.its.ac.id/assets/plugins/sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="https://my.its.ac.id/assets/plugins/cropperjs/dist/cropper.css">
     <!-- END Stylesheets -->
-
     
-<style type="text/css">/* Chart.js */
-@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+{% comment %} tambahan js  {% endcomment %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" integrity="sha512-SUJFImtiT87gVCOXl3aGC00zfDl6ggYAw5+oheJvRJ8KBXZrr/TMISSdVJ5bBarbQDRC2pR5Kto3xTR0kpZInA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
 
 {% endblock %}
 
@@ -54,7 +80,6 @@
 {% endblock title %}
 
 {% block navbar %}
-
 <div id="page-container" class="sidebar-inverse side-scroll page-header-fixed page-header-glass page-header-inverse main-content-boxed side-trans-enabled">
     <header id="page-header" class="bg-primary-dark">
         <!-- Header Content -->
@@ -119,8 +144,30 @@
 {% load static %}
 
     <main id="main-container" style="min-height: 829px;">
+        {% comment %} <canvas id="polar-chart" width="400" height="100"></canvas> {% endcomment %}
         <div class="content" style="margin-top: 50px;">
-            ini halaman detail author
+        <div class="grid-container">
+            <div class="FOTO">
+                 <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:200px; border-radius: 50%;"> 
+            </div>
+            <div class="DATAAUTH">
+                <div>{{ author.name }}</div>
+                <div>{{author.id_univ }}</div>
+                <div>Jumlah Pub {{ countpub }} || Jumlah citation {{sumcite.cite__sum}} </div>
+                <div>nidn : {{author.nidn}}  i10-index : {{author.i10_index}}  h-index : {{author.h_index}}</div>                                
+            
+            </div>
+
+            <div class="VISUALISASI">
+                <canvas id="doughnut-chart" width="400" height="100"></canvas>
+            </div>
+            
+            <div class="FILTER">
+                filter disini
+            </div>
+            <div class="DATAPUB"> Data Publikasi</div>
+
+            </div>
         </div>
     </main>
 
@@ -159,4 +206,46 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    {% comment %} tambahan {% endcomment %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js" integrity="sha512-G8JE1Xbr0egZE5gNGyUm1fF764iHVfRXshIoUWCTPAbKkkItp/6qal5YAHXrxEu4HNfPTQs6HOu3D5vCGS1j3w==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js" integrity="sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg==" crossorigin="anonymous"></script>
+    <script>
+    new Chart(document.getElementById("doughnut-chart"), {
+        type: 'pie',
+        data: {
+        labels: ["Topik {{author.topik_dominan1}}", "Topik {{author.topik_dominan2}}", "Topik {{author.topik_dominan3}}",],
+        datasets: [{
+            label: "Jumlah Publikasi Berdasarkan Topik",
+            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f",],
+            data: [{{author.nilai_dominan1}},{{author.nilai_dominan2}},{{author.nilai_dominan3}}]
+        }]
+        },
+        options: {
+        title: {
+            display: true,
+            text: 'Jumlah Publikasi Berdasarkan topik'
+        }
+        }
+    });
+    new Chart(document.getElementById("polar-chart"), {
+        type: 'polarArea',
+        data: {
+        labels: ["Topik {{author.topik_dominan1}}", "Topik {{author.topik_dominan2}}", "Topik {{author.topik_dominan3}}",],
+        datasets: [{
+            label: "Publikasi Topik Terbanyak 3 tahun terakhir",
+            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f",],
+            data: [{{author.nilai_dominan1}},{{author.nilai_dominan2}},{{author.nilai_dominan3}}]
+        }]
+        },
+        options: {
+        title: {
+            display: true,
+            text: 'Publikasi Topik Terbanyak 3 tahun terakhir'
+        }
+        }
+    });
+</script>
 {% endblock %}

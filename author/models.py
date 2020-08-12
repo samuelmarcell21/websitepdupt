@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 class Authors(models.Model):
-    nidn = models.CharField(max_length=25)
+    nidn = models.CharField(max_length=25, primary_key=True)
     id_univ = models.CharField(max_length=25)
     name = models.CharField(max_length=255)
     scholar_id = models.CharField(max_length=255)
