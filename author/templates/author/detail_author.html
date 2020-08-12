@@ -118,56 +118,12 @@
 
 {% load static %}
 
+    <main id="main-container" style="min-height: 829px;">
+        <div class="content" style="margin-top: 50px;">
+            ini halaman detail author
+        </div>
+    </main>
 
-<main id="main-container" style="min-height: 829px;">
-    <div class="content">
-        {% if users.has_other_pages %}
-            <nav aria-label="Page navigation example" style="margin-top:50px">
-                <ul class="pagination justify-content-end">
-                    {% if users.has_other_pages %}
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-end">
-                        {% if users.has_previous %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ users.previous_page_number }}" tabindex="-1" style="color:#013880;">Previous</a>
-                            </li>
-                        {% else %}
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">Previous</a>
-                            </li>
-                        {% endif %}
-            
-                        
-                        {% for i in users.paginator.page_range %}
-                        {% if users.number == i %}
-                            <li class="page-item active"><span class="page-link" style="background-color:#013880;">{{ i }} <span class="sr-only">(current)</span></span></li>
-                        {% else %}
-                            <li class="page-item"><a href="?page={{ i }}" class="page-link" style="color:#013880;">{{ i }}</a></li>
-                        {% endif %}
-                        {% endfor %}
-            
-                        {% if users.has_next %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ users.next_page_number }}" style="color:#013880;">Next</a>
-                        </li>
-                            {% else %}
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#">Next</a>
-                            </li>
-                            {% endif %}
-                        </ul>
-                    </nav>
-                    {% endif %}
-                </ul>
-            </nav>
-        {% endif %}
-        
-        {% for authors in users %}
-        <a href='{{ authors.nidn }}'> {{ authors.name }} </p>
-        {% endfor %}
-        
-            </div>
-        </main>
 {% endblock content %}
 
 {% block footer %}

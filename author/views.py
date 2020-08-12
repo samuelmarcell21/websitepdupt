@@ -18,3 +18,10 @@ def showauthor(request):
         users = paginator.page(paginator.num_pages)
 
     return render(request, 'author/author.html', {'users': users})
+
+def show_detailauthor(request, *args, **kwargs):
+    nidn_author = kwargs['nidn']
+    author = Authors.objects.filter(nidn=nidn_author).values('name', 'nidn', 'h_index', 'i10_index')
+    print(author)
+
+    return render(request, 'author/detail_author.html')
