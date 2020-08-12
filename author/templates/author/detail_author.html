@@ -154,7 +154,7 @@
                 <div>{{ author.name }}</div>
                 <div>{{author.id_univ }}</div>
                 <div>Jumlah Pub {{ countpub }} || Jumlah citation {{sumcite.cite__sum}} </div>
-                <div>nidn : {{author.nidn}}  i10-index : {{author.i10_index}}  h-index : {{author.h_index}}</div>                                
+                <div><pre>nidn : {{author.nidn}}    i10-index : {{author.i10_index}}    h-index : {{author.h_index}}</pre></div>                                
             
             </div>
 
@@ -165,9 +165,14 @@
             <div class="FILTER">
                 filter disini
             </div>
-            <div class="DATAPUB"> Data Publikasi</div>
+        </div>
+            <div class="DATAPUB">
+            {% for paper in papers %}
+                <p>{{ paper.title }}</p>
+                <br>
+            {% endfor %}  
+        </div>
 
-            </div>
         </div>
     </main>
 
