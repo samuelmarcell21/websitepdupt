@@ -36,3 +36,35 @@ class Authors(models.Model):
     threeyears_score_v2 = models.FloatField()
     class Meta:
         db_table = "researcher"
+
+class Papers(models.Model):
+    id_pub = models.CharField(max_length=25)
+    nidn = models.CharField(max_length=25)
+    title = models.CharField(max_length=1000)
+    cite = models.CharField(max_length=10)
+    authors = models.CharField(max_length=2000)
+    keywords = models.CharField(max_length=1000)
+    abstract = models.CharField(max_length=2000)
+    year = models.CharField(max_length=4)
+    source_title = models.CharField(max_length=1000)
+    volume = models.CharField(max_length=100)
+    DOI = models.CharField(max_length=100)
+    link = models.CharField(max_length=500)
+    class Meta:
+        db_table = "dataset_publication"
+
+class Papers_Update(models.Model):
+    id_pub = models.CharField(max_length=25)
+    nidn = models.CharField(max_length=25)
+    title = models.CharField(max_length=1000)
+    cite = models.CharField(max_length=10)
+    authors = models.CharField(max_length=2000)
+    keywords = models.CharField(max_length=1000)
+    abstract = models.CharField(max_length=2000)
+    year = models.CharField(max_length=4)
+    source_title = models.CharField(max_length=1000)
+    volume = models.CharField(max_length=100)
+    DOI = models.CharField(max_length=100)
+    link = models.CharField(max_length=500)
+    class Meta:
+        db_table = "dataset_publication_update"

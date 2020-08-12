@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from author.models import Authors
+from author.models import Authors, Papers, Papers_Update
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
@@ -22,6 +22,5 @@ def showauthor(request):
 def show_detailauthor(request, *args, **kwargs):
     nidn_author = kwargs['nidn']
     author = Authors.objects.filter(nidn=nidn_author).values('name', 'nidn', 'h_index', 'i10_index')
-    print(author)
-
-    return render(request, 'author/detail_author.html')
+    paper = Papers.objects.filter(nidn=nidn_author).values('nidn', 'title', 'cite', 'authors', 'year')
+    return render(request, 'author/detail_author.html', {'papers': paper, 'author': author})
