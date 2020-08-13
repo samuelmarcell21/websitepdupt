@@ -7,5 +7,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('author/', include('author.urls')),
     path('affiliation/', include('affiliation.urls')),
+    path('topic/', include('topic.urls')),
     path('', views.find),
 ]
