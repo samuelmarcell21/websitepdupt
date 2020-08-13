@@ -1,0 +1,389 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-156454913-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-156454913-1');
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <meta name="description" content="myITS SSO">
+    <meta name="author" content="DPTSI ITS">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- Icons -->
+    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+    <link rel="shortcut icon" href="https://my.its.ac.id/assets/media/favicons/favicon-web.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://my.its.ac.id/assets/media/favicons/favicon-web.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://my.its.ac.id/assets/plugins/sweetalert2/sweetalert2.min.css">
+    <!-- END Icons -->
+
+    <!-- Stylesheets -->
+
+    <!-- Fonts and Codebase framework -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700">
+    <link rel="stylesheet" id="css-main" href="https://my.its.ac.id/assets/css/codebase.css">
+    <link href="https://my.its.ac.id/assets/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+    <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+    <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
+    <link rel="stylesheet" id="css-theme" href="https://my.its.ac.id/assets/css/themes/corporate.min.css">
+    <link rel="stylesheet" href="https://my.its.ac.id/assets/plugins/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://my.its.ac.id/assets/plugins/cropperjs/dist/cropper.css">
+    <!-- END Stylesheets -->
+
+    
+<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+{% endblock %}
+
+{% block title %}
+    PDUPT
+{% endblock title %}
+
+{% block navbar %}
+
+<div id="page-container" class="sidebar-inverse side-scroll page-header-fixed page-header-glass page-header-inverse main-content-boxed side-trans-enabled">
+    <header id="page-header" class="bg-primary-dark">
+        <!-- Header Content -->
+        <div class="content-header">
+            <!-- Left Section -->
+            <div class="content-header-section">
+                <!-- Logo -->
+                <a class="logo" href="/">
+                    <img srcset="https://my.its.ac.id/assets/media/img/@2x/myits-sso-white.png 2x, https://my.its.ac.id/assets/media/img/myits-sso-white.png 1x" src="https://my.its.ac.id/assets/media/img/myits-sso-white.png" width="100px" alt="home" class="dark-logo">
+                </a>
+                <!-- END Logo -->
+            </div>
+            <!-- END Left Section -->
+
+            <!-- Right Section -->
+            <div class="content-header-section">
+                <!-- Header Navigation -->
+                <!--
+                Desktop Navigation, mobile navigation can be found in #sidebar
+                -->
+                <ul class="nav-main-header">
+                    <li>
+                        <a href="/author">Author</a>
+                    </li>
+                    <li>
+                        <a href="/topic">Topic</a>
+                    </li>
+                    <li>
+                        <a href="/affiliation">Affiliation</a>
+                    </li>
+                </ul>
+
+                <!-- END Header Navigation -->
+
+                <!-- Toggle Sidebar -->
+                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none" data-toggle="layout" data-action="sidebar_toggle">
+                    <i class="fa fa-navicon"></i>
+                </button>
+                <!-- END Toggle Sidebar -->
+            </div>
+            <!-- END Right Section -->
+        </div>
+        <!-- END Header Content -->
+
+        <!-- Header Loader -->
+        <div id="page-header-loader" class="overlay-header bg-primary">
+            <div class="content-header content-header-fullrow text-center">
+                <div class="content-header-item">
+                    <i class="fa fa-sun-o fa-spin text-white"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- END Header Loader -->
+    </header>
+
+{% endblock navbar %}
+
+{% block content %}
+
+{% load static %}
+
+
+<main id="main-container" style="min-height: 829px;">
+    <div class="content" style="margin-top: 50px;">
+        <div id="chart" style="width: 70%; height: 70%;">
+        asdasdas
+        </div>
+        Visualisasi persebaran jumlah topik 
+        <svg overflow='scroll' id='vis' width='1600' height='900' transform='scale(0.6)' z-index='1'>
+            <g>
+                <g class="axis" transform="translate(0,0)">
+                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                        2010        
+                    </text>
+                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                    </line>
+                </g>
+                <g class="axis" transform="translate(150,0)">
+                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                        2011     
+                    </text>
+                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                    </line>
+                </g>
+                <g class="axis" transform="translate(300,0)">
+                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                        2012        
+                    </text>
+                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                    </line>
+                </g>
+                <g class="axis" transform="translate(450,0)">
+                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                        2013        
+                    </text>
+                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                    </line>
+                </g>
+                <g class="axis" transform="translate(600,0)">
+                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                        2014        
+                    </text>
+                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                    </line>
+                </g>
+                <g class="axis" transform="translate(750,0)">
+                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                        2015        
+                    </text>
+                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                    </line>
+                </g>
+                <g class="axis" transform="translate(900,0)">
+                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                        2016        
+                    </text>
+                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                    </line>
+                </g>
+                <g class="axis" transform="translate(1050,0)">
+                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                        2017        
+                    </text>
+                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                    </line>
+                </g>
+                <g class="axis" transform="translate(1200,0)">
+                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                        2018        
+                    </text>
+                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
+
+                    </line>
+                </g>
+                <g class="axis" transform="translate(1350,0)">
+                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                        2019        
+                    </text>
+                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
+
+                    </line>
+                </g>
+                <g class="axis" transform="translate(1500,0)">
+                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                        2020        
+                    </text>
+                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
+
+                    </line>
+                </g>
+            </g>
+            <g>
+                <path d="M 0,350 C 75,347.5823046875 75,333.07613281249996 150,330.6584375 L 150,328.51296875 C 75,325.82708984375006 75,352.68587890624997 0,350" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: purple;" opacity="1"> </path>
+
+                <path d="M 150,330.6584375 C 225,330.41265625 225,332.87046875000004 300,332.62468750000005 L 300,339.91234375 C 225,338.487421875 225,329.937890625 150,328.51296875" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: purple;" opacity="1"> </path>
+                
+                <path d="M 300,332.62468750000005 C 375,330.1534179687501 375,354.8661132812499 450,352.39484374999995 L 450,357.629921875 C 375,355.415224609375 375,342.12704101562497 300,339.91234375" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: purple;" opacity="1"> </path>
+                
+                <path d="M 450,352.39484374999995 C 525,351.33580078124993 525,361.92623046875 600,360.8671875 L 600,371.42109375 C 525,369.697197265625 525,359.353818359375 450,357.629921875" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: purple;" opacity="1"> </path>
+                
+                <path d="M 600,360.8671875 C 675,357.6908203125 675,389.4544921875 750,386.27812500000005 L 750,398.03656250000006 C 675,394.70962890625003 675,374.74802734375004 600,371.42109375" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: purple;" opacity="1"> </path>
+                
+                <path d="M 750,386.27812500000005 C 825,385.16601562500006 825,378.493359375 900,377.38125 L 900,406.620625 C 825,405.5476171875 825,399.10957031250007 750,398.03656250000006" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: purple;" opacity="1"> </path>
+                
+                <path d="M 900,377.38125 C 975,371.89738281250004 975,426.7360546875 1050,421.2521875 L 1050,450.28234375 C 975,444.82462890625 975,412.07833984375003 900,406.620625" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: purple;" opacity="1"> </path>
+                
+                <path d="M 1050,421.2521875 C 1125,418.10273437499995 1125,449.5972656250001 1200,446.44781250000005 L 1200,484.59015625000006 C 1125,480.30167968750004 1125,454.5708203125 1050,450.28234375" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: purple;" opacity="1"> </path>
+                
+                <path d="M 1200,446.44781250000005 C 1275,440.0915234375001 1275,503.65441406249994 1350,497.29812499999997 L 1350,534.3578125 C 1275,528.13685546875 1275,490.8111132812501 1200,484.59015625000006" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: purple;" opacity="1"> </path>
+                
+                <path d="M 1350,497.29812499999997 C 1425,492.19333984375 1425,543.2411914062501 1500,538.13640625 L 1500,574.764453125 C 1425,569.713623046875 1425,539.4086425781251 1350,534.3578125" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: purple;" opacity="1"> </path>
+                
+                <path d="M 1500,538.13640625 C 1575,537.783984375 1575,541.308203125 1650,540.95578125 L 1650,577.035390625 C 1575,576.7515234375 1575,575.0483203125 1500,574.764453125" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: purple;" opacity="1"> </path>
+                
+                <path d="M 0,350 C 75,345.4378125 75,318.0646875 150,313.5025 L 150,317.31875 C 75,313.23359375 75,354.08515625 0,350" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: black;" opacity="1"> </path>
+                
+                <path d="M 150,313.5025 C 225,311.330078125 225,333.05429687500003 300,330.88187500000004 L 300,328.62468750000005 C 225,327.2114453125 225,318.73199218750005 150,317.31875" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: black;" opacity="1"> </path>
+                
+                <path d="M 300,330.88187500000004 C 375,327.67808593750004 375,359.7159765625 450,356.5121875 L 450,348.39484374999995 C 375,345.92357421875 375,331.09595703125 300,328.62468750000005" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: black;" opacity="1"> </path>
+                
+                <path d="M 450,356.5121875 C 525,356.2415234375 525,354.6175390625 600,354.346875 L 600,356.8671875 C 525,355.80814453125 525,349.45388671874997 450,348.39484374999995" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: black;" opacity="1"> </path>
+                
+                <path d="M 600,354.346875 C 675,348.916328125 675,316.33304687500004 750,310.90250000000003 L 750,345.56125000000003 C 675,344.14800781250005 675,358.2804296875 600,356.8671875" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: black;" opacity="1"> </path>
+                
+                <path d="M 750,310.90250000000003 C 825,298.43773437500005 825,423.085390625 900,410.620625 L 900,405.8528125 C 825,398.3163671875 825,353.09769531250004 750,345.56125000000003" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: black;" opacity="1"> </path>
+                
+                <path d="M 900,410.620625 C 975,409.34296875 975,401.67703124999997 1050,400.39937499999996 L 1050,417.2521875 C 975,415.827265625 975,407.277734375 900,405.8528125" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: black;" opacity="1"> </path>
+                
+                <path d="M 1050,400.39937499999996 C 1125,397.79328124999995 1125,423.85421875000003 1200,421.248125 L 1200,442.44781250000005 C 1125,439.298359375 1125,420.401640625 1050,417.2521875" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: black;" opacity="1"> </path>
+                
+                <path d="M 1200,421.248125 C 1275,406.04117187500003 1275,314.799453125 1350,299.59250000000003 L 1350,404.22375 C 1275,399.4457421875 1275,447.22582031250005 1200,442.44781250000005" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: black;" opacity="1"> </path>
+                
+                <path d="M 1350,299.59250000000003 C 1425,299.37515625000003 1425,298.07109375 1500,297.85375 L 1500,417.24812499999996 C 1425,415.62007812499996 1425,405.851796875 1350,404.22375" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: black;" opacity="1"> </path>
+                
+                <path d="M 1500,297.85375 C 1575,297.85375 1575,297.85375 1650,297.85375 L 1650,418.125625 C 1575,418.0159375 1575,417.35781249999997 1500,417.24812499999996" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: black;" opacity="1"> </path>
+                
+                <path d="M 0,350 C 75,347.81412109375003 75,334.69884765625 150,332.51296875 L 150,330.301484375 C 75,327.83916992187494 75,352.46231445312503 0,350" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: blue;" opacity="1"> </path>
+                
+                <path d="M 150,332.51296875 C 225,330.78869140625 225,320.44302734375003 300,318.71875 L 300,326.88187500000004 C 225,326.4544238281251 225,330.72893554687494 150,330.301484375" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: blue;" opacity="1"> </path>
+                
+                <path d="M 300,318.71875 C 375,318.5034375 375,320.65656249999995 450,320.44124999999997 L 450,339.91437499999995 C 375,338.2853125 375,328.5109375 300,326.88187500000004" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: blue;" opacity="1"> </path>
+                
+                <path d="M 450,320.44124999999997 C 525,319.79125 525,315.89125 600,315.24125000000004 L 600,350.346875 C 525,349.0428125 525,341.21843749999994 450,339.91437499999995" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: blue;" opacity="1"> </path>
+                
+                <path d="M 600,315.24125000000004 C 675,310.95125 675,353.85125000000005 750,349.56125000000003 L 750,382.27812500000005 C 675,378.28671875000003 675,354.33828125 600,350.346875" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: blue;" opacity="1"> </path>
+                
+                <path d="M 750,349.56125000000003 C 825,343.42484375000004 825,306.60640625 900,300.47 L 900,373.38125 C 825,372.26914062500003 825,383.39023437500003 750,382.27812500000005" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: blue;" opacity="1"> </path>
+                
+                <path d="M 900,300.47 C 975,300.36234375000004 975,299.71640625 1050,299.60875 L 1050,396.39937499999996 C 975,393.52210937499996 975,376.25851562500003 900,373.38125" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: blue;" opacity="1"> </path>
+                
+                <path d="M 1050,299.60875 C 1125,298.5240625 1125,309.37093749999997 1200,308.28625 L 1200,417.248125 C 1125,414.64203125 1125,399.00546875 1050,396.39937499999996" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: blue;" opacity="1"> </path>
+                
+                <path d="M 1200,308.28625 C 1275,295.7940625 1275,420.7159375 1350,408.22375 L 1350,493.29812499999997 C 1275,483.791875 1275,426.754375 1200,417.248125" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: blue;" opacity="1"> </path>
+                
+                <path d="M 1350,408.22375 C 1425,406.595703125 1425,422.87617187499995 1500,421.24812499999996 L 1500,525.8753125000001 C 1425,521.8031640625001 1425,497.3702734375 1350,493.29812499999997" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: blue;" opacity="1"> </path>
+                
+                <path d="M 1500,421.24812499999996 C 1575,421.13843749999995 1575,422.2353125 1650,422.125625 L 1650,529.7915625 C 1575,529.30203125 1575,526.3648437500001 1500,525.8753125000001" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: blue;" opacity="1"> </path>
+                
+                <path d="M 0,350 C 75,346.903359375 75,328.323515625 150,325.226875 L 150,326.6584375 C 75,323.7407421875 75,352.9176953125 0,350" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: red;" opacity="1"> </path>
+                
+                <path d="M 150,325.226875 C 225,322.89119140625 225,346.24802734375 300,343.91234375 L 300,339.47867187500003 C 225,337.87614257812504 225,328.260966796875 150,326.6584375" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: red;" opacity="1"> </path>
+                
+                <path d="M 300,343.91234375 C 375,343.91208984375 375,343.91462890624996 450,343.91437499999995 L 450,352.5121875 C 375,350.882998046875 375,341.107861328125 300,339.47867187500003" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: red;" opacity="1"> </path>
+                
+                <path d="M 450,343.91437499999995 C 525,339.97603515624996 525,379.35943359375 600,375.42109375 L 600,383.03679687500005 C 525,379.221220703125 525,356.327763671875 450,352.5121875" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: red;" opacity="1"> </path>
+                
+                <path d="M 600,375.42109375 C 675,372.3056640625 675,403.45996093750006 750,400.34453125000005 L 750,424.7175 C 675,419.50741210937497 675,388.24688476562505 600,383.03679687500005" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: red;" opacity="1"> </path>
+                
+                <path d="M 750,400.34453125000005 C 825,398.55195312500007 825,416.47773437499995 900,414.68515625 L 900,476.88 C 825,470.3596875 825,431.23781249999996 750,424.7175" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: red;" opacity="1"> </path>
+                
+                <path d="M 900,414.68515625 C 975,410.49659179687495 975,452.38223632812503 1050,448.193671875 L 1050,522.0550000000001 C 975,516.408125 975,482.526875 900,476.88" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: red;" opacity="1"> </path>
+                
+                <path d="M 1050,448.193671875 C 1125,443.87599609375 1125,487.05275390625 1200,482.73507812500003 L 1200,567.23 C 1125,561.583125 1125,527.7018750000001 1050,522.0550000000001" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: red;" opacity="1"> </path>
+                
+                <path d="M 1200,482.73507812500003 C 1275,477.018505859375 1275,534.184228515625 1350,528.46765625 L 1350,629.825 C 1275,622.000625 1275,575.054375 1200,567.23" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: red;" opacity="1"> </path>
+                
+                <path d="M 1350,528.46765625 C 1425,522.180556640625 1425,585.051552734375 1500,578.764453125 L 1500,669.8 C 1425,664.8031249999999 1425,634.8218750000001 1350,629.825" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: red;" opacity="1"> </path>
+                
+                <path d="M 1500,578.764453125 C 1575,578.4805859375001 1575,581.3192578124999 1650,581.035390625 L 1650,675.0 C 1575,674.35 1575,670.4499999999999 1500,669.8" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: red;" opacity="1"> </path>
+                
+                <path d="M 0,350 C 75,348.03768554687497 75,336.263798828125 150,334.301484375 L 150,332.6125 C 75,330.43906250000003 75,352.1734375 0,350" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: pink;" opacity="1"> </path>
+                
+                <path d="M 150,334.301484375 C 225,333.1543359375 225,344.6258203125 300,343.47867187500003 L 300,336.09 C 225,335.6553125 225,333.0471875 150,332.6125" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: pink;" opacity="1"> </path>
+                
+                <path d="M 300,343.47867187500003 C 375,341.20976562500005 375,363.89882812499997 450,361.629921875 L 450,339.5675 C 375,339.1328125 375,336.52468749999997 300,336.09" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: pink;" opacity="1"> </path>
+                
+                <path d="M 450,361.629921875 C 525,358.45406249999996 525,390.21265625000007 600,387.03679687500005 L 600,372.5875 C 525,368.46 525,343.695 450,339.5675" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: pink;" opacity="1"> </path>
+                
+                <path d="M 600,387.03679687500005 C 675,385.1618261718751 675,403.91153320312503 750,402.03656250000006 L 750,396.34453125000005 C 675,393.37490234375 675,375.55712890625 600,372.5875" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: pink;" opacity="1"> </path>
+                
+                <path d="M 750,402.03656250000006 C 825,401.0595312500001 825,410.82984375 900,409.8528125 L 900,410.68515625 C 825,408.892578125 825,398.137109375 750,396.34453125000005" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: pink;" opacity="1"> </path>
+                
+                <path d="M 900,409.8528125 C 975,404.29912109375005 975,459.83603515625 1050,454.28234375 L 1050,444.193671875 C 975,440.005107421875 975,414.873720703125 900,410.68515625" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: pink;" opacity="1"> </path>
+                
+                <path d="M 1050,454.28234375 C 1125,449.9938671875 1125,492.8786328125001 1200,488.59015625000006 L 1200,478.73507812500003 C 1125,474.41740234375004 1125,448.51134765625 1050,444.193671875" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: pink;" opacity="1"> </path>
+                
+                <path d="M 1200,488.59015625000006 C 1275,482.36919921875005 1275,544.57876953125 1350,538.3578125 L 1350,524.46765625 C 1275,518.751083984375 1275,484.45165039062505 1200,478.73507812500003" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: pink;" opacity="1"> </path>
+                
+                <path d="M 1350,538.3578125 C 1425,537.2975 1425,530.9356250000001 1500,529.8753125000001 L 1500,534.13640625 C 1425,532.9278125000001 1425,525.67625 1350,524.46765625" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: pink;" opacity="1"> </path>
+                
+                <path d="M 1500,529.8753125000001 C 1575,529.38578125 1575,534.2810937500001 1650,533.7915625 L 1650,536.95578125 C 1575,536.603359375 1575,534.488828125 1500,534.13640625" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: pink;" opacity="1"> </path>
+                
+                <path d="M 0,350 C 75,346.41484375 75,324.90390625000003 150,321.31875 L 150,321.226875 C 75,317.630234375 75,353.596640625 0,350" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: cyan;" opacity="1"> </path>
+                
+                <path d="M 150,321.31875 C 225,318.60296875 225,302.30828125 300,299.5925 L 300,314.71875 C 225,313.905234375 225,322.040390625 150,321.226875" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: cyan;" opacity="1"> </path>
+                
+                <path d="M 300,299.5925 C 375,297.85375 375,287.42125 450,285.6825 L 450,316.44124999999997 C 375,316.2259375 375,314.9340625 300,314.71875" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: cyan;" opacity="1"> </path>
+                
+                <path d="M 450,285.6825 C 525,282.64375 525,264.41125 600,261.3725 L 600,311.24125000000004 C 525,310.59125000000006 525,317.09124999999995 450,316.44124999999997" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: cyan;" opacity="1"> </path>
+                
+                <path d="M 600,261.3725 C 675,257.6796875 675,235.52281250000001 750,231.83 L 750,306.90250000000003 C 675,306.36015625000005 675,311.78359375 600,311.24125000000004" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: cyan;" opacity="1"> </path>
+                
+                <path d="M 750,231.83 C 825,226.3984375 825,193.8090625 900,188.3775 L 900,296.47 C 825,295.16593750000004 825,308.2065625 750,306.90250000000003" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: cyan;" opacity="1"> </path>
+                
+                <path d="M 900,188.3775 C 975,182.9459375 975,150.3565625 1050,144.925 L 1050,295.60875 C 975,295.50109375 975,296.57765625 900,296.47" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: cyan;" opacity="1"> </path>
+                
+                <path d="M 1050,144.925 C 1125,142.316875 1125,126.66812499999997 1200,124.05999999999997 L 1200,304.28625 C 1125,303.2015625 1125,296.69343749999996 1050,295.60875" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: cyan;" opacity="1"> </path>
+                
+                <path d="M 1200,124.05999999999997 C 1275,116.67437499999998 1275,72.36062500000001 1350,64.97500000000002 L 1350,295.59250000000003 C 1275,294.50578125000004 1275,305.37296875 1200,304.28625" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: cyan;" opacity="1"> </path>
+                
+                <path d="M 1350,64.97500000000002 C 1425,60.41281250000002 1425,33.03968750000002 1500,28.47750000000002 L 1500,293.85375 C 1425,293.63640625 1425,295.80984375 1350,295.59250000000003" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: cyan;" opacity="1"> </path>
+                
+                <path d="M 1500,28.47750000000002 C 1575,28.042812500000018 1575,25.434687500000003 1650,25.0 L 1650,293.85375 C 1575,293.85375 1575,293.85375 1500,293.85375" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: cyan;" opacity="1"> </path>
+        </svg>
+    </div>
+    </main>
+{% endblock content %}
+
+{% block footer %}
+<footer id="page-footer" class="bg-white opacity-0" style="opacity: 1;">
+    <div class="content py-20 font-size-xs clearfix">
+        <div class="float-left" style="padding-top: 40px">
+            <div class="info">© 2020 Institut Teknologi Sepuluh Nopember</div>
+        </div>
+        <div class="float-right">
+            <img srcset="https://my.its.ac.id/assets/media/img/@2x/Logo-its.png 2x, https://my.its.ac.id/assets/media/img/Logo-its.png 1x" src="https://my.its.ac.id/assets/media/img/Logo-its.png" alt="Logo ITS" class="dark-logo mr-2" width="100px">
+            <img srcset="https://my.its.ac.id/assets/media/img/@2x/logo-ITSsemangatbaru.png 2x, https://my.its.ac.id/assets/media/img/logo-ITSsemangatbaru.png 1x" src="https://my.its.ac.id/assets/media/img/logo-ITSsemangatbaru.png" width="100px" alt="Logo ITS Semangat Baru" class="dark-logo">
+        </div>
+    </div>
+</footer>
+{% endblock %}
+
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://my.its.ac.id/assets/plugins/chartjs/Chart.min.js"></script>
+    <script src="https://my.its.ac.id/assets/js/core/jquery.min.js"></script>
+    <script src="https://my.its.ac.id/assets/js/codebase.core.min.js"></script>
+    <script src="https://my.its.ac.id/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="https://my.its.ac.id/assets/js/codebase.app.min.js"></script>
+    <script src="https://my.its.ac.id/assets/js/pages/db_corporate.min.js"></script>
+    <script src="https://my.its.ac.id/assets/js/webauthn/base64url-arraybuffer.js"></script>
+    <script src="https://my.its.ac.id/assets/js/webauthn/cbor.js"></script>
+    <script src="https://my.its.ac.id/assets/js/webauthn/helpers.js"></script>
+    <script src="https://my.its.ac.id/assets/plugins/cropperjs/dist/cropper.js"></script>
+    <script src="https://my.its.ac.id/assets/plugins/jquery-croppers/dist/jquery-cropper.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+{% endblock %}
