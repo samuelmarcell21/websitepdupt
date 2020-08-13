@@ -69,7 +69,7 @@ class Papers_Update(models.Model):
     link = models.CharField(max_length=500)
     class Meta:
         db_table = "dataset_publication_update"       
-
+ 
 class Svg_top(models.Model):
     id = models.CharField(max_length=25, primary_key=True)
     # id_topic = models.CharField(max_length=25)

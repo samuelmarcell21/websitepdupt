@@ -172,38 +172,102 @@ def BuatHasil(sorted_listGraf,HASIL):
 def SVG(request):
     df=pd.DataFrame()
     topik=[1,2,3]
+    listdict=[]
     for top in topik:
         obj = Topics.objects.get(id_topic=top)
         data=obj.svg.all().order_by('Year').values()
         temp=pd.DataFrame(data)
+        temp2={'name':obj.topic_name}
+        listdict.append(temp2)
+        # namatopik.append()
         df=pd.concat([df,temp])
-    
+    datatopics=Topics.objects.all().values()
+    tes=Topics.objects.filter(id_topic=top).values().first()
     data = scale_data(df)#scaling data
     data = data.rename(columns={"id_topic_id": "Topik"})
-    print(data.info())
+    # print(data.info())
     data = data.astype({"Topik": float, "Year": float, "kumAtas": float, "kumBawah": float, "batasAtas": float, "batasBawah": float})
     # print(data)
     years=data.Year.unique()
     HASIL = pd.DataFrame(columns=col)
-    print( data[data['Topik']==1])
+    # print( data[data['Topik']==1])
     for year in years:
         listGraf=[]
         for top in topik:
             a = data[(data['Topik']==top) & (data['Year']==year)]
-            print(a)
+            # print(a)
             graf=grafik(a['Topik'].values[0],a['Year'].values[0],a['Scale Atas'].values[0],a['Scale Bawah'].values[0],a['kumAtas'].values[0],a['kumBawah'].values[0],HASIL)
             listGraf.append(graf)
         sorted_listGraf = sorted(listGraf, key=operator.attrgetter('kumAtas'), reverse=True)
         sorted_listGraf=Gambar(sorted_listGraf)
         HASIL=BuatHasil(sorted_listGraf,HASIL)
         HASIL=BuatHasil(listGraf,HASIL)
-    print(HASIL.info())
-    print(HASIL)
-    return render(request, 'author/SVG.html',{'data':data})
+    HASIL['Color']=HASIL.apply(color,axis=1)
+    HASIL=HASIL.reset_index(drop=True)
+    # print(HASIL.info())
+    # print(HASIL)
+    data_akhir=HASIL.to_dict('records')
+
+    #Visualisasi samping svg
+    dfvis2=df[['id_topic_id','Year','batasAtas']]
+    dfvis2 = dfvis2.rename(columns={"id_topic_id": "Topik"})
+    dfvis2 = dfvis2.astype({"Topik": float, "Year": float, "batasAtas": float})
+    dfvis2= dfvis2[dfvis2['Year']>2017]
+    dfvis2['Color']=dfvis2.apply(color,axis=1)
+    listvis2=[]
+    flag=0
+    for top in dfvis2.Topik.unique():
+        datay=[]
+        for index,row in dfvis2[dfvis2['Topik']==top].iterrows():
+            datay.append(row['batasAtas'])
+        data={'x':listdict[flag]['name'],'y':datay,'Color':row['Color']}
+        flag+=1
+        listvis2.append(data)
+    print(datatopics)
+    
+    return render(request, 'author/SVG.html',{'data':data_akhir,'nama_top':listdict,'data2':listvis2,'datatopics':datatopics})
 
 
-
-
+def color(row):
+    if(row['Topik']==0):
+        val='#2d97ab'
+    elif(row['Topik']==1):
+        val='#ed164f'
+    elif(row['Topik']==2):
+        val='#72801b'
+    elif(row['Topik']==3):
+        val='#755e5c'
+    elif(row['Topik']==4):
+        val='#e9ce86'
+    elif(row['Topik']==5):
+        val='#8851d2'
+    elif(row['Topik']==6):
+        val='#ccbd73'
+    elif(row['Topik']==7):
+        val='#7acdd3'
+    elif(row['Topik']==8):
+        val='#7254da'
+    elif(row['Topik']==9):
+        val='#655e2d'
+    elif(row['Topik']==10):
+        val='#75377d'
+    elif(row['Topik']==11):
+        val='#bea56b'
+    elif(row['Topik']==12):
+        val='#e18a39'
+    elif(row['Topik']==13):
+        va='#cef397'
+    elif(row['Topik']==14):
+        val=='#22875c'        
+    elif(row['Topik']==15):
+        val=='#a3c6ae'       
+    elif(row['Topik']==16):
+        val=='#d15ac9'       
+    elif(row['Topik']==17):
+        val=='#7758fb'       
+    elif(row['Topik']==18):
+        val=='#63b9c8'       
+    return val
 
 
 
