@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 class Topics(models.Model):
-    id_topic = models.CharField(max_length=20)
+    id_topic = models.CharField(max_length=20, primary_key=True)
     topic_name = models.CharField(max_length=200)
     total_author = models.IntegerField()
     total_cite = models.IntegerField()

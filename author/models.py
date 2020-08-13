@@ -1,5 +1,6 @@
 from django.db import connections
 from django.db import models
+from topic.models import Topics
 
 # Create your models here.
 class Authors(models.Model):
@@ -67,4 +68,16 @@ class Papers_Update(models.Model):
     DOI = models.CharField(max_length=100)
     link = models.CharField(max_length=500)
     class Meta:
-        db_table = "dataset_publication_update"
+        db_table = "dataset_publication_update"       
+
+class Svg_top(models.Model):
+    id = models.CharField(max_length=25, primary_key=True)
+    # id_topic = models.CharField(max_length=25)
+    id_topic = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="id_topic",related_name="svg",to_field='id_topic')
+    Year = models.CharField(max_length=25)
+    kumAtas = models.CharField(max_length=25)
+    kumBawah = models.CharField(max_length=25)
+    batasAtas = models.CharField(max_length=25)
+    batasBawah = models.CharField(max_length=25)
+    class Meta:
+        db_table = "svg_top"
