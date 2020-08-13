@@ -113,20 +113,9 @@
 
 {% endblock navbar %}
 
-{% block content %}
-
-{% load static %}
-
-<main id="main-container" style="min-height: 829px;">
-
-
-</main>
-
-
-{% endblock content %}
 
 {% block footer %}
-<footer id="page-footer" class="bg-white opacity-0" style="opacity: 1;">
+<footer id="page-footer" class="bg-white opacity-0" style="opacity: 1; margin-top:100px;">
     <div class="content py-20 font-size-xs clearfix">
         <div class="float-left" style="padding-top: 40px">
             <div class="info">© 2020 Institut Teknologi Sepuluh Nopember</div>
@@ -137,7 +126,36 @@
         </div>
     </div>
 </footer>
+</div>
 {% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<main id="main-container" style="min-height: 829px;">
+    <div class="container" style="width: 100%; margin-top:100px; margin-bottom:30px;">
+        <form action="/topic/search/" class="form-inline justify-content-center" method="post">
+            {% csrf_token %}
+                <input type="text" class="form-control" placeholder="Search Topic..." id="title" name="title" style="border-color: #013880; width:80%">
+                <button type="Submit" class="btn btn-primary" style="background-color: #013880; font-family: 'Quicksand', sans-serif; margin-left:15px;">
+                    <i class="fas fa-search"></i>
+                </button>
+        </form>
+    </div>
+    
+    <div class="container" style="text-align:right; width:100%;">
+        {% for topic in topics %}
+        <a href="/{{ topic.id_topic }}">
+            <div class="item" style="font-size:20px; box-shadow: 1px 1px 8px gray; background-color:white; width: 60%; float:right; text-align:left; padding-left:10px; margin-bottom:20px;">
+                {{ topic.topic_name }}
+            </div>    
+        </a>
+        {% endfor %}
+    </div>
+</main>
+
+{% endblock content %}
 
 {% block script %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
