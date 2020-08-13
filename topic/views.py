@@ -11,4 +11,4 @@ def show_detailtopic(request, *args, **kwargs):
     topic_id = kwargs['id_topic']
     topic = Topics.objects.filter(id_topic=topic_id).values().first()
     paper = Papers.objects.filter(id_topic=topic_id).values('nidn', 'title', 'cite', 'authors', 'year')
-    return render(request, 'author/detail_author.html', {'papers': paper, 'author': author,'countpub':paper.count(),'sumcite':sumcite})
+    return render(request, 'topic/detail_topic.html', {'topics': topic, 'papers': paper})
