@@ -3,6 +3,7 @@ from author.models import Authors, Papers, Papers_Update, Svg_top
 from topic.models import Topics
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Sum
+from django.views.generic import View
 
 #SVG
 import pandas as pd
@@ -171,7 +172,7 @@ def BuatHasil(sorted_listGraf,HASIL):
 
 def SVG(request):
     df=pd.DataFrame()
-    topik=[1,2,3]
+    topik=[1,2,3,4,5]
     listdict=[]
     for top in topik:
         obj = Topics.objects.get(id_topic=top)
@@ -271,6 +272,12 @@ def color(row):
 
 
 
+class AjaxHandlerView(View):
+    def get(self,request):
+        text = request.GET.get('button_text')
+        print(text)
+        datatopics=Topics.objects.all().values()
 
+        return render(request, 'author/cobajax.html',{'datatopics':datatopics})
 
 

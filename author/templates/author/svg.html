@@ -34,7 +34,6 @@
     <!-- Fonts and Codebase framework -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700">
     <link rel="stylesheet" id="css-main" href="https://my.its.ac.id/assets/css/codebase.css">
-    <link href="https://my.its.ac.id/assets/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 
     <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
     <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
@@ -120,11 +119,11 @@
 
 <main id="main-container" style="min-height: 829px;">
     <div class="content" style="margin-top: 50px;">
-        <select id="select" class="i9multiselect" multiple required>
+        {% comment %} <select id="select" class="i9multiselect" multiple required>
             {% for top in datatopics %}
                 <option value="{{top.id_topic}}">{{top.topic_name}}</option>
             {% endfor %}
-        </select>
+        </select> {% endcomment %}
 
         <div id="chart" style="width: 70%; height: 70%;">
         </div>
@@ -246,21 +245,6 @@
 {% endblock %}
 
 {% block script %}
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script src="https://my.its.ac.id/assets/plugins/chartjs/Chart.min.js"></script>
-    <script src="https://my.its.ac.id/assets/js/core/jquery.min.js"></script>
-    <script src="https://my.its.ac.id/assets/js/codebase.core.min.js"></script>
-    <script src="https://my.its.ac.id/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
-    <script src="https://my.its.ac.id/assets/js/codebase.app.min.js"></script>
-    <script src="https://my.its.ac.id/assets/js/pages/db_corporate.min.js"></script>
-    <script src="https://my.its.ac.id/assets/js/webauthn/base64url-arraybuffer.js"></script>
-    <script src="https://my.its.ac.id/assets/js/webauthn/cbor.js"></script>
-    <script src="https://my.its.ac.id/assets/js/webauthn/helpers.js"></script>
-    <script src="https://my.its.ac.id/assets/plugins/cropperjs/dist/cropper.js"></script>
-    <script src="https://my.its.ac.id/assets/plugins/jquery-croppers/dist/jquery-cropper.js"></script>
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>

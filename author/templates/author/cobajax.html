@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ayak</title>
+</head>
+<body>
+    <button type="button" class="btn btn-success btn-lg">GET</button>
+
+    <ul id='seconds'>
+
+    </ul>
+    <form>
+        {% for top in datatopics %}
+        <input type='checkbox' name='user_ids[]' value="{{top.id_topic}}" id='checkbox_1' /> {{top.topic_name}}</input>
+        <br> {% endfor %}
+        <input name="confirm" type="button" value="confirm" onclick="submit_form();" />
+    </form>
+
+</body>
+
+<script>
+    function submit_form() {
+        $.post("ajax.php", {
+                selectedcheckboxes: user_ids,
+                confirm: "true"
+            },
+            function(data) {
+                $("#lightbox").html(data);
+            });
+    }
+    $(document).ready(function() {
+        $(".btn").click(function() {
+            $.ajax({
+                url: '',
+                type: 'get',
+                data: {
+                    button_text: $(this).text()
+                },
+                success: function(response) {
+                    $(".btn").text(response.seconds)
+                }
+            });
+        });
+    });
+
+    $(document).ready(function() {
+        $("#test").CreateMultiCheckBox({
+            width: '230px',
+            defaultText: 'Select Below',
+            height: '250px'
+        });
+    });
+</script>
+html
+</html>
