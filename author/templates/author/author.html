@@ -178,7 +178,7 @@
         <div class="filter" style="width:400px; float:left">
             Filter By: <br> <br>
             {% for topics in topic %}
-            <input type="checkbox" id="{{ topics.id_topic }}" name="{{ topics.id_topic }}" value="Bike">
+            <input type="checkbox" id="{{ topics.id_topic }}" name="{{ topics.id_topic }}" value="{{ topics.id_topic }}">
             <label for="{{ topics.id_topic }}"> {{ topics.topic_name }}</label><br>
             {% endfor %}
         </div>

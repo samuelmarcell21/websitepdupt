@@ -172,15 +172,28 @@
         {% endif %}
     </div>
         
-        {% for affiliations in users %}
-        <div class="container" style="text-align:right; width:100%;">
-            <a href="{{ affiliations.id_univ }}" style="color: #013880;">
-                <div class="item" style="font-size:20px; box-shadow: 1px 1px 8px gray; background-color:white; width: 60%; float:right; text-align:left; padding-left:10px; margin-bottom:20px;">
-                    {{ affiliations.name }}
-                </div>    
-            </a>
+    <div class="container" style="text-align:left; width:100%;">
+        <div class="filter" style="width:400px; float:left">
+            Filter By: <br> <br>
+            <input type="checkbox" id="sortaz" name="sortaz" value="sortaz">
+            <label for="sortaz">Sort By A-Z</label><br>
+            <input type="checkbox" id="sortpublications" name="sortpublications" value="sortpublications">
+            <label for="sortaz">Sort By Publications</label><br>
+            <input type="checkbox" id="sortcitations" name="sortcitations" value="sortcitations">
+            <label for="sortaz">Sort By Citations</label><br>
+            <input type="checkbox" id="sortauthors" name="sortauthors" value="sortauthors">
+            <label for="sortaz">Sort By Total Authors</label><br>
         </div>
-        {% endfor %}
+            {% for affiliations in users %}
+                <div class="item" style="font-size:20px; box-shadow: 1px 1px 8px gray; background-color:white; width: 680px; height:190px; float:right; text-align:left; padding-left:20px; padding-right:20px; margin-bottom:20px;">
+                    <a href="{{ affiliations.id_univ }}" style="color: #013880;">
+                        <p style="margin-top: 20px; font-size:20px;"> <strong> {{ affiliations.name }} </strong></p>
+                    </a>
+                    <p style="font-size:13px;"> <strong> {{ affiliations.province }} </strong></p>
+                    <p style="font-size:13px; color: #013880;"> <strong style="outline-style: solid;"> {{ affiliations.topik_dominan1.topic_name }} </strong> &nbsp; &nbsp; <strong> {{ affiliations.nilai_dominan1 }} Publications </strong> &nbsp; &nbsp; <strong style="outline-style: solid;"> {{ affiliations.topik_dominan2.topic_name }} </strong> &nbsp; &nbsp; <strong> {{ affiliations.nilai_dominan2 }} Publications </strong></p>
+                </div>    
+            {% endfor %}
+    </div>
 
 </main>
 

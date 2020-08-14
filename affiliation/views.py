@@ -6,7 +6,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def showaffiliation(request):
     if request.method == 'GET':
         univ_list = ['Institut Pertanian Bogor', 'Institut Teknologi Bandung', 'Institut Teknologi Sepuluh Nopember', 'Universitas Airlangga', 'Universitas Diponegoro', 'Universitas Gadjah Mada', 'Universitas Hasanuddin', 'Universitas Indonesia', 'Universitas Padjajaran', 'Universitas Pendidikan Indonesia', 'Universitas Sumatera Utara']
-        result = Affiliations.objects.filter(name__in=univ_list).values('id_univ', 'name')
+        result = Affiliations.objects.filter(name__in=univ_list)
         page = request.GET.get('page', 1)
         paginator = Paginator(result, 6)
 
@@ -24,7 +24,7 @@ def showaffiliation(request):
         catch = request.POST['affiliation']
 
         univ_list = ['Institut Pertanian Bogor', 'Institut Teknologi Bandung', 'Institut Teknologi Sepuluh Nopember', 'Universitas Airlangga', 'Universitas Diponegoro', 'Universitas Gadjah Mada', 'Universitas Hasanuddin', 'Universitas Indonesia', 'Universitas Padjajaran', 'Universitas Pendidikan Indonesia', 'Universitas Sumatera Utara']
-        result = Affiliations.objects.filter(name__in=univ_list).filter(name__icontains=catch).values('id_univ', 'name')
+        result = Affiliations.objects.filter(name__in=univ_list).filter(name__icontains=catch)
         page = request.GET.get('page', 1)
         paginator = Paginator(result, 6)
 
