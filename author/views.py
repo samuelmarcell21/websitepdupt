@@ -37,7 +37,7 @@ def show_detailauthor(request, *args, **kwargs):
     sumcite = paper.aggregate(Sum('cite'))
     return render(request, 'author/detail_author.html', {'papers': paper, 'author': author,'countpub':paper.count(),'sumcite':sumcite})
 
-##fungsi svg
+# fungsi svg
 #fungsi scaling kolom batas atas
 scaler = MinMaxScaler(feature_range=(-1.0, 1.0))
 col = ["Topik","Year","xAwalAtas","yAwalAtas","xLengkung1","yLengkung1atas","xLengkung2","yLengkung2atas","xAkhirAtas","yAkhirAtas","xAkhirBawah","yAkhirBawah","yLengkung2bawah","yLengkung1bawah","xAwalBawah","yAwalBawah"]

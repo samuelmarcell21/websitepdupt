@@ -1,59 +1,68 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-156454913-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-156454913-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
 
-        gtag('config', 'UA-156454913-1');
-    </script>
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+    gtag('config', 'UA-156454913-1');
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
 
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <meta name="description" content="myITS SSO">
-    <meta name="author" content="DPTSI ITS">
-    <meta name="robots" content="noindex, nofollow">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<meta name="description" content="myITS SSO">
+<meta name="author" content="DPTSI ITS">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <!-- Icons -->
-    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-    <link rel="shortcut icon" href="https://my.its.ac.id/assets/media/favicons/favicon-web.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://my.its.ac.id/assets/media/favicons/favicon-web.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://my.its.ac.id/assets/plugins/sweetalert2/sweetalert2.min.css">
-    <!-- END Icons -->
+<!-- Icons -->
+<!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+<link rel="shortcut icon" href="https://my.its.ac.id/assets/media/favicons/favicon-web.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://my.its.ac.id/assets/media/favicons/favicon-web.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://my.its.ac.id/assets/plugins/sweetalert2/sweetalert2.min.css">
+<!-- END Icons -->
 
-    <!-- Stylesheets -->
+<!-- Stylesheets -->
 
-    <!-- Fonts and Codebase framework -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700">
-    <link rel="stylesheet" id="css-main" href="https://my.its.ac.id/assets/css/codebase.css">
+<!-- Fonts and Codebase framework -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700">
+<link rel="stylesheet" id="css-main" href="https://my.its.ac.id/assets/css/codebase.css">
 
-    <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
-    <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
-    <link rel="stylesheet" id="css-theme" href="https://my.its.ac.id/assets/css/themes/corporate.min.css">
-    <link rel="stylesheet" href="https://my.its.ac.id/assets/plugins/sweetalert2/sweetalert2.min.css">
-    <link rel="stylesheet" href="https://my.its.ac.id/assets/plugins/cropperjs/dist/cropper.css">
-    <!-- END Stylesheets -->
+<!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+<!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
+<link rel="stylesheet" id="css-theme" href="https://my.its.ac.id/assets/css/themes/corporate.min.css">
+<link rel="stylesheet" href="https://my.its.ac.id/assets/plugins/sweetalert2/sweetalert2.min.css">
+<link rel="stylesheet" href="https://my.its.ac.id/assets/plugins/cropperjs/dist/cropper.css">
+<!-- END Stylesheets -->
 
-    {% comment %} css tambahan {% endcomment %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" integrity="sha512-SUJFImtiT87gVCOXl3aGC00zfDl6ggYAw5+oheJvRJ8KBXZrr/TMISSdVJ5bBarbQDRC2pR5Kto3xTR0kpZInA==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
+{% comment %} css tambahan {% endcomment %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css"
+    integrity="sha512-SUJFImtiT87gVCOXl3aGC00zfDl6ggYAw5+oheJvRJ8KBXZrr/TMISSdVJ5bBarbQDRC2pR5Kto3xTR0kpZInA=="
+    crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
+    integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w=="
+    crossorigin="anonymous" />
 {% endblock %}
 
 {% block title %}
-    PDUPT
+PDUPT
 {% endblock title %}
 
 {% block navbar %}
 
-<div id="page-container" class="sidebar-inverse side-scroll page-header-fixed page-header-glass page-header-inverse main-content-boxed side-trans-enabled">
+<div id="page-container"
+    class="sidebar-inverse side-scroll page-header-fixed page-header-glass page-header-inverse main-content-boxed side-trans-enabled">
     <header id="page-header" class="bg-primary-dark">
         <!-- Header Content -->
         <div class="content-header">
@@ -61,7 +70,9 @@
             <div class="content-header-section">
                 <!-- Logo -->
                 <a class="logo" href="/">
-                    <img srcset="https://my.its.ac.id/assets/media/img/@2x/myits-sso-white.png 2x, https://my.its.ac.id/assets/media/img/myits-sso-white.png 1x" src="https://my.its.ac.id/assets/media/img/myits-sso-white.png" width="100px" alt="home" class="dark-logo">
+                    <img srcset="https://my.its.ac.id/assets/media/img/@2x/myits-sso-white.png 2x, https://my.its.ac.id/assets/media/img/myits-sso-white.png 1x"
+                        src="https://my.its.ac.id/assets/media/img/myits-sso-white.png" width="100px" alt="home"
+                        class="dark-logo">
                 </a>
                 <!-- END Logo -->
             </div>
@@ -89,7 +100,8 @@
 
                 <!-- Toggle Sidebar -->
                 <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none" data-toggle="layout" data-action="sidebar_toggle">
+                <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none" data-toggle="layout"
+                    data-action="sidebar_toggle">
                     <i class="fa fa-navicon"></i>
                 </button>
                 <!-- END Toggle Sidebar -->
@@ -110,195 +122,231 @@
         <!-- END Header Loader -->
     </header>
 
-{% endblock navbar %}
+    {% endblock navbar %}
 
-{% block content %}
+    {% block content %}
 
-{% load static %}
+    {% load static %}
 
 
-<main id="main-container" style="min-height: 829px;">
-    <div class="content" style="margin-top: 50px;">
-        {% comment %} <select id="select" class="i9multiselect" multiple required>
-            {% for top in datatopics %}
+    <main id="main-container" style="min-height: 829px;">
+        <div class="content" style="margin-top: 50px;">
+            {% comment %} <select id="select" class="i9multiselect" multiple required>
+                {% for top in datatopics %}
                 <option value="{{top.id_topic}}">{{top.topic_name}}</option>
-            {% endfor %}
-        </select> {% endcomment %}
-
-        <div id="chart" style="width: 70%; height: 70%;">
-        </div>
-        Visualisasi persebaran jumlah topik 
-        <svg overflow='scroll' id='vis' width='1600' height='900' transform='scale(0.6)' z-index='1'>
-            <g>
-                <g class="axis" transform="translate(0,0)">
-                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                        2010        
-                    </text>
-                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
-
-                    </line>
-                </g>
-                <g class="axis" transform="translate(150,0)">
-                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                        2011     
-                    </text>
-                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
-
-                    </line>
-                </g>
-                <g class="axis" transform="translate(300,0)">
-                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                        2012        
-                    </text>
-                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
-
-                    </line>
-                </g>
-                <g class="axis" transform="translate(450,0)">
-                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                        2013        
-                    </text>
-                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
-
-                    </line>
-                </g>
-                <g class="axis" transform="translate(600,0)">
-                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                        2014        
-                    </text>
-                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
-
-                    </line>
-                </g>
-                <g class="axis" transform="translate(750,0)">
-                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                        2015        
-                    </text>
-                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
-
-                    </line>
-                </g>
-                <g class="axis" transform="translate(900,0)">
-                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                        2016        
-                    </text>
-                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
-
-                    </line>
-                </g>
-                <g class="axis" transform="translate(1050,0)">
-                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                        2017        
-                    </text>
-                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
-
-                    </line>
-                </g>
-                <g class="axis" transform="translate(1200,0)">
-                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                        2018        
-                    </text>
-                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
-
-                    </line>
-                </g>
-                <g class="axis" transform="translate(1350,0)">
-                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                        2019        
-                    </text>
-                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
-
-                    </line>
-                </g>
-                <g class="axis" transform="translate(1500,0)">
-                    <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                        2020        
-                    </text>
-                    <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
-
-                    </line>
-                </g>
-            </g>
-            <g>
-                {% for dat in data %}
-                    <path d="M {{dat.xAwalAtas}},{{dat.yAwalAtas}} C {{dat.xLengkung1}},{{dat.yLengkung1atas}} {{dat.xLengkung2}},{{dat.yLengkung2atas}} {{dat.xAkhirAtas}},{{dat.yAkhirAtas}} L {{dat.xAkhirBawah}},{{dat.yAkhirBawah}} C {{dat.xLengkung2}},{{dat.yLengkung2bawah}} {{dat.xLengkung1}},{{dat.yLengkung1bawah}} {{dat.xAwalBawah}},{{dat.yAwalBawah}}" style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: {{dat.Color}};" opacity="1"> </path>
                 {% endfor %}
-            </g>
-        </svg>
-        <canvas id="mixed-chart" width="400 px" height="200 px"></canvas>
-    </div>
+            </select> {% endcomment %}
+
+            <div id="chart" style="width: 70%; height: 70%;">
+            </div>
+            Visualisasi persebaran jumlah topik
+            <svg overflow='scroll' id='vis' width='1600' height='900' transform='scale(0.6)' z-index='1'>
+                <g>
+                    <g class="axis" transform="translate(0,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2010
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(150,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2011
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(300,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2012
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(450,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2013
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(600,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2014
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(750,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2015
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(900,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2016
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(1050,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2017
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(1200,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2018
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(1350,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2019
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(1500,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2020
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
+
+                        </line>
+                    </g>
+                </g>
+                <g>
+                    {% for dat in data %}
+                    <path
+                        d="M {{dat.xAwalAtas}},{{dat.yAwalAtas}} C {{dat.xLengkung1}},{{dat.yLengkung1atas}} {{dat.xLengkung2}},{{dat.yLengkung2atas}} {{dat.xAkhirAtas}},{{dat.yAkhirAtas}} L {{dat.xAkhirBawah}},{{dat.yAkhirBawah}} C {{dat.xLengkung2}},{{dat.yLengkung2bawah}} {{dat.xLengkung1}},{{dat.yLengkung1bawah}} {{dat.xAwalBawah}},{{dat.yAwalBawah}}"
+                        style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: {{dat.Color}};"
+                        opacity="1"> </path>
+                    {% endfor %}
+                </g>
+            </svg>
+            <canvas id="mixed-chart" width="400 px" height="200 px"></canvas>
+        </div>
     </main>
-{% endblock content %}
+    {% endblock content %}
 
-{% block footer %}
-<footer id="page-footer" class="bg-white opacity-0" style="opacity: 1;">
-    <div class="content py-20 font-size-xs clearfix">
-        <div class="float-left" style="padding-top: 40px">
-            <div class="info">© 2020 Institut Teknologi Sepuluh Nopember</div>
+    {% block footer %}
+    <footer id="page-footer" class="bg-white opacity-0" style="opacity: 1;">
+        <div class="content py-20 font-size-xs clearfix">
+            <div class="float-left" style="padding-top: 40px">
+                <div class="info">© 2020 Institut Teknologi Sepuluh Nopember</div>
+            </div>
+            <div class="float-right">
+                <img srcset="https://my.its.ac.id/assets/media/img/@2x/Logo-its.png 2x, https://my.its.ac.id/assets/media/img/Logo-its.png 1x"
+                    src="https://my.its.ac.id/assets/media/img/Logo-its.png" alt="Logo ITS" class="dark-logo mr-2"
+                    width="100px">
+                <img srcset="https://my.its.ac.id/assets/media/img/@2x/logo-ITSsemangatbaru.png 2x, https://my.its.ac.id/assets/media/img/logo-ITSsemangatbaru.png 1x"
+                    src="https://my.its.ac.id/assets/media/img/logo-ITSsemangatbaru.png" width="100px"
+                    alt="Logo ITS Semangat Baru" class="dark-logo">
+            </div>
         </div>
-        <div class="float-right">
-            <img srcset="https://my.its.ac.id/assets/media/img/@2x/Logo-its.png 2x, https://my.its.ac.id/assets/media/img/Logo-its.png 1x" src="https://my.its.ac.id/assets/media/img/Logo-its.png" alt="Logo ITS" class="dark-logo mr-2" width="100px">
-            <img srcset="https://my.its.ac.id/assets/media/img/@2x/logo-ITSsemangatbaru.png 2x, https://my.its.ac.id/assets/media/img/logo-ITSsemangatbaru.png 1x" src="https://my.its.ac.id/assets/media/img/logo-ITSsemangatbaru.png" width="100px" alt="Logo ITS Semangat Baru" class="dark-logo">
-        </div>
-    </div>
-</footer>
-{% endblock %}
+    </footer>
+    {% endblock %}
 
-{% block script %}
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    {% block script %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
 
 
     {% comment %} script tambahan {% endcomment %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js" integrity="sha512-G8JE1Xbr0egZE5gNGyUm1fF764iHVfRXshIoUWCTPAbKkkItp/6qal5YAHXrxEu4HNfPTQs6HOu3D5vCGS1j3w==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js" integrity="sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"
+        integrity="sha512-G8JE1Xbr0egZE5gNGyUm1fF764iHVfRXshIoUWCTPAbKkkItp/6qal5YAHXrxEu4HNfPTQs6HOu3D5vCGS1j3w=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
+        integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"
+        integrity="sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"
+        integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg=="
+        crossorigin="anonymous"></script>
 
     <script>
         new Chart(document.getElementById("mixed-chart"), {
             type: 'bar',
             data: {
-            labels: ["2018", "2019","2020"],
-            datasets: [
-                {% for dat in data2 %}
-                    {
+                labels: ["2018", "2019", "2020"],
+                datasets: [{
+                        %
+                        for dat in data2 %
+                    } {
                         label: "{{dat.x}}",
                         type: "line",
                         borderColor: "{{dat.Color}}",
-                        data:{{dat.y}},
+                        data: {
+                            {
+                                dat.y
+                            }
+                        },
                         fill: false
                     },
-                {% endfor %}
-                {% for dat in data2 %}
                     {
+                        % endfor %
+                    } {
+                        %
+                        for dat in data2 %
+                    } {
                         label: "{{dat.x}}",
                         type: "bar",
                         backgroundColor: "{{dat.Color}}",
                         backgroundColorHover: "{{dat.Color}}",
-                        data:{{dat.y}},
+                        data: {
+                            {
+                                dat.y
+                            }
+                        },
                     },
-                {% endfor %}
-            ]
+                    {
+                        % endfor %
+                    }
+                ]
             },
             options: {
-            title: {
-                display: true,
-                text: 'Persebaran jumlah topik 3 tahun terakhir'
-            },
-            legend: {
-                labels: {
-                    filter: function(legendItem, chartData) {
-                        // return true or false based on legendItem's datasetIndex (legendItem.datasetIndex)
-                        if ([0,1,2].includes(legendItem.datasetIndex)) {
-                            return false;
+                title: {
+                    display: true,
+                    text: 'Persebaran jumlah topik 3 tahun terakhir'
+                },
+                legend: {
+                    labels: {
+                        filter: function (legendItem, chartData) {
+                            // return true or false based on legendItem's datasetIndex (legendItem.datasetIndex)
+                            if ([0, 1, 2].includes(legendItem.datasetIndex)) {
+                                return false;
                             }
-                        return true;
+                            return true;
                         }
                     }
                 }
             }
-    });
-    </script
-{% endblock %}
+        }); <
+        /script {
+            % endblock %
+        }
