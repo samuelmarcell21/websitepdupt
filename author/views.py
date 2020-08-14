@@ -32,7 +32,7 @@ def showauthor(request):
 
 def show_detailauthor(request, *args, **kwargs):
     nidn_author = kwargs['nidn']
-    author = Authors.objects.filter(nidn=nidn_author).values().first()
+    author = Authors.objects.get(nidn=nidn_author)
     paper = Papers.objects.filter(nidn=nidn_author).values('nidn', 'title', 'cite', 'authors', 'year')
     sumcite = paper.aggregate(Sum('cite'))
     return render(request, 'author/detail_author.html', {'papers': paper, 'author': author,'countpub':paper.count(),'sumcite':sumcite})
@@ -172,7 +172,7 @@ def BuatHasil(sorted_listGraf,HASIL):
 
 def SVG(request):
     df=pd.DataFrame()
-    topik=[1,2,3,4,5]
+    topik=[1,2,3]
     listdict=[]
     for top in topik:
         obj = Topics.objects.get(id_topic=top)

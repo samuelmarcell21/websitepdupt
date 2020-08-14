@@ -294,39 +294,23 @@ PDUPT
             type: 'bar',
             data: {
                 labels: ["2018", "2019", "2020"],
-                datasets: [{
-                        %
-                        for dat in data2 %
-                    } {
+                datasets: [{%for dat in data2 %} {
                         label: "{{dat.x}}",
                         type: "line",
                         borderColor: "{{dat.Color}}",
-                        data: {
-                            {
-                                dat.y
-                            }
-                        },
+                        data: {{dat.y}},
                         fill: false
                     },
+                    {% endfor %} 
+                    {%for dat in data2 %}
                     {
-                        % endfor %
-                    } {
-                        %
-                        for dat in data2 %
-                    } {
                         label: "{{dat.x}}",
                         type: "bar",
                         backgroundColor: "{{dat.Color}}",
                         backgroundColorHover: "{{dat.Color}}",
-                        data: {
-                            {
-                                dat.y
-                            }
-                        },
+                        data: {{dat.y}},
                     },
-                    {
-                        % endfor %
-                    }
+                    {% endfor %}
                 ]
             },
             options: {
@@ -346,7 +330,6 @@ PDUPT
                     }
                 }
             }
-        }); <
-        /script {
-            % endblock %
-        }
+        }); 
+        </script> 
+        {% endblock %}

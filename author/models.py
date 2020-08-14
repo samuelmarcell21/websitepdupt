@@ -1,11 +1,13 @@
 from django.db import connections
 from django.db import models
 from topic.models import Topics
+from affiliation.models import Affiliations
 
 # Create your models here.
 class Authors(models.Model):
     nidn = models.CharField(max_length=25, primary_key=True)
-    id_univ = models.CharField(max_length=25)
+    # id_univ = models.CharField(max_length=25)
+    univ = models.ForeignKey(Affiliations, on_delete=models.CASCADE,db_column="id_univ",to_field='id_univ')
     name = models.CharField(max_length=255)
     scholar_id = models.CharField(max_length=255)
     sinta_id = models.CharField(max_length=255)
@@ -16,11 +18,11 @@ class Authors(models.Model):
     rank = models.IntegerField()
     flag = models.IntegerField()
     tag = models.CharField(max_length=300)
-    topik_dominan1 = models.IntegerField()
+    topik_dominan1 = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="topik_dominan1",to_field='id_topic',related_name="topik_dominan1")
     nilai_dominan1 = models.IntegerField()
-    topik_dominan2 = models.IntegerField()
+    topik_dominan2 = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="topik_dominan2",to_field='id_topic',related_name="topik_dominan2")
     nilai_dominan2 = models.IntegerField()
-    topik_dominan3 = models.IntegerField()
+    topik_dominan3 = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="topik_dominan3",to_field='id_topic',related_name="topik_dominan3")
     nilai_dominan3 = models.IntegerField()
     topik_dominan1_3years = models.IntegerField()
     nilai_dominan1_3years = models.IntegerField()

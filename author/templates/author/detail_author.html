@@ -4,27 +4,21 @@
 <style>
     .grid-container {
     display: grid;
-    grid-template-columns: 0.4fr 1.6fr;
-    grid-template-rows: 0.6fr 1.4fr 1fr;
-    gap: 5px 5px;
-    grid-template-areas: "FOTO DATAAUTH" "VISUALISASI VISUALISASI" "FILTER DATAPUB";
+    grid-template-columns: 0.5fr 1.5fr;
+    grid-template-rows: 1fr;
+    gap: 1px 1px;
+    grid-template-areas: "foto data-aut";
     }
 
-    .VISUALISASI { grid-area: VISUALISASI; }
+    .foto { grid-area: foto; }
 
-    .FILTER { grid-area: FILTER; }
-
-    .DATAPUB { grid-area: DATAPUB; }
-
-    .FOTO { grid-area: FOTO; }
-
-    .DATAAUTH {
+    .data-aut {
     display: grid;
-    grid-template-columns: ;
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
     gap: 1px 1px;
     grid-template-areas: "." "." "." ".";
-    grid-area: DATAAUTH;
+    grid-area: data-aut;
     }
     </style>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -135,35 +129,49 @@
 
     <main id="main-container" style="min-height: 829px;">
         {% comment %} <canvas id="polar-chart" width="400" height="100"></canvas> {% endcomment %}
-        <div class="content" style="margin-top: 50px;">
-        <div class="grid-container">
-            <div class="FOTO">
-                 <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:200px; border-radius: 50%;"> 
+        <div class="data-atas" style="margin-top: 100px;">
+            <div style="float: right;">
+                <p>Data informasi tamabhan di daerah kanan</p>
+                <p>author2 terdekatnya berdasarkan topik dominan author</p>
             </div>
-            <div class="DATAAUTH">
-                <div>{{ author.name }}</div>
-                <div>{{author.id_univ }}</div>
-                <div>Jumlah Pub {{ countpub }} || Jumlah citation {{sumcite.cite__sum}} </div>
-                <div><pre>nidn : {{author.nidn}}    i10-index : {{author.i10_index}}    h-index : {{author.h_index}}</pre></div>                                
-            
-            </div>
+            <div class="content" >
+                <div class="grid-container">
+                    <div class="foto">
+                        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:200px; border-radius: 50%;">
+                        
+                    </div>
+                    <div class="data-aut">
+                        <div>{{ author.name }} </div>
+                        <div>{{author.univ.name }}</div>
+                        <div>
+                        <pre><img src="https://cdn4.iconfinder.com/data/icons/111-seo-services-pack/128/new_seo-37-512.png" style="width: 40px;"> {{ countpub }}    <img src="https://w7.pngwing.com/pngs/10/134/png-transparent-quotation-marks-in-english-computer-icons-comma-linkedin-blue-angle-text-thumbnail.png" style="width: 40px;">{{sumcite.cite__sum}}</div></pre>
+                        <div><pre>nidn : {{author.nidn}}    i10-index : {{author.i10_index}}    h-index : {{author.h_index}}</pre></div>                                
+                    </div>
+                </div>
 
-            <div class="VISUALISASI">
-                <canvas id="doughnut-chart" width="400" height="100"></canvas>
-            </div>
-            
-            <div class="FILTER">
-                filter disini
             </div>
         </div>
-            <div class="DATAPUB">
-            {% for paper in papers %}
-                <p>{{ paper.title }}</p>
-                <br>
-            {% endfor %}  
-        </div>
+        <div class="VISUALISASI">
+            <canvas id="doughnut-chart" width="400" height="100"></canvas>
+        </div> 
+        <div style="margin-top: 50px;">        
+            <div class="FILTER"style="float:left;">
+                    <p>filter disini</p>
+                    <p>topik1</p>
+                    <p>topik1</p>
+                    <p>topik1</p>
+                    <p>topik1</p>
+            </div>
+            <div class="content">
+                <div class="DATAPUB">
+                {% for paper in papers %}
+                    <p>{{ paper.title }}</p>
+                    <br>
+                {% endfor %}  
+            </div>
+        </div>        
 
-        </div>
+        
     </main>
 
 {% endblock content %}
@@ -196,7 +204,7 @@
     new Chart(document.getElementById("doughnut-chart"), {
         type: 'pie',
         data: {
-        labels: ["Topik {{author.topik_dominan1}}", "Topik {{author.topik_dominan2}}", "Topik {{author.topik_dominan3}}",],
+        labels: ["{{author.topik_dominan1.topic_name}}", "{{author.topik_dominan2.topic_name}}", "{{author.topik_dominan3.topic_name}}",],
         datasets: [{
             label: "Jumlah Publikasi Berdasarkan Topik",
             backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f",],
@@ -213,7 +221,7 @@
     new Chart(document.getElementById("polar-chart"), {
         type: 'polarArea',
         data: {
-        labels: ["Topik {{author.topik_dominan1}}", "Topik {{author.topik_dominan2}}", "Topik {{author.topik_dominan3}}",],
+        labels: ["{{author.topik_dominan1.topic_name}}", "{{author.topik_dominan2.topic_name}}", "{{author.topik_dominan3.topic_name}}",],
         datasets: [{
             label: "Publikasi Topik Terbanyak 3 tahun terakhir",
             backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f",],
