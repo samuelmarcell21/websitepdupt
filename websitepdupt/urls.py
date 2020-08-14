@@ -8,5 +8,7 @@ urlpatterns = [
     path('author/', include('author.urls')),
     path('affiliation/', include('affiliation.urls')),
     path('topic/', include('topic.urls')),
+    path('search/', views.search),
     path('', views.find),
+
 ]
