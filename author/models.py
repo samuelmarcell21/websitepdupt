@@ -53,6 +53,9 @@ class Papers(models.Model):
     volume = models.CharField(max_length=100)
     DOI = models.CharField(max_length=100)
     link = models.CharField(max_length=500)
+    id_topic = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="id_topic",to_field='id_topic',related_name="id_topic_paper")
+    id_subtopic = models.CharField(max_length=20)
+    flag = models.IntegerField()
     class Meta:
         db_table = "dataset_publication"
 
@@ -69,6 +72,9 @@ class Papers_Update(models.Model):
     volume = models.CharField(max_length=100)
     DOI = models.CharField(max_length=100)
     link = models.CharField(max_length=500)
+    id_topic = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="id_topic",to_field='id_topic',related_name="id_topic_paper1")
+    id_subtopic = models.CharField(max_length=20)
+    flag = models.IntegerField()
     class Meta:
         db_table = "dataset_publication_update"       
  

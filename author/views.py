@@ -16,19 +16,37 @@ import operator
 # Create your views here.
 
 def showauthor(request):
-    result = Authors.objects.all().values('name','nidn','h_index','i10_index')[:100]
-    print(result)
-    page = request.GET.get('page', 1)
-    paginator = Paginator(result, 20)
+    if request.method == 'GET':
+        result = Authors.objects.all().values('name','nidn','h_index','i10_index')[:100]
+        print(result)
+        page = request.GET.get('page', 1)
+        paginator = Paginator(result, 20)
 
-    try:
-        users = paginator.page(page)
-    except PageNotAnInteger:
-        users = paginator.page(1)
-    except EmptyPage:
-        users = paginator.page(paginator.num_pages)
+        try:
+            users = paginator.page(page)
+        except PageNotAnInteger:
+            users = paginator.page(1)
+        except EmptyPage:
+            users = paginator.page(paginator.num_pages)
 
-    return render(request, 'author/author.html', {'users': users})
+        return render(request, 'author/author.html', {'users': users})
+
+    elif request.method == 'POST':
+        catch = request.POST['author']
+        result = Authors.objects.filter(name__icontains=catch).values('name','nidn','h_index','i10_index')[:100]
+        page = request.GET.get('page', 1)
+        paginator = Paginator(result, 20)
+
+        try:
+            users = paginator.page(page)
+        except PageNotAnInteger:
+            users = paginator.page(1)
+        except EmptyPage:
+            users = paginator.page(paginator.num_pages)
+
+        return render(request, 'author/author.html', {'users': users})
+
+
 
 def show_detailauthor(request, *args, **kwargs):
     nidn_author = kwargs['nidn']

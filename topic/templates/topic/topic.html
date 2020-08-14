@@ -135,18 +135,62 @@
 
 <main id="main-container" style="min-height: 829px;">
     <div class="container" style="width: 100%; margin-top:100px; margin-bottom:30px;">
-        <form action="/topic/search/" class="form-inline justify-content-center" method="post">
+        <form action="/topic/" class="form-inline justify-content-center" method="post">
             {% csrf_token %}
-                <input type="text" class="form-control" placeholder="Search Topic..." id="title" name="title" style="border-color: #013880; width:80%">
+                <input type="text" class="form-control" placeholder="Search Topic..." id="topic" name="topic" style="border-color: #013880; width:94%">
                 <button type="Submit" class="btn btn-primary" style="background-color: #013880; font-family: 'Quicksand', sans-serif; margin-left:15px;">
                     <i class="fas fa-search"></i>
                 </button>
         </form>
     </div>
+
+    <div class="content">
+        {% if users.has_other_pages %}
+            <nav aria-label="Page navigation example" style="margin-bottom: 40px; margin-right:20px">
+                <ul class="pagination justify-content-end">
+                    {% if users.has_other_pages %}
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end">
+                        {% if users.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ users.previous_page_number }}" tabindex="-1" style="color:#013880;">Previous</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                        {% endif %}
+            
+                        
+                        {% for i in users.paginator.page_range %}
+                        {% if users.number == i %}
+                            <li class="page-item active"><span class="page-link" style="background-color:#013880;">{{ i }} <span class="sr-only">(current)</span></span></li>
+                        {% else %}
+                            <li class="page-item"><a href="?page={{ i }}" class="page-link" style="color:#013880;">{{ i }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+            
+                        {% if users.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ users.next_page_number }}" style="color:#013880;">Next</a>
+                        </li>
+                            {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">Next</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+    </div>
+
     
     <div class="container" style="text-align:right; width:100%;">
-        {% for topic in topics %}
-        <a href="/topic/{{ topic.id_topic }}">
+        {% for topic in users %}
+        <a href="{{ topic.id_topic }}" style="color: #013880;">
             <div class="item" style="font-size:20px; box-shadow: 1px 1px 8px gray; background-color:white; width: 60%; float:right; text-align:left; padding-left:10px; margin-bottom:20px;">
                 {{ topic.topic_name }}
             </div>    

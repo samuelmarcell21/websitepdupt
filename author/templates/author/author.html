@@ -120,9 +120,20 @@
 
 
 <main id="main-container" style="min-height: 829px;">
+
+    <div class="container" style="width: 100%; margin-top:100px; margin-bottom:30px;">
+        <form action="/author/" class="form-inline justify-content-center" method="post">
+            {% csrf_token %}
+                <input type="text" class="form-control" placeholder="Search Author..." id="author" name="author" style="border-color: #013880; width:94%">
+                <button type="Submit" class="btn btn-primary" style="background-color: #013880; font-family: 'Quicksand', sans-serif; margin-left:15px;">
+                    <i class="fas fa-search"></i>
+                </button>
+        </form>
+    </div>
+
     <div class="content">
         {% if users.has_other_pages %}
-            <nav aria-label="Page navigation example" style="margin-top:50px">
+            <nav aria-label="Page navigation example" style="margin-bottom: 40px; margin-right:20px">
                 <ul class="pagination justify-content-end">
                     {% if users.has_other_pages %}
                     <nav aria-label="Page navigation example">
@@ -161,13 +172,19 @@
                 </ul>
             </nav>
         {% endif %}
+    </div>
         
         {% for authors in users %}
-        <a href='{{ authors.nidn }}'> {{ authors.name }} </p>
+        <div class="container" style="text-align:right; width:100%;">
+            <a href="{{ authors.nidn }}" style="color: #013880;">
+                <div class="item" style="font-size:20px; box-shadow: 1px 1px 8px gray; background-color:white; width: 60%; float:right; text-align:left; padding-left:10px; margin-bottom:20px;">
+                    {{ authors.name }}
+                </div>    
+            </a>
+        </div>
         {% endfor %}
         
-            </div>
-        </main>
+    </main>
 {% endblock content %}
 
 {% block footer %}
