@@ -174,15 +174,25 @@
         {% endif %}
     </div>
         
-        {% for authors in users %}
-        <div class="container" style="text-align:right; width:100%;">
-            <a href="{{ authors.nidn }}" style="color: #013880;">
-                <div class="item" style="font-size:20px; box-shadow: 1px 1px 8px gray; background-color:white; width: 60%; float:right; text-align:left; padding-left:10px; margin-bottom:20px;">
-                    {{ authors.name }}
-                </div>    
-            </a>
+    <div class="container" style="text-align:left; width:100%;">
+        <div class="filter" style="width:400px; float:left">
+            Filter By: <br> <br>
+            {% for topics in topic %}
+            <input type="checkbox" id="{{ topics.id_topic }}" name="{{ topics.id_topic }}" value="Bike">
+            <label for="{{ topics.id_topic }}"> {{ topics.topic_name }}</label><br>
+            {% endfor %}
         </div>
+        {% for authors in users %}
+                <div class="author" style="box-shadow: 1px 1px 8px gray; background-color:white; width: 680px; height:214px; float:right; text-align:left; padding-left:20px; margin-bottom:50px; padding-right:20px;">
+                    <a href="{{ authors.nidn }}" style="color: #013880;">
+                        <p style="margin-top: 20px; font-size:20px;"> <strong> {{ authors.name }} </strong></p>
+                    </a>
+                    <p style="font-size:13px;"> <strong> {{ authors.univ.name }} </strong></p>
+                    <p style="font-size:13px;"> <strong> nidn {{ authors.nidn }} i10-index {{ authors.i10_index }} h-index {{ authors.h_index }} </strong> </p>
+                    <p style="font-size:13px; color: #013880;"> <strong style="outline-style: solid;"> {{ authors.topik_dominan1.topic_name }} </strong> &nbsp; &nbsp; <strong> {{ authors.nilai_dominan1 }} Publications </strong> &nbsp; &nbsp; <strong style="outline-style: solid;"> {{ authors.topik_dominan2.topic_name }} </strong> &nbsp; &nbsp; <strong> {{ authors.nilai_dominan2 }} Publications </strong></p>
+                </div>    
         {% endfor %}
+        </div>
         
     </main>
 {% endblock content %}

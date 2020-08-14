@@ -17,7 +17,8 @@ import operator
 
 def showauthor(request):
     if request.method == 'GET':
-        result = Authors.objects.all().values('name','nidn','h_index','i10_index')[:100]
+        result = Authors.objects.all()[:100]
+        topic = Topics.objects.all()
         print(result)
         page = request.GET.get('page', 1)
         paginator = Paginator(result, 20)
@@ -29,11 +30,13 @@ def showauthor(request):
         except EmptyPage:
             users = paginator.page(paginator.num_pages)
 
-        return render(request, 'author/author.html', {'users': users})
+        return render(request, 'author/author.html', {'users': users, 'topic': topic})
 
     elif request.method == 'POST':
         catch = request.POST['author']
-        result = Authors.objects.filter(name__icontains=catch).values('name','nidn','h_index','i10_index')[:100]
+        result = Authors.objects.filter(name__icontains=catch)[:100]
+        topic = Topics.objects.all()
+
         page = request.GET.get('page', 1)
         paginator = Paginator(result, 20)
 
@@ -44,7 +47,7 @@ def showauthor(request):
         except EmptyPage:
             users = paginator.page(paginator.num_pages)
 
-        return render(request, 'author/author.html', {'users': users})
+        return render(request, 'author/author.html', {'users': users, 'topic': topic})
 
 
 
