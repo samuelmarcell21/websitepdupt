@@ -222,7 +222,7 @@ def search(request):
         # global hasiltopik
         # hasiltopik = topic_dict.get(str(topic))
 
-        topic = Topics.objects.filter(id_topic=topic).values('topic_name')
+        topic_obj = Topics.objects.filter(id_topic=topic+1).values('topic_name')
 
         page = request.GET.get('page', 1)
         paginator = Paginator(user_list, 10)
@@ -236,7 +236,7 @@ def search(request):
         
         context = {
             'title': 'Halaman Utama',
-            'topic': topic,
+            'topik': topic_obj,
             'catch': catch,
             'users' : users,
         }

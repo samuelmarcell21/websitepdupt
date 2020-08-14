@@ -122,8 +122,9 @@
 <main id="main-container" style="min-height: 829px;">
 
     <div class="content" style="font-size: 20px; color:#013880; margin-top:80px;">
-        <p><strong>"{{ catch }}" classified into {{ topic.topic_name }}'s Topic</strong></p>
-        <p><strong>Papers Recommendation by ITS Collaborator</strong> </p>
+        <p style="margin-left:18px;"><strong>"{{ catch }}" classified into {% for topic in topik %} {{ topic.topic_name }}'s Topic</strong></p> {% endfor %} 
+
+        <p style="margin-left:18px;"><strong>Papers and Authors Recommendation by ITS Collaborator</strong> </p>
     </div>  
 
     <div class="content">
@@ -170,9 +171,14 @@
     </div>
         
         {% for authors in users %}
-        <div class="container" style="text-align:right; width:100%;">
-            <div class="item" style="font-size:10px; box-shadow: 1px 1px 8px gray; background-color:white; width: 60%; float:right; text-align:left; padding-left:10px; margin-bottom:20px;">
-                {{ authors.title }}
+        <div class="container" style="width:100%;">
+            <div class="author" style="font-size:10px; box-shadow: 1px 1px 8px gray; background-color:white; width: 445px; height:145px; text-align:left; padding-left:20px; padding-top:15px; padding-right:20px; margin-bottom:30px; float:left;">
+                {{ authors.authors }}
+            </div>
+            <div class="paper" style="font-size:10px; box-shadow: 1px 1px 8px gray; background-color:white; width: 633px; height:145px; text-align:left; padding-left:20px; padding-right:20px; margin-bottom:30px; float:right;">
+                <p style="font-size: 16px; color:#013880; margin-top:10px;margin-bottom:5px;"><strong>{{ authors.title }}</strong></p>
+                <p style="margin-top:5px; margin-bottom:5px;">{{ authors.year }}, {{ authors.authors }} </p>
+                <p style="color:#013880; margin-top:5px; margin-bottom:5px;"> Machine Learning </p>
             </div>    
         </div>
         {% endfor %}
