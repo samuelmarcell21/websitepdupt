@@ -39,6 +39,18 @@ def showtopic(request):
 
 def show_detailtopic(request, *args, **kwargs):
     topic_id = kwargs['id_topic']
-    topic = Topics.objects.filter(id_topic=topic_id).values('id_topic').first()
-    paper = Papers.objects.filter(id_topic=topic_id).values('nidn', 'title', 'cite', 'authors', 'year', 'id_topic')
-    return render(request, 'topic/detail_topic.html', {'topics': topic, 'papers': paper})
+    topic = Topics.objects.filter(id_topic=topic_id).first()
+    paper = Papers.objects.filter(id_topic=topic_id).values('nidn', 'title', 'cite', 'authors', 'year', 'id_topic')[:100]
+    page = request.GET.get('page', 1)
+    paginator = Paginator(paper, 20)
+
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+    print(dir(paper))
+
+    return render(request, 'topic/detail_topic.html', {'topics': topic, 'users': users})
