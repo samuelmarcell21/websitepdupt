@@ -40,7 +40,7 @@ def showtopic(request):
 def show_detailtopic(request, *args, **kwargs):
     topic_id = kwargs['id_topic']
     topic = Topics.objects.filter(id_topic=topic_id).first()
-    paper = Papers.objects.filter(id_topic=topic_id).values('nidn', 'title', 'cite', 'authors', 'year', 'id_topic')[:100]
+    paper = Papers.objects.filter(topic=topic_id).values('nidn', 'title', 'cite', 'authors', 'year', 'topic')[:100]
     page = request.GET.get('page', 1)
     paginator = Paginator(paper, 20)
 
