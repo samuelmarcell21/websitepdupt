@@ -18,11 +18,11 @@ class Authors(models.Model):
     rank = models.IntegerField()
     flag = models.IntegerField()
     tag = models.CharField(max_length=300)
-    topik_dominan1 = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="topik_dominan1",to_field='id_topic',related_name="topik_dominan1_univ")
+    topik_dominan1 = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="topik_dominan1",to_field='id_topic',related_name="topik_dominan1_aut")
     nilai_dominan1 = models.IntegerField()
-    topik_dominan2 = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="topik_dominan2",to_field='id_topic',related_name="topik_dominan2_univ")
+    topik_dominan2 = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="topik_dominan2",to_field='id_topic',related_name="topik_dominan2_aut")
     nilai_dominan2 = models.IntegerField()
-    topik_dominan3 = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="topik_dominan3",to_field='id_topic',related_name="topik_dominan3_univ")
+    topik_dominan3 = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="topik_dominan3",to_field='id_topic',related_name="topik_dominan3_aut")
     nilai_dominan3 = models.IntegerField()
     topik_dominan1_3years = models.IntegerField()
     nilai_dominan1_3years = models.IntegerField()
@@ -41,8 +41,8 @@ class Authors(models.Model):
         db_table = "researcher"
 
 class Papers(models.Model):
-    id_pub = models.CharField(max_length=25)
-    nidn = models.CharField(max_length=25)
+    id_pub = models.CharField(max_length=25,primary_key=True)
+    author = models.ForeignKey(Authors, on_delete=models.CASCADE,db_column="nidn",to_field='nidn',related_name="paper")
     title = models.CharField(max_length=1000)
     cite = models.CharField(max_length=10)
     authors = models.CharField(max_length=2000)
@@ -54,13 +54,13 @@ class Papers(models.Model):
     DOI = models.CharField(max_length=100)
     link = models.CharField(max_length=500)
     topic = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="id_topic",to_field='id_topic',related_name="id_topic_paper")
-    subtopic = models.CharField(max_length=20)
+    subtopic = models.CharField(max_length=20 , db_column="id_subtopic")
     flag = models.IntegerField()
     class Meta:
         db_table = "dataset_publication"
 
 class Papers_Update(models.Model):
-    id_pub = models.CharField(max_length=25)
+    id_pub = models.CharField(max_length=25,primary_key=True)
     nidn = models.CharField(max_length=25)
     title = models.CharField(max_length=1000)
     cite = models.CharField(max_length=10)
@@ -72,8 +72,8 @@ class Papers_Update(models.Model):
     volume = models.CharField(max_length=100)
     DOI = models.CharField(max_length=100)
     link = models.CharField(max_length=500)
-    id_topic = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="id_topic",to_field='id_topic',related_name="id_topic_paper1")
-    id_subtopic = models.CharField(max_length=20)
+    topic = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="id_topic",to_field='id_topic',related_name="id_topic_paper1")
+    subtopic = models.CharField(max_length=20)
     flag = models.IntegerField()
     class Meta:
         db_table = "dataset_publication_update"       
@@ -81,7 +81,7 @@ class Papers_Update(models.Model):
 class Svg_top(models.Model):
     id = models.CharField(max_length=25, primary_key=True)
     # id_topic = models.CharField(max_length=25)
-    id_topic = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="id_topic",related_name="svg",to_field='id_topic')
+    topic = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="id_topic",related_name="svg",to_field='id_topic')
     Year = models.CharField(max_length=25)
     kumAtas = models.CharField(max_length=25)
     kumBawah = models.CharField(max_length=25)

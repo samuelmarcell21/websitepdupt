@@ -206,7 +206,7 @@ def SVG(request):
     datatopics=Topics.objects.all().values()
     tes=Topics.objects.filter(id_topic=top).values().first()
     data = scale_data(df)#scaling data
-    data = data.rename(columns={"id_topic_id": "Topik"})
+    data = data.rename(columns={"topic_id": "Topik"})
     # print(data.info())
     data = data.astype({"Topik": float, "Year": float, "kumAtas": float, "kumBawah": float, "batasAtas": float, "batasBawah": float})
     # print(data)
@@ -231,8 +231,8 @@ def SVG(request):
     data_akhir=HASIL.to_dict('records')
 
     #Visualisasi samping svg
-    dfvis2=df[['id_topic_id','Year','batasAtas']]
-    dfvis2 = dfvis2.rename(columns={"id_topic_id": "Topik"})
+    dfvis2=df[['topic_id','Year','batasAtas']]
+    dfvis2 = dfvis2.rename(columns={"topic_id": "Topik"})
     dfvis2 = dfvis2.astype({"Topik": float, "Year": float, "batasAtas": float})
     dfvis2= dfvis2[dfvis2['Year']>2017]
     dfvis2['Color']=dfvis2.apply(color,axis=1)
@@ -299,6 +299,39 @@ class AjaxHandlerView(View):
         print(text)
         datatopics=Topics.objects.all().values()
 
-        return render(request, 'author/cobajax.html',{'datatopics':datatopics})
+        return render(request, 'author/cobajax.html',)
 
 
+
+
+def coba(request):
+    nidn_author='0000013047' 
+    author = Authors.objects.get(nidn=nidn_author)
+    df=pd.DataFrame(columns=['Topic','Year','Count','Sumcite'])
+    YEAR=['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020']
+    TOPIK=[author.topik_dominan1_id,author.topik_dominan2_id,author.topik_dominan3_id]
+    print(TOPIK)
+    for top in TOPIK:
+        papers_top = author.paper.filter(topic_id=top)
+        year_dis = papers_top.values('year').distinct()
+        df_temp=pd.DataFrame(columns=['Topic','Year','Count','Sumcite'])
+        count=[0]*11
+        sumcite=[0]*11
+        topic=[top]*11
+        for year in year_dis:
+            cou=papers_top.filter(year=year['year']).count()
+            sumc=papers_top.filter(year=year['year']).aggregate(Sum('cite'))['cite__sum']
+            if(sumc is None):
+                sumc=0
+            yea=int(year['year'])-2010
+            count[yea]=cou
+            sumcite[yea]=int(sumc)
+        df_temp['Topic']=topic
+        df_temp['Year']=YEAR
+        df_temp['Count']=count
+        df_temp['Sumcite']=sumcite
+        print(df_temp)
+        df=pd.concat([df,df_temp])
+    df=df.reset_index(drop=True)
+    print(df)
+    return render(request, 'author/cobajax.html',)
