@@ -197,10 +197,10 @@
             </div>
 
             {% for paper in users %}
-            <div class="item" style="font-size:20px; box-shadow: 1px 1px 8px gray; background-color:white; width: 680px; height:250px; float:right; text-align:left; padding-left:20px; padding-right: 20px; margin-bottom:50px;">
+            <div class="item" style="font-size:20px; box-shadow: 1px 1px 8px gray; background-color:white; width: 680px; height:auto; float:right; text-align:left; padding-left:20px; padding-right: 20px; margin-bottom:50px;">
                 <p style="margin-top: 15px; font-size:20px; color: #013880; margin-bottom:0px;"> <strong> {{ paper.title }} </strong></p>
-                <p> <strong style="font-size:16px"> {{ paper.year }} &nbsp; &nbsp; {{ paper.authors }} </strong></p>
-                <p style="font-size:16px; color: #013880;"> <strong style="outline-style: solid;"> {{ paper.topic.topic_name }} </strong> </p>
+                <p style="margin-bottom:5px;"> <strong style="font-size:16px;"> {{ paper.year }} &nbsp; &nbsp; {{ paper.authors }} </strong></p>
+                <p style="font-size:16px; color: #013880;"> <strong style="outline-style: solid;"> {{ topics.topic_name }} </strong> </p>
             </div>    
             {% endfor %}
         </div>
