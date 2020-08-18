@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'author',
-    'topic',
     'affiliation',
+    'topic',
+    'author',
 ]
 
 MIDDLEWARE = [
@@ -133,4 +133,6 @@ STATIC_URL = '/static/'
 STATISFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     '/var/www/static/',
+    os.path.join(BASE_DIR, 'affiliation/static/'),
+    os.path.join(BASE_DIR, 'app2/static/'),
 ]
