@@ -362,8 +362,8 @@ def vis_author(nidn):
         flag+=1
         list_count.append(datac)
         list_sum.append(datas)
-    print(list_count)
-    print(list_sum)
+    # print(list_count)
+    # print(list_sum)
 
     return(list_count,list_sum)
     # return render(request, 'author/cobajax.html',{'data_count':list_count,'data_sum':list_sum,'author':author})
