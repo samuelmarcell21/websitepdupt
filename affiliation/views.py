@@ -59,8 +59,8 @@ def show_detailaffiliation(request, *args, **kwargs):
         users = paginator.page(1)
     except EmptyPage:
         users = paginator.page(paginator.num_pages)
-    vis_affil(id_univ)
-    return render(request, 'affiliation/detail_affiliation.html', {'univs': univ, 'users': users})
+    list_count,list_sum=vis_affil(id_univ)
+    return render(request, 'affiliation/detail_affiliation.html', {'univs': univ, 'users': users,'data_count':list_count,'data_sum':list_sum})
 
 
 def color(row):
@@ -115,12 +115,12 @@ def vis_affil(id_univ):
     df['Topic']=[TOPIK[0]]*11 + [TOPIK[1]]*11 + [TOPIK[2]]*11
     df['Year']=(YEAR)*3
     df = df.astype({"Topic": int,"Year": int})
-    flag=0
+    # flag=0
     df['Count']=0
     df['Sumcite']=0
     for aut in univ.aut.all():
-        print(flag,'/',univ.aut.count())
-        flag +=1
+        # print(flag,'/',univ.aut.count())
+        # flag +=1
         for top in TOPIK:
             papers_top = aut.paper.filter(topic_id=top)
             year_dis = papers_top.values('year').distinct()
@@ -131,6 +131,23 @@ def vis_affil(id_univ):
                     sumc=0
                 df.loc[(df["Topic"] == int(top)) & (df["Year"] == int(year['year'])), "Count"] += cou
                 df.loc[(df["Topic"] == int(top)) & (df["Year"] == int(year['year'])), "Sumcite"] += sumc
-                
-    print(TOPIK,TOPIK_NAMA)
-    print(df)
+    df = df.rename(columns={"Topic": "Topik"})
+    df = df.astype({"Topik": int})
+    df['Color']=df.apply(color,axis=1)
+    flag=0
+    list_count=[]
+    list_sum=[]
+    for top in df.Topik.unique():
+        datacount=[]
+        datasum=[]
+        for index,row in df[df['Topik']==top].iterrows():
+            datacount.append(row['Count'])
+            datasum.append(row['Sumcite'])
+        datac={'x':TOPIK_NAMA[flag],'y':datacount,'Color':row['Color']}
+        datas={'x':TOPIK_NAMA[flag],'y':datasum,'Color':row['Color']}
+        flag+=1
+        list_count.append(datac)
+        list_sum.append(datas)     
+    print(list_count)
+    print(list_sum)           
+    return(list_count,list_sum)
