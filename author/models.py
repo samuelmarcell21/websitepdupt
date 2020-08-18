@@ -7,7 +7,7 @@ from affiliation.models import Affiliations
 class Authors(models.Model):
     nidn = models.CharField(max_length=25, primary_key=True)
     # id_univ = models.CharField(max_length=25)
-    univ = models.ForeignKey(Affiliations, on_delete=models.CASCADE,db_column="id_univ",to_field='id_univ')
+    univ = models.ForeignKey(Affiliations, on_delete=models.CASCADE,db_column="id_univ",to_field='id_univ',related_name="aut")
     name = models.CharField(max_length=255)
     scholar_id = models.CharField(max_length=255)
     sinta_id = models.CharField(max_length=255)
