@@ -128,83 +128,86 @@
 {% load static %}
 
     <main id="main-container" style="min-height: 829px;">
-        {% comment %} <canvas id="polar-chart" width="400" height="100"></canvas> {% endcomment %}
-        <div class="data-atas" style="margin-top: 100px;">
-            <div style="float: right;">
-                <p>Data informasi tamabhan di daerah kanan</p>
-                <p>Peneliti dengan kemiripan</p>
-                <div class="grid-container">
-                    <div class="foto">
-                        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:75px; border-radius: 50%;">
-                        
-                    </div>
-                    <div class="data-aut">
-                        <div>{{ author.name }} </div>
-                        <div>{{author.univ.name }}</div>
-                        <div>{{author.topik_dominan1.topic_name}}||{{author.topik_dominan2.topic_name}}||{{author.topik_dominan3.topic_name}}</div>                            
+        <div class="container" style="margin-top:100px; width:100%;">
+            <div class="foto" style="float:left; width:120px;">
+                <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:120px; height:120px; border-radius: 50%;">
+            </div>
+            <div class="info-author" style="margin-left:150px;"> 
+                <p style="font-size:24px; color: #013880; margin-bottom:0px;"> <strong> {{ author.name }} </strong> </p>
+                <p style="font-size:16px; margin-bottom:0px;"> {{ author.univ.name }} </p>
+                <p style="font-size:16px; margin-bottom:0px;"> {{ countpub }} Publications &nbsp; &nbsp; {{ sumcite.cite__sum }} Citations </p>
+                <p> nidn {{ author.nidn }} &nbsp; &nbsp; i10-index {{ author.i10_index }} &nbsp; &nbsp; h-index {{ author.h_index }} </p>
+            </div>
+            <div class="container" style="width:100%">
+                <div class="publication" style="font-size: 18px; color: #013880; margin-top:50px; width:100%;">
+                    <p> <strong>Publications & Topics Over Time</strong> </p>
+                    <div class="chart-container content" style="height: 300; width: 600px; text-align:left">
+                        <canvas id="doughnut-chart"></canvas>
                     </div>
                 </div>
-                <div class="grid-container">
-                    <div class="foto">
-                        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:75px; border-radius: 50%;">
-                        
-                    </div>
-                    <div class="data-aut">
-                        <div>{{ author.name }} </div>
-                        <div>{{author.univ.name }}</div>
-                        <div>{{author.topik_dominan1.topic_name}}||{{author.topik_dominan2.topic_name}}||{{author.topik_dominan3.topic_name}}</div>                            
-                    </div>
+            </div>  
+            <div class="container" style="width:100%">
+                <div class="publication" style="font-size: 18px; color: #013880; margin-top:50px; width:100%;">
+                    <p> <strong>Publications</strong> </p>
                 </div>
-                <div class="grid-container">
-                    <div class="foto">
-                        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:75px; border-radius: 50%;">
-                        
-                    </div>
-                    <div class="data-aut">
-                        <div>{{ author.name }} </div>
-                        <div>{{author.univ.name }}</div>
-                        <div>{{author.topik_dominan1.topic_name}}||{{author.topik_dominan2.topic_name}}||{{author.topik_dominan3.topic_name}}</div>                            
-                    </div>
-                </div>                                
-                
-
             </div>
-            <div class="content" >
-                <div class="grid-container">
-                    <div class="foto">
-                        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:200px; border-radius: 50%;">
-                        
-                    </div>
-                    <div class="data-aut">
-                        <div>{{ author.name }} </div>
-                        <div>{{author.univ.name }}</div>
-                        <div>
-                        <pre><img src="https://cdn4.iconfinder.com/data/icons/111-seo-services-pack/128/new_seo-37-512.png" style="width: 40px;"> {{ countpub }}    <img src="https://w7.pngwing.com/pngs/10/134/png-transparent-quotation-marks-in-english-computer-icons-comma-linkedin-blue-angle-text-thumbnail.png" style="width: 40px;">{{sumcite.cite__sum}}</div></pre>
-                        <div><pre>nidn : {{author.nidn}}    i10-index : {{author.i10_index}}    h-index : {{author.h_index}}</pre></div>                                
-                    </div>
-            </div>
-            <div class="chart-container content" style="height: 300; width: 600px; text-align:left">
-                <canvas id="doughnut-chart"></canvas>
-            </div>
+            <div class="container" style="width: 100%;">
+                {% if users.has_other_pages %}
+                            <nav aria-label="Page navigation example" style="margin-bottom: 40px; margin-right:20px">
+                                <ul class="pagination justify-content-end">
+                                    {% if users.has_other_pages %}
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination justify-content-end">
+                                        {% if users.has_previous %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ users.previous_page_number }}" tabindex="-1" style="color:#013880;">Previous</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                            </li>
+                                        {% endif %}
+                            
+                                        
+                                        {% for i in users.paginator.page_range %}
+                                        {% if users.number == i %}
+                                            <li class="page-item active"><span class="page-link" style="background-color:#013880;">{{ i }} <span class="sr-only">(current)</span></span></li>
+                                        {% else %}
+                                            <li class="page-item"><a href="?page={{ i }}" class="page-link" style="color:#013880;">{{ i }}</a></li>
+                                        {% endif %}
+                                        {% endfor %}
+                            
+                                        {% if users.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ users.next_page_number }}" style="color:#013880;">Next</a>
+                                        </li>
+                                            {% else %}
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#">Next</a>
+                                            </li>
+                                            {% endif %}
+                                        </ul>
+                                    </nav>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        {% endif %}
+        
+                <div class="filter" style="width:400px; float:left">
+                    Filter By: <br> <br>
+                    <input type="checkbox" id="sortaz" name="sortaz" value="sortaz">
+                    <label for="sortaz">Sort By A-Z</label><br>
+                </div>
+            
+                {% for paper in users %}
+                <div class="item" style="font-size:20px; box-shadow: 1px 1px 8px gray; background-color:white; width: 680px; height:auto; float:right; text-align:left; padding-left:20px; padding-right: 20px; margin-bottom:50px;">
+                    <p style="margin-top: 15px; font-size:20px; color: #013880; margin-bottom:0px;"> <strong> {{ paper.title }} </strong></p>
+                    <p style="margin-bottom:5px;"> <strong style="font-size:16px;"> {{ paper.year }} &nbsp; &nbsp; {{ paper.authors }} </strong></p>
+                    <p style="font-size:16px; color: #013880;"> <strong style="outline-style: solid;"> {{ topics.topic_name }} </strong> </p>
+                </div>    
+                {% endfor %}
+            </div> 
         </div>
-
-
-        <div class="data-bawah" style="margin-top: 50px;">        
-            <div class="FILTER"style="float:left;">
-                    <p>filter disini</p>
-                    <p>topik1</p>
-                    <p>topik1</p>
-                    <p>topik1</p>
-                    <p>topik1</p>
-            </div>
-            <div class="content">
-                <div class="DATAPUB">
-                {% for paper in papers %}
-                    <p>{{ paper.title }}</p>
-                    <br>
-                {% endfor %}  
-            </div>
-        </div>        
 
         
     </main>
