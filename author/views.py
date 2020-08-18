@@ -67,7 +67,8 @@ def show_detailauthor(request, *args, **kwargs):
         users = paginator.page(paginator.num_pages)
 
     sumcite = paper.aggregate(Sum('cite'))
-    return render(request, 'author/detail_author.html', {'users': users, 'author': author,'countpub':paper.count(),'sumcite':sumcite})
+    list_count,list_sum=vis_author(nidn_author)
+    return render(request, 'author/detail_author.html', {'users': users, 'author': author,'countpub':paper.count(),'sumcite':sumcite,'data_count':list_count,'data_sum':list_sum})
 
 # fungsi svg
 #fungsi scaling kolom batas atas
@@ -257,7 +258,6 @@ def SVG(request):
         flag+=1
         listvis2.append(data)
     print(datatopics)
-    
     return render(request, 'author/SVG.html',{'data':data_akhir,'nama_top':listdict,'data2':listvis2,'datatopics':datatopics})
 
 
@@ -315,8 +315,8 @@ class AjaxHandlerView(View):
 
 
 
-def coba(request):
-    nidn_author='0000013047' 
+def vis_author(nidn):
+    nidn_author=nidn 
     author = Authors.objects.get(nidn=nidn_author)
     df=pd.DataFrame(columns=['Topic','Year','Count','Sumcite'])
     YEAR=['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020']
@@ -365,4 +365,5 @@ def coba(request):
     print(list_count)
     print(list_sum)
 
-    return render(request, 'author/cobajax.html',{'data_count':list_count,'data_sum':list_sum,'author':author})
+    return(list_count,list_sum)
+    # return render(request, 'author/cobajax.html',{'data_count':list_count,'data_sum':list_sum,'author':author})

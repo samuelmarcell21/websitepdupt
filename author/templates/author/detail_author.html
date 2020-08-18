@@ -141,8 +141,11 @@
             <div class="container" style="width:100%">
                 <div class="publication" style="font-size: 18px; color: #013880; margin-top:50px; width:100%;">
                     <p> <strong>Publications & Topics Over Time</strong> </p>
-                    <div class="chart-container content" style="height: 300; width: 600px; text-align:left">
+                    {% comment %} <div class="chart-container content" style="height: 300; width: 600px; text-align:left">
                         <canvas id="doughnut-chart"></canvas>
+                    </div> {% endcomment %}
+                    <div class="chart-container content" style="height:40vh; width:80vw">
+                        <canvas id="mixed-chart"></canvas>
                     </div>
                 </div>
             </div>  
@@ -239,7 +242,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js" integrity="sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg==" crossorigin="anonymous"></script>
     <script>
-    new Chart(document.getElementById("doughnut-chart"), {
+    {% comment %} new Chart(document.getElementById("doughnut-chart"), {
         type: 'pie',
         data: {
         labels: ["{{author.topik_dominan1.topic_name}}", "{{author.topik_dominan2.topic_name}}", "{{author.topik_dominan3.topic_name}}",],
@@ -272,6 +275,50 @@
             text: 'Publikasi Topik Terbanyak 3 tahun terakhir'
         }
         }
+    }); {% endcomment %}
+    new Chart(document.getElementById("mixed-chart"), {
+    type: 'bar',
+    data: {
+        labels: ['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020'],
+        datasets: [
+        {%for dat in data_count %} {
+                    label: "{{dat.x}}",
+                    type: "line",
+                    borderColor: "{{dat.Color}}",
+                    data: {{dat.y}},
+                    fill: false
+                },
+        {% endfor %} 
+        
+        {%for dat in data_sum %}
+                {
+                    label: "{{dat.x}}",
+                    type: "bar",
+                    backgroundColor: "{{dat.Color}}",
+                    backgroundColorHover: "{{dat.Color}}",
+                    data: {{dat.y}},
+                },
+        {% endfor %}           
+        
+        ]
+    },
+    options: {
+        title: {
+            display: true,
+            text: 'Persebaran jumlah topik 3 tahun terakhir'
+        },
+            legend: {
+            labels: {
+                filter: function(legendItem, chartData) {
+                // return true or false based on legendItem's datasetIndex (legendItem.datasetIndex)
+                if ([0,1,2].includes(legendItem.datasetIndex)) {
+                        return false;
+                    }
+                    return true;
+                }
+            }
+            }
+    }
     });
 </script>
 {% endblock %}
