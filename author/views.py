@@ -54,9 +54,20 @@ def showauthor(request):
 def show_detailauthor(request, *args, **kwargs):
     nidn_author = kwargs['nidn']
     author = Authors.objects.get(nidn=nidn_author)
-    paper = Papers.objects.filter(nidn=nidn_author).values('nidn', 'title', 'cite', 'authors', 'year')
+    paper = Papers.objects.filter(author=nidn_author).values('author', 'title', 'cite', 'authors', 'year')[:100]
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(paper, 20)
+
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
     sumcite = paper.aggregate(Sum('cite'))
-    return render(request, 'author/detail_author.html', {'papers': paper, 'author': author,'countpub':paper.count(),'sumcite':sumcite})
+    return render(request, 'author/detail_author.html', {'users': users, 'author': author,'countpub':paper.count(),'sumcite':sumcite})
 
 # fungsi svg
 #fungsi scaling kolom batas atas
