@@ -4,8 +4,16 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js" integrity="sha512-G8JE1Xbr0egZE5gNGyUm1fF764iHVfRXshIoUWCTPAbKkkItp/6qal5YAHXrxEu4HNfPTQs6HOu3D5vCGS1j3w==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js" integrity="sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" integrity="sha512-SUJFImtiT87gVCOXl3aGC00zfDl6ggYAw5+oheJvRJ8KBXZrr/TMISSdVJ5bBarbQDRC2pR5Kto3xTR0kpZInA==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ayak</title>
@@ -22,6 +30,7 @@
         <br> {% endfor %}
         <input name="confirm" type="button" value="confirm" onclick="submit_form();" />
     </form>
+    <canvas id="mixed-chart" width="100" height="100"></canvas>
 
 </body>
 
@@ -57,6 +66,50 @@
             height: '250px'
         });
     });
+
+    new Chart(document.getElementById("mixed-chart"), {
+        type: 'bar',
+        data: {
+            labels: ['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020'],
+            datasets: [
+            {%for dat in data_count %} {
+                        label: "{{dat.x}}",
+                        type: "line",
+                        borderColor: "{{dat.Color}}",
+                        data: {{dat.y}},
+                        fill: false
+                    },
+            {% endfor %} 
+            
+            {%for dat in data_sum %}
+                    {
+                        label: "{{dat.x}}",
+                        type: "bar",
+                        backgroundColor: "{{dat.Color}}",
+                        backgroundColorHover: "{{dat.Color}}",
+                        data: {{dat.y}},
+                    },
+            {% endfor %}           
+            
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Persebaran jumlah topik 3 tahun terakhir'
+            },
+             legend: {
+               labels: {
+                 filter: function(legendItem, chartData) {
+                   // return true or false based on legendItem's datasetIndex (legendItem.datasetIndex)
+                   if ([0,1,2].includes(legendItem.datasetIndex)) {
+                         return false;
+                       }
+                      return true;
+                 }
+               }
+             }
+        }
+    });
 </script>
-html
 </html>

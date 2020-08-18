@@ -278,17 +278,17 @@ def color(row):
     elif(row['Topik']==12):
         val='#e18a39'
     elif(row['Topik']==13):
-        va='#cef397'
+        val='#cef397'
     elif(row['Topik']==14):
-        val=='#22875c'        
+        val='#22875c'        
     elif(row['Topik']==15):
-        val=='#a3c6ae'       
+        val='#a3c6ae'       
     elif(row['Topik']==16):
-        val=='#d15ac9'       
+        val='#d15ac9'       
     elif(row['Topik']==17):
-        val=='#7758fb'       
+        val='#7758fb'       
     elif(row['Topik']==18):
-        val=='#63b9c8'       
+        val='#63b9c8'       
     return val
 
 
@@ -310,6 +310,7 @@ def coba(request):
     df=pd.DataFrame(columns=['Topic','Year','Count','Sumcite'])
     YEAR=['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020']
     TOPIK=[author.topik_dominan1_id,author.topik_dominan2_id,author.topik_dominan3_id]
+    TOPIK_NAMA=[author.topik_dominan1.topic_name,author.topik_dominan2.topic_name,author.topik_dominan3.topic_name]
     print(TOPIK)
     for top in TOPIK:
         papers_top = author.paper.filter(topic_id=top)
@@ -330,8 +331,27 @@ def coba(request):
         df_temp['Year']=YEAR
         df_temp['Count']=count
         df_temp['Sumcite']=sumcite
-        print(df_temp)
+        # print(df_temp)
         df=pd.concat([df,df_temp])
     df=df.reset_index(drop=True)
-    print(df)
-    return render(request, 'author/cobajax.html',)
+    list_count=[]
+    list_sum=[]
+    df = df.rename(columns={"Topic": "Topik"})
+    df = df.astype({"Topik": int})
+    df['Color']=df.apply(color,axis=1)
+    flag=0
+    for top in df.Topik.unique():
+        datacount=[]
+        datasum=[]
+        for index,row in df[df['Topik']==top].iterrows():
+            datacount.append(row['Count'])
+            datasum.append(row['Sumcite'])
+        datac={'x':TOPIK_NAMA[flag],'y':datacount,'Color':row['Color']}
+        datas={'x':TOPIK_NAMA[flag],'y':datasum,'Color':row['Color']}
+        flag+=1
+        list_count.append(datac)
+        list_sum.append(datas)
+    print(list_count)
+    print(list_sum)
+
+    return render(request, 'author/cobajax.html',{'data_count':list_count,'data_sum':list_sum,'author':author})
