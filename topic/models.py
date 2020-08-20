@@ -10,3 +10,12 @@ class Topics(models.Model):
     total_publication = models.IntegerField()
     class Meta:
         db_table = "topic"
+
+class Subtopics(models.Model):
+    id_SubTopic = models.CharField(max_length=25, primary_key=True)
+    topic = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="id_topic",to_field='id_topic',related_name="topik_subtopik")
+    no_subTopic = models.CharField(max_length=20)
+    subtopic_name = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = "subtopic"
