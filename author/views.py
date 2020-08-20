@@ -18,7 +18,7 @@ import operator
 def showauthor(request):
     if request.method == 'GET':
         result = Authors.objects.all()[:100]
-        topic = Topics.objects.all()
+        topic = Topics.objects.all().order_by('topic_name')
         print(result)
         page = request.GET.get('page', 1)
         paginator = Paginator(result, 20)
@@ -35,7 +35,7 @@ def showauthor(request):
     elif request.method == 'POST':
         catch = request.POST['author']
         result = Authors.objects.filter(name__icontains=catch)[:100]
-        topic = Topics.objects.all()
+        topic = Topics.objects.all().order_by('topic_name')
 
         page = request.GET.get('page', 1)
         paginator = Paginator(result, 20)
