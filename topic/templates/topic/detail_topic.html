@@ -42,10 +42,14 @@
     <link rel="stylesheet" href="https://my.its.ac.id/assets/plugins/cropperjs/dist/cropper.css">
     <!-- END Stylesheets -->
 
-    
-<style type="text/css">/* Chart.js */
-@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
-
+    {% comment %} tambahan {% endcomment %}
+    {% comment %} css tambahan {% endcomment %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css"
+    integrity="sha512-SUJFImtiT87gVCOXl3aGC00zfDl6ggYAw5+oheJvRJ8KBXZrr/TMISSdVJ5bBarbQDRC2pR5Kto3xTR0kpZInA=="
+    crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
+    integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w=="
+    crossorigin="anonymous" />
 {% endblock %}
 
 {% block title %}
@@ -143,6 +147,107 @@
 
         <div class="SVG" style="font-size: 18px; color: #013880; margin-top:50px">
             <p> <strong> Sub-Topic </strong> </p>
+            <svg overflow='scroll' id='vis' width='1600' height='900' transform='scale(0.6)' z-index='1'>
+                <g>
+                    <g class="axis" transform="translate(0,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2010
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(150,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2011
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(300,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2012
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(450,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2013
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(600,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2014
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(750,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2015
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(900,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2016
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(1050,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2017
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(1200,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2018
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(1350,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2019
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
+
+                        </line>
+                    </g>
+                    <g class="axis" transform="translate(1500,0)">
+                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                            2020
+                        </text>
+                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
+
+                        </line>
+                    </g>
+                </g>
+                <g>
+                    {% for dat in data %}
+                    <path
+                        d="M {{dat.xAwalAtas}},{{dat.yAwalAtas}} C {{dat.xLengkung1}},{{dat.yLengkung1atas}} {{dat.xLengkung2}},{{dat.yLengkung2atas}} {{dat.xAkhirAtas}},{{dat.yAkhirAtas}} L {{dat.xAkhirBawah}},{{dat.yAkhirBawah}} C {{dat.xLengkung2}},{{dat.yLengkung2bawah}} {{dat.xLengkung1}},{{dat.yLengkung1bawah}} {{dat.xAwalBawah}},{{dat.yAwalBawah}}"
+                        style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: {{dat.Color}};"
+                        opacity="1"> </path>
+                    {% endfor %}
+                </g>
+            </svg>
+            <canvas id="mixed-chart" width="400 px" height="200 px"></canvas>
         </div>
 
         <div class="publications">
@@ -226,4 +331,44 @@
     <script src="https://my.its.ac.id/assets/plugins/cropperjs/dist/cropper.js"></script>
     <script src="https://my.its.ac.id/assets/plugins/jquery-croppers/dist/jquery-cropper.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    {% comment %} tambahan {% endcomment %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"
+        integrity="sha512-G8JE1Xbr0egZE5gNGyUm1fF764iHVfRXshIoUWCTPAbKkkItp/6qal5YAHXrxEu4HNfPTQs6HOu3D5vCGS1j3w=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
+        integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"
+        integrity="sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"
+        integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg=="
+        crossorigin="anonymous"></script>
+
+    <script>
+        new Chart(document.getElementById("mixed-chart"), {
+            type: 'bar',
+            data: {
+                labels: ["2018", "2019", "2020"],
+                datasets: [
+                    {%for dat in data2 %}
+                    {
+                        label: "{{dat.x}}",
+                        type: "bar",
+                        backgroundColor: "{{dat.Color}}",
+                        backgroundColorHover: "{{dat.Color}}",
+                        data: {{dat.y}},
+                    },
+                    {% endfor %}
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Persebaran jumlah topik 3 tahun terakhir'
+                },
+
+            }
+        }); 
+        </script> 
 {% endblock %}

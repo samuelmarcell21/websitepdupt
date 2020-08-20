@@ -19,3 +19,15 @@ class Subtopics(models.Model):
 
     class Meta:
         db_table = "subtopic"
+
+class Svg_sub(models.Model):
+    id = models.CharField(max_length=25, primary_key=True)
+    # id_topic = models.CharField(max_length=25)
+    subtopic = models.ForeignKey(Subtopics, on_delete=models.CASCADE,db_column="id_SubTopic",related_name="svg_sub",to_field='id_SubTopic')
+    Year = models.CharField(max_length=25)
+    kumAtas = models.CharField(max_length=25)
+    kumBawah = models.CharField(max_length=25)
+    batasAtas = models.CharField(max_length=25)
+    batasBawah = models.CharField(max_length=25)
+    class Meta:
+        db_table = "svg_sub"        
