@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
-from author.models import Papers
+from author.models import Papers, Authors
 from topic.models import Topics
 from affiliation.models import Affiliations
+
 
 # Untuk Search
 import re
@@ -54,6 +55,34 @@ from gensim.test.utils import get_tmpfile
 import gensim
 from IPython.display import clear_output
 
+global color
+
+def svg(total_pub_topic1, total_pub_topic2, total_pub_topic3, total_pub_topic4, total_pub_topic5, i):
+    color = ['green', 'yellow', 'red', 'blue', 'lime']
+    jarak_topic1 = (total_pub_topic1/3000)*120
+    jarak_topic2 = (total_pub_topic2/3000)*120
+    jarak_topic3 = (total_pub_topic3/3000)*120
+    jarak_topic4 = (total_pub_topic4/3000)*120
+    jarak_topic5 = (total_pub_topic5/3000)*120
+    x_topic1 = 300
+    y_topic1 = 200-jarak_topic1
+    x_topic2 = 300 + ((416-300)*(jarak_topic2/120))
+    y_topic2 = 200 - ((200-157)*(jarak_topic2/120))
+    x_topic3 = 300 + ((382-300)*(jarak_topic3/120))
+    y_topic3 = 200 + ((302-200)*(jarak_topic3/120))
+    x_topic4 = 300 - ((300-233)*(jarak_topic4/120))
+    y_topic4 = 200 + ((302-200)*(jarak_topic4/120))
+    x_topic5 = 300 - ((300-198)*(jarak_topic5/120))
+    y_topic5 = 200 - ((200-157)*(jarak_topic5/120))
+    print('''
+<polygon points="{},{} {},{} {},{} {},{} {},{}" style="fill:{}; fill-opacity:0.5;stroke:{};stroke-width:3" />
+<circle cx="{}" cy="{}" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+<circle cx="{}" cy="{}" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+<circle cx="{}" cy="{}" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+<circle cx="{}" cy="{}" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+<circle cx="{}" cy="{}" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+    '''.format(x_topic1, y_topic1, x_topic2, y_topic2, x_topic3, y_topic3, x_topic4, y_topic4, x_topic5, y_topic5, color[i] , color[i], x_topic1, y_topic1, x_topic2, y_topic2, x_topic3, y_topic3, x_topic4, y_topic4, x_topic5, y_topic5))
+
 def index(request):
     context = {
         'title': 'Halaman Utama',
@@ -61,12 +90,34 @@ def index(request):
     return render(request, 'index.html', context)
 
 def find(request):
-    topic = Topics.objects.all().order_by('total_publication')[:5]
-    affiliation = Affiliations.objects.all().order_by('total_publication')[:5]
+    topic = Topics.objects.all().order_by('-total_publication')[:5]
+    for i in topic:
+        print(i.topic_name)
+    affiliation = Affiliations.objects.all().order_by('-total_publication')[:5]
+    univ = []
     for i in affiliation:
-        print(i.id_univ)
-    print(topic)
-    return render(request, 'find.html')
+        univ.append(i.initial_univ)
+    # print(univ)
+    # univ = []
+    # arr_peruniv = []
+    # for i in affiliation:
+    #     arr_peruniv.append(i.id_univ)
+    #     researcher = Authors.objects.filter(univ=i.id_univ)
+    #     for b in topic:
+    #         count = 0
+    #         for a in researcher:
+    #             paper = Papers.objects.filter(author = a.nidn, topic=b.id_topic)
+    #             count += len(paper)
+    #         arr_peruniv.append(count)   
+    #     univ.append(arr_peruniv)
+
+    arr_visualisasi = [['6', 1826, 2477, 852, 1535, 1408], ['1', 552, 1797, 665, 2176, 714], ['8', 1802, 335, 1660, 709, 506], ['5', 816, 1346, 801, 771, 1723], ['2', 1598, 288, 762, 939, 286]]
+    arr_svg = []
+    for i in range(len(arr_visualisasi)):
+        arr_svg.append(svg(arr_visualisasi[i][1], arr_visualisasi[i][2], arr_visualisasi[i][3], arr_visualisasi[i][4], arr_visualisasi[i][5], i))
+    # print(univ)
+    # print(arr_svg)
+    return render(request, 'find.html', {'arr_svg': arr_svg})
 
 def search(request):
     if request.method == 'POST':
