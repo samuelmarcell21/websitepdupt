@@ -297,8 +297,12 @@
 
             <div class="filter" style="width:400px; float:left">
                 Filter By: <br> <br>
-                <input type="checkbox" id="sortaz" name="sortaz" value="sortaz">
-                <label for="sortaz">Sort By A-Z</label><br>
+                <input type="checkbox" id="sortcitations" name="sortcitations" value="sortcitations">
+                <label for="sortcitations">Sort By Citations</label><br>
+                <input type="checkbox" id="sortpublications" name="sortpublications" value="sortpublications">
+                <label for="sortpublications">Sort By Publications</label><br>
+                <input type="checkbox" id="sortauthors" name="sortauthors" value="sortauthors">
+                <label for="sortauthors">Sort By Total Authors</label><br>
             </div>
 
             {% for paper in users %}
