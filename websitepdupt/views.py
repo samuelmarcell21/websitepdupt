@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 
 from author.models import Papers
 from topic.models import Topics
+from affiliation.models import Affiliations
 
 # Untuk Search
 import re
@@ -60,6 +61,11 @@ def index(request):
     return render(request, 'index.html', context)
 
 def find(request):
+    topic = Topics.objects.all().order_by('total_publication')[:5]
+    affiliation = Affiliations.objects.all().order_by('total_publication')[:5]
+    for i in affiliation:
+        print(i.id_univ)
+    print(topic)
     return render(request, 'find.html')
 
 def search(request):

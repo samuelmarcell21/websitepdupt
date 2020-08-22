@@ -13,5 +13,9 @@ class Affiliations(models.Model):
     nilai_dominan2 = models.IntegerField()
     topik_dominan3 = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="topik_dominan3",to_field='id_topic',related_name="topik_dominan3")
     nilai_dominan3 = models.IntegerField()
+    total_publication = models.IntegerField()
+    total_cite = models.IntegerField()
+    total_author = models.IntegerField()
+    initial_univ = models.CharField(max_length=20)
     class Meta:
         db_table = "university"
