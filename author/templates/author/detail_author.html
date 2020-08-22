@@ -198,8 +198,10 @@
         
                 <div class="filter" style="width:400px; float:left">
                     Filter By: <br> <br>
-                    <input type="checkbox" id="sortaz" name="sortaz" value="sortaz">
-                    <label for="sortaz">Sort By A-Z</label><br>
+                    {% for topik in nama_topik %}
+                        <input type="checkbox" id="{{topik.topic_name}}" name="{{topik.topic_name}}" value="{{topik.topic_name}}">
+                        <label for="{{topik.topic_name}}">{{topik.topic_name}}</label><br>
+                    {% endfor %}
                 </div>
             
                 {% for paper in users %}

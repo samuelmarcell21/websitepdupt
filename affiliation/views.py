@@ -2,6 +2,7 @@ from django.shortcuts import render
 from affiliation.models import Affiliations
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from author.models import Authors, Papers
+from topic.models import Topics
 import pandas as pd
 import numpy as np
 from django.db.models import Sum
@@ -45,6 +46,7 @@ def show_detailaffiliation(request, *args, **kwargs):
     id_univ = kwargs['id_univ']
     univ = Affiliations.objects.filter(id_univ=id_univ).first()
     nidn = Authors.objects.filter(univ=id_univ).values('nidn').distinct()
+    topic = Topics.objects.all().order_by('topic_name')
     nidn_fix = []
     for i in nidn:
         nidn_fix.append(i['nidn'])
@@ -60,7 +62,7 @@ def show_detailaffiliation(request, *args, **kwargs):
     except EmptyPage:
         users = paginator.page(paginator.num_pages)
     list_count,list_sum=vis_affil(id_univ)
-    return render(request, 'affiliation/detail_affiliation.html', {'univs': univ, 'users': users,'data_count':list_count,'data_sum':list_sum})
+    return render(request, 'affiliation/detail_affiliation.html', {'univs': univ, 'users': users,'data_count':list_count,'data_sum':list_sum, 'nama_topik': topic})
 
 
 def color(row):

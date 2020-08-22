@@ -54,8 +54,16 @@ def showauthor(request):
 def show_detailauthor(request, *args, **kwargs):
     nidn_author = kwargs['nidn']
     author = Authors.objects.get(nidn=nidn_author)
-    paper = Papers.objects.filter(author=nidn_author).values('author', 'title', 'cite', 'authors', 'year')[:100]
+    topic_paper = Papers.objects.filter(author=nidn_author).values('topic').distinct()
 
+    topik = []
+    for i in topic_paper:
+        topik.append(i['topic'])
+
+    nama_topik = Topics.objects.filter(id_topic__in=topik).order_by('topic_name')
+
+    paper = Papers.objects.filter(author=nidn_author).values('author', 'title', 'cite', 'authors', 'year')[:100]
+    
     page = request.GET.get('page', 1)
     paginator = Paginator(paper, 20)
 
@@ -68,7 +76,7 @@ def show_detailauthor(request, *args, **kwargs):
 
     sumcite = paper.aggregate(Sum('cite'))
     list_count,list_sum=vis_author(nidn_author)
-    return render(request, 'author/detail_author.html', {'users': users, 'author': author,'countpub':paper.count(),'sumcite':sumcite,'data_count':list_count,'data_sum':list_sum})
+    return render(request, 'author/detail_author.html', {'users': users, 'author': author,'countpub':paper.count(),'sumcite':sumcite,'data_count':list_count,'data_sum':list_sum, 'nama_topik': nama_topik})
 
 # fungsi svg
 #fungsi scaling kolom batas atas
