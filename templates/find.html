@@ -303,11 +303,11 @@
     
     <img style="width:100%" src="{% static "author/img/fotoits.jpg" %}" alt="Background ITS" style="position: relative;">
 
-    <div class="tulisan" style="position: absolute; top:140px; left:380px; font-family: 'Quicksand', sans-serif; font-size:200%; color:white;">
+    <div class="tulisan" style="position: absolute; top:100px; left:200px; font-family: 'Quicksand', sans-serif; font-size:200%; color:white;">
         Collaborator Finder
     </div>
 
-    <div class="tulisan2" style="position: absolute; top:180px; left:380px; font-family: 'Quicksand', sans-serif; font-size:100%; color:white;">
+    <div class="tulisan2" style="position: absolute; top:140px; left:200px; font-family: 'Quicksand', sans-serif; font-size:100%; color:white;">
         Established: July 12, 2020
     </div>
     
@@ -334,75 +334,84 @@
             </div>
             <button type="Submit" class="btn btn-primary" style="background-color: #013880; font-family: 'Quicksand', sans-serif; margin:30px;">Find Collaborator</button>
         </form>
+        
     </div>
+        
+        <div class="visualisasi" style="width:100%; ">
+            <div class="visualisasi1" style="width: 45%; height: 500px; background-color:white; margin: 18px;text-align:center; border:1px solid gray; border-radius:20px; float:left;">
+                <p style="font-family: 'Quicksand', sans-serif; margin-top: 15px;">Top 3 Topics by Affiliation by <strong style="color: #013880;" >Collaborator Finder</strong></p>
+                <svg id="dataviz" height="500" width="800">
 
+                    <text x="279" y="64" fill="black">Kimia</text>
+                    <text x="428" y="160" fill="black">Kimia Organik</text>
+                    <text x="369" y="325" fill="black">HRD</text>
+                    <text x="166" y="325" fill="black">Konservasi</text>
+                    <text x="128" y="160" fill="black">Hukum</text>
+
+                    <circle cx="300" cy="200" r="20" stroke="black" stroke-width="1" fill-opacity='0' />
+                    <circle cx="300" cy="200" r="40" stroke="black" stroke-width="1" fill-opacity='0' />
+                    <circle cx="300" cy="200" r="60" stroke="black" stroke-width="1" fill-opacity='0' />
+                    <circle cx="300" cy="200" r="80" stroke="black" stroke-width="1" fill-opacity='0' />
+                    <circle cx="300" cy="200" r="100" stroke="black" stroke-width="1" fill-opacity='0' />
+                    <circle cx="300" cy="200" r="120" stroke="black" stroke-width="2" fill-opacity='0' />
+
+                    <polygon points="300,126.96 395.77733333333333,164.49633333333333 323.288,228.968 265.71833333333336,252.19 252.128,179.81866666666667" style="fill:green; fill-opacity:0.5;stroke:green;stroke-width:3" />
+                    <circle cx="300" cy="126.96" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="395.77733333333333" cy="164.49633333333333" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="323.288" cy="228.968" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="265.71833333333336" cy="252.19" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="252.128" cy="179.81866666666667" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+
+
+                    <polygon points="300,177.92000000000002 369.484,174.243 318.1766666666667,222.61 251.40266666666668,273.98400000000004 275.724,189.766" style="fill:yellow; fill-opacity:0.5;stroke:yellow;stroke-width:3" />
+                    <circle cx="300" cy="177.92000000000002" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="369.484" cy="174.243" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="318.1766666666667" cy="222.61" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="251.40266666666668" cy="273.98400000000004" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="275.724" cy="189.766" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+
+
+                    <polygon points="300,127.92 312.9533333333333,195.19833333333332 345.37333333333333,256.44 284.16566666666665,224.106 282.796,192.74733333333333" style="fill:red; fill-opacity:0.5;stroke:red;stroke-width:3" />
+                    <circle cx="300" cy="127.92" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="312.9533333333333" cy="195.19833333333332" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="345.37333333333333" cy="256.44" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="284.16566666666665" cy="224.106" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="282.796" cy="192.74733333333333" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+
+
+                    <polygon points="300,167.36 352.04533333333336,180.70733333333334 321.894,227.234 282.781,226.214 241.418,175.30366666666666" style="fill:blue; fill-opacity:0.5;stroke:blue;stroke-width:3" />
+                    <circle cx="300" cy="167.36" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="352.04533333333336" cy="180.70733333333334" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="321.894" cy="227.234" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="282.781" cy="226.214" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="241.418" cy="175.30366666666666" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+
+
+                    <polygon points="300,136.08 311.136,195.872 320.828,225.90800000000002 279.029,231.926 290.276,195.90066666666667" style="fill:lime; fill-opacity:0.5;stroke:lime;stroke-width:3" />
+                    <circle cx="300" cy="136.08" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="311.136" cy="195.872" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="320.828" cy="225.90800000000002" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="279.029" cy="231.926" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                    <circle cx="290.276" cy="195.90066666666667" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
+                            
+                </svg>
+            </div>
+            <div class="visualisasi2" style="width: 15%; height: 500px; background-color:white; margin: 18px;text-align:center; border:1px solid gray; border-radius:20px; float:left;">
+                
+            </div>
+            <div class="visualisasi3" style="width: 15%; height: 500px; background-color:white; margin: 18px;text-align:center; border:1px solid gray; border-radius:20px; float:left;">
+                
+            </div>
+            <div class="visualisasi4" style="width: 15%; height: 500px; background-color:white; margin: 18px;text-align:center; border:1px solid gray; border-radius:20px; float:left;">
+                
+            </div>
+        </div>
+        
+        <div class="visualisasiSVG" class="text-center" style="width:97%; height:550px; margin: 20px; background-color:white; border:1px solid gray; border-radius:20px; margin-top:550px;">
+            <p style="font-family: 'Quicksand', sans-serif; margin-top: 15px; text-align:center;">Trending Topics by <strong style="color: #013880;" >Collaborator Finder</strong></p>
+        </div>
 </main>
 
-<div class="visualisasi" class="text-center" style="margin-top:-120px; width:100%;">
-    <div class="visualisasi1" style="width: 45%; height: 500px; background-color:white; margin: 30px;text-align:center; border:1px solid gray; border-radius:20px;">
-        <p style="font-family: 'Quicksand', sans-serif; margin-top: 15px;">Top 3 Topics by Affiliation by <strong style="color: #013880;" >Collaborator Finder</strong></p>
-        <svg id="dataviz" height="500" width="800">
-
-            <text x="279" y="64" fill="black">Kimia</text>
-            <text x="428" y="160" fill="black">Kimia Organik</text>
-            <text x="369" y="325" fill="black">HRD</text>
-            <text x="166" y="325" fill="black">Konservasi</text>
-            <text x="128" y="160" fill="black">Hukum</text>
-
-            <circle cx="300" cy="200" r="20" stroke="black" stroke-width="1" fill-opacity='0' />
-            <circle cx="300" cy="200" r="40" stroke="black" stroke-width="1" fill-opacity='0' />
-            <circle cx="300" cy="200" r="60" stroke="black" stroke-width="1" fill-opacity='0' />
-            <circle cx="300" cy="200" r="80" stroke="black" stroke-width="1" fill-opacity='0' />
-            <circle cx="300" cy="200" r="100" stroke="black" stroke-width="1" fill-opacity='0' />
-            <circle cx="300" cy="200" r="120" stroke="black" stroke-width="2" fill-opacity='0' />
-
-            <polygon points="300,126.96 395.77733333333333,164.49633333333333 323.288,228.968 265.71833333333336,252.19 252.128,179.81866666666667" style="fill:green; fill-opacity:0.5;stroke:green;stroke-width:3" />
-            <circle cx="300" cy="126.96" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="395.77733333333333" cy="164.49633333333333" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="323.288" cy="228.968" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="265.71833333333336" cy="252.19" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="252.128" cy="179.81866666666667" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-
-
-            <polygon points="300,177.92000000000002 369.484,174.243 318.1766666666667,222.61 251.40266666666668,273.98400000000004 275.724,189.766" style="fill:yellow; fill-opacity:0.5;stroke:yellow;stroke-width:3" />
-            <circle cx="300" cy="177.92000000000002" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="369.484" cy="174.243" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="318.1766666666667" cy="222.61" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="251.40266666666668" cy="273.98400000000004" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="275.724" cy="189.766" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-
-
-            <polygon points="300,127.92 312.9533333333333,195.19833333333332 345.37333333333333,256.44 284.16566666666665,224.106 282.796,192.74733333333333" style="fill:red; fill-opacity:0.5;stroke:red;stroke-width:3" />
-            <circle cx="300" cy="127.92" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="312.9533333333333" cy="195.19833333333332" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="345.37333333333333" cy="256.44" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="284.16566666666665" cy="224.106" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="282.796" cy="192.74733333333333" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-
-
-            <polygon points="300,167.36 352.04533333333336,180.70733333333334 321.894,227.234 282.781,226.214 241.418,175.30366666666666" style="fill:blue; fill-opacity:0.5;stroke:blue;stroke-width:3" />
-            <circle cx="300" cy="167.36" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="352.04533333333336" cy="180.70733333333334" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="321.894" cy="227.234" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="282.781" cy="226.214" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="241.418" cy="175.30366666666666" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-
-
-            <polygon points="300,136.08 311.136,195.872 320.828,225.90800000000002 279.029,231.926 290.276,195.90066666666667" style="fill:lime; fill-opacity:0.5;stroke:lime;stroke-width:3" />
-            <circle cx="300" cy="136.08" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="311.136" cy="195.872" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="320.828" cy="225.90800000000002" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="279.029" cy="231.926" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-            <circle cx="290.276" cy="195.90066666666667" r="2" stroke="black" stroke-width="1" fill-opacity='1' />
-                    
-        </svg>
-    </div>
-</div>
-
-
-<div class="visualisasi" class="text-center" style="width:97%; height:550px; margin: 30px; background-color:white; border:1px solid gray; border-radius:20px; float:none">
-    <p style="font-family: 'Quicksand', sans-serif; margin-top: 15px; text-align:center;">Trending Topics by <strong style="color: #013880;" >Collaborator Finder</strong></p>
-</div>
 
 
 
