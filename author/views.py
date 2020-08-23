@@ -17,7 +17,7 @@ import operator
 
 def showauthor(request):
     if request.method == 'GET':
-        result = Authors.objects.all()[:100]
+        result = Authors.objects.all().order_by('-citations')[:100]
         topic = Topics.objects.all().order_by('topic_name')
         print(result)
         page = request.GET.get('page', 1)

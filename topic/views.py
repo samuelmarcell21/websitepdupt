@@ -15,7 +15,7 @@ import operator
 # Create your views here.
 def showtopic(request):
     if request.method == 'GET':
-        result = Topics.objects.all()
+        result = Topics.objects.all().order_by('-total_publication')
 
         page = request.GET.get('page', 1)
         paginator = Paginator(result, 6)

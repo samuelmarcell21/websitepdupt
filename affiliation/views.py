@@ -10,7 +10,7 @@ from django.db.models import Sum
 def showaffiliation(request):
     if request.method == 'GET':
         univ_list = ['Institut Pertanian Bogor', 'Institut Teknologi Bandung', 'Institut Teknologi Sepuluh Nopember', 'Universitas Airlangga', 'Universitas Diponegoro', 'Unviersitas Gadjah Mada', 'Universitas Hasanuddin', 'Universitas Indonesia', 'Universitas Padjajaran', 'Universitas Pendidikan Indonesia', 'Universitas Sumatera Utara']
-        result = Affiliations.objects.filter(name__in=univ_list)
+        result = Affiliations.objects.filter(name__in=univ_list).order_by('-total_publication')
         page = request.GET.get('page', 1)
         paginator = Paginator(result, 6)
 
