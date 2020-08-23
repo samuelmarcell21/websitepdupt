@@ -148,9 +148,9 @@
             <p style="font-size: 18px;"> <strong> {{ topics.total_author }} Authors {{ topics.total_publication }} Publications {{ topics.total_cite }} Citations </strong> </p>
         </div>
 
-        <div class="SVG" style="font-size: 18px; color: #013880; margin-top:50px; width:100%;">
+        <div class="SVG" style="font-size: 18px; color: #013880; margin-top:50px; width:100%; height:600px;">
             <p> <strong> Sub-Topic </strong> </p>
-            <svg overflow='scroll' id='vis' width='1600' height='900' transform='scale(0.6)' z-index='1'>
+            <svg overflow='scroll' id='vis' width='1600' height='700' transform='scale(0.6) translate(-400 -200)' z-index='1'>
                 <g>
                     <g class="axis" transform="translate(0,0)">
                         <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
@@ -250,8 +250,9 @@
                     {% endfor %}
                 </g>
             </svg>
-            <canvas id="mixed-chart" width="400 px" height="200 px"></canvas>
         </div>
+
+        <canvas id="mixed-chart" width="400 px" height="200 px"></canvas>
 
         <div class="publications">
             <p style="font-size: 18px; color: #013880;"> <strong> Publications</strong> </p>
@@ -356,7 +357,7 @@
             data: {
                 labels: ["2018", "2019", "2020"],
                 datasets: [
-                    {%for dat in data2 %}
+                    {% for dat in data2 %}
                     {
                         label: "{{dat.x}}",
                         type: "bar",
