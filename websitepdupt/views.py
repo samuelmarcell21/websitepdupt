@@ -90,34 +90,29 @@ def index(request):
     return render(request, 'index.html', context)
 
 def find(request):
-    topic = Topics.objects.all().order_by('-total_publication')[:5]
+    topic = Topics.objects.all().order_by('-total_publication')[:3]
+    topik = []
     for i in topic:
-        print(i.topic_name)
+        topik.append(i.id_topic)
+
+    affi_1 = Affiliations.objects.filter(topik_dominan1=topik[0]).order_by('-nilai_dominan1')[:1]
+
+    affi_2 = Affiliations.objects.filter(topik_dominan1=topik[1]).order_by('-nilai_dominan1')[:1]
+
+    affi_3 = Affiliations.objects.filter(topik_dominan1=topik[2]).order_by('-nilai_dominan1')[:1]
+
+    author_1 = Authors.objects.filter(topik_dominan1=topik[0]).order_by('-nilai_dominan1')[:1]
+
+    author_2 = Authors.objects.filter(topik_dominan1=topik[1]).order_by('-nilai_dominan1')[:1]
+
+    author_3 = Authors.objects.filter(topik_dominan1=topik[2]).order_by('-nilai_dominan1')[:1]
+
     affiliation = Affiliations.objects.all().order_by('-total_publication')[:5]
     univ = []
     for i in affiliation:
         univ.append(i.initial_univ)
-    # print(univ)
-    # univ = []
-    # arr_peruniv = []
-    # for i in affiliation:
-    #     arr_peruniv.append(i.id_univ)
-    #     researcher = Authors.objects.filter(univ=i.id_univ)
-    #     for b in topic:
-    #         count = 0
-    #         for a in researcher:
-    #             paper = Papers.objects.filter(author = a.nidn, topic=b.id_topic)
-    #             count += len(paper)
-    #         arr_peruniv.append(count)   
-    #     univ.append(arr_peruniv)
 
-    arr_visualisasi = [['6', 1826, 2477, 852, 1535, 1408], ['1', 552, 1797, 665, 2176, 714], ['8', 1802, 335, 1660, 709, 506], ['5', 816, 1346, 801, 771, 1723], ['2', 1598, 288, 762, 939, 286]]
-    arr_svg = []
-    for i in range(len(arr_visualisasi)):
-        arr_svg.append(svg(arr_visualisasi[i][1], arr_visualisasi[i][2], arr_visualisasi[i][3], arr_visualisasi[i][4], arr_visualisasi[i][5], i))
-    # print(univ)
-    # print(arr_svg)
-    return render(request, 'find.html', {'arr_svg': arr_svg})
+    return render(request, 'find.html')
 
 def search(request):
     if request.method == 'POST':
