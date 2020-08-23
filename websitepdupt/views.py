@@ -95,6 +95,12 @@ def find(request):
     for i in topic:
         topik.append(i.id_topic)
 
+    topik_1 = Topics.objects.filter(id_topic=topik[0]).first()
+
+    topik_2 = Topics.objects.filter(id_topic=topik[1]).first()
+
+    topik_3 = Topics.objects.filter(id_topic=topik[2]).first()
+
     affi_1 = Affiliations.objects.filter(topik_dominan1=topik[0]).order_by('-nilai_dominan1')[:1]
 
     affi_2 = Affiliations.objects.filter(topik_dominan1=topik[1]).order_by('-nilai_dominan1')[:1]
@@ -112,7 +118,7 @@ def find(request):
     for i in affiliation:
         univ.append(i.initial_univ)
 
-    return render(request, 'find.html')
+    return render(request, 'find.html', {'affi_1':affi_1, 'affi_2':affi_2, 'affi_3':affi_3, 'author_1':author_1, 'author_2':author_2, 'author_3':author_3, 'topik_1':topik_1, 'topik_2':topik_2, 'topik_3':topik_3})
 
 def search(request):
     if request.method == 'POST':

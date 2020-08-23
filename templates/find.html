@@ -342,7 +342,7 @@
         
         <div class="visualisasi" style="width:100%; ">
             <div class="visualisasi1" style="width: 45%; height: 500px; background-color:white; margin: 18px;text-align:center; border:1px solid gray; border-radius:20px; float:left;">
-                <p style="font-family: 'Quicksand', sans-serif; margin-top: 15px;">Top 3 Topics by Affiliation by <strong style="color: #013880;" >Collaborator Finder</strong></p>
+                <p style="font-family: 'Quicksand', sans-serif; margin-top: 30px;">Top 3 Topics by Affiliation by <strong style="color: #013880;" >Collaborator Finder</strong></p>
                 <svg id="dataviz" height="500" width="800">
 
                     <text x="279" y="64" fill="black">Kimia</text>
@@ -399,13 +399,109 @@
                             
                 </svg>
             </div>
-            <div class="visualisasi2" style="width: 15%; height: 500px; background-color:white; margin: 18px;text-align:center; border:1px solid gray; border-radius:20px; float:left;">
+            <div class="visualisasi2" style="width: 15%; height: 500px; background-color:white; margin: 18px; border:1px solid gray; border-radius:20px; float:left;">
+                <p style="text-align: center; margin-bottom:0px; margin-top:30px;"> <strong> Top Trending Topic </strong></p>
+                    <div class="logo_topik1" style="width: 65px;float:left; margin:15px;">
+                        <img style="width:60px; height:60px;" src="{% static 'author/img/'|add:'topik'|add:topik_1.id_topic|add:'.png' %}" style="position: relative;" alt="Logo Afiliasi">
+                    </div>
+                    <div class="topik">
+                        <p style="font-size: 15px; color: #013880; margin:15px;  margin-bottom:0px;"> <strong> {{ topik_1.topic_name }} </strong></p>
+                        <p style="font-size: 12px;"> <strong>{{ topik_1.total_publication }} Publications </strong> </p>
+                    </div>
+                    <br>
+                    <br>
+
+                    <p style="text-align: center; margin-bottom:0px;">Top {{ topik_1.topic_name }} Affiliation</p>
+                    {% for affi_1 in affi_1 %}
+                    <div class="logo_afiliasi1" style="width: 60px;float:left;margin:15px;">
+                        <img style="width:60px; height:60px;" src="{% static 'author/img/'|add:affi_1.id_univ|add:'.png' %}" style="position: relative;" alt="Logo Afiliasi">
+                    </div>
+
+                    <p style="font-size: 12px; margin:15px;  margin-bottom:0px; margin-top:20px;"> <strong>{{ affi_1.total_author }} Authors </strong> </p>
+                    <p style="font-size: 12px;"> <strong>{{ affi_1.total_publication }} Publications </strong> </p>
+                    {% endfor %}
+
+                    <br>
+                    <br>
+                    <p style="text-align: center; margin-bottom:0px; ">Top {{ topik_1.topic_name }} Author</p>
+                    {% for author_1 in author_1 %}
+                    <div class="logo_author1" style="float:left; width:65px; margin:15px;">
+                        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:60px; height:60px; border-radius: 50%;">
+                    </div>
+                    <p style="font-size: 15px; color: #013880; margin:15px;  margin-bottom:0px;"> <strong> {{ author_1.name }} </strong></p>
+                    <p style="font-size: 12px; margin:15px;  margin-bottom:0px; margin-top:0px"> <strong>{{ author_1.nilai_dominan1 }} Publications </strong> </p>
+                    <p style="font-size: 12px;"> <strong>{{ author_1.citations }} Citations </strong> </p>
+                    {% endfor %}
+                        
+
             </div>
-            <div class="visualisasi3" style="width: 15%; height: 500px; background-color:white; margin: 18px;text-align:center; border:1px solid gray; border-radius:20px; float:left;">
-                
+            <div class="visualisasi3" style="width: 15%; height: 500px; background-color:white; margin: 18px; border:1px solid gray; border-radius:20px; float:left;">
+                <p style="text-align: center; margin-bottom:0px; margin-top:30px;"> <strong> Top Trending Topic </strong></p>
+                    <div class="logo_topik2" style="width: 65px;float:left; margin:15px;">
+                        <img style="width:60px; height:60px;" src="{% static 'author/img/'|add:'topik'|add:topik_2.id_topic|add:'.png' %}" style="position: relative;" alt="Logo Afiliasi">
+                    </div>
+                    <div class="topik">
+                        <p style="font-size: 15px; color: #013880; margin:15px;  margin-bottom:0px;"> <strong> {{ topik_2.topic_name }} </strong></p>
+                        <p style="font-size: 12px;"> <strong>{{ topik_2.total_publication }} Publications </strong> </p>
+                    </div>
+                    <br>
+                    <br>
+
+                    <p style="text-align: center; margin-bottom:0px;">Top {{ topik_2.topic_name }} Affiliation</p>
+                    {% for affi_2 in affi_2 %}
+                    <div class="logo_afiliasi2" style="width: 60px;float:left;margin:15px;">
+                        <img style="width:60px; height:60px;" src="{% static 'author/img/'|add:affi_2.id_univ|add:'.png' %}" style="position: relative;" alt="Logo Afiliasi">
+                    </div>
+
+                    <p style="font-size: 12px; margin:15px;  margin-bottom:0px; margin-top:20px;"> <strong>{{ affi_2.total_author }} Authors </strong> </p>
+                    <p style="font-size: 12px;"> <strong>{{ affi_2.total_publication }} Publications </strong> </p>
+                    {% endfor %}
+
+                    <br>
+                    <br>
+                    <p style="text-align: center; margin-bottom:0px; ">Top {{ topik_2.topic_name }} Author</p>
+                    {% for author_2 in author_2 %}
+                    <div class="logo_author2    " style="float:left; width:65px; margin:15px;">
+                        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:60px; height:60px; border-radius: 50%;">
+                    </div>
+                    <p style="font-size: 15px; color: #013880; margin:15px;  margin-bottom:0px;"> <strong> {{ author_2.name }} </strong></p>
+                    <p style="font-size: 12px; margin:15px;  margin-bottom:0px; margin-top:0px"> <strong>{{ author_2.nilai_dominan1 }} Publications </strong> </p>
+                    <p style="font-size: 12px;"> <strong>{{ author_2.citations }} Citations </strong> </p>
+                    {% endfor %}
             </div>
-            <div class="visualisasi4" style="width: 15%; height: 500px; background-color:white; margin: 18px;text-align:center; border:1px solid gray; border-radius:20px; float:left;">
-                
+            <div class="visualisasi4" style="width: 15%; height: 500px; background-color:white; margin: 18px; border:1px solid gray; border-radius:20px; float:left;">
+                <p style="text-align: center; margin-bottom:0px; margin-top:30px;"> <strong> Top Trending Topic </strong></p>
+                    <div class="logo_topik3" style="width: 65px;float:left; margin:15px;">
+                        <img style="width:60px; height:60px;" src="{% static 'author/img/'|add:'topik'|add:topik_3.id_topic|add:'.png' %}" style="position: relative;" alt="Logo Afiliasi">
+                    </div>
+                    <div class="topik3">
+                        <p style="font-size: 15px; color: #013880; margin:15px;  margin-bottom:0px;"> <strong> {{ topik_3.topic_name }} </strong></p>
+                        <p style="font-size: 12px;"> <strong>{{ topik_3.total_publication }} Publications </strong> </p>
+                    </div>
+                    <br>
+                    <br>
+
+                    <p style="text-align: center; margin-bottom:0px;">Top {{ topik_3.topic_name }} Affiliation</p>
+                    {% for affi_3 in affi_3 %}
+                    <div class="logo_afiliasi3" style="width: 60px;float:left;margin:15px;">
+                        <img style="width:60px; height:60px;" src="{% static 'author/img/'|add:affi_3.id_univ|add:'.png' %}" style="position: relative;" alt="Logo Afiliasi">
+                    </div>
+
+                    <p style="font-size: 12px; margin:15px;  margin-bottom:0px; margin-top:20px;"> <strong>{{ affi_3.total_author }} Authors </strong> </p>
+                    <p style="font-size: 12px;"> <strong>{{ affi_3.total_publication }} Publications </strong> </p>
+                    {% endfor %}
+
+                    <br>
+                    <br>
+                    <p style="text-align: center; margin-bottom:0px; ">Top {{ topik_3.topic_name }} Author</p>
+                    {% for author_3 in author_3 %}
+                    <div class="logo_author3" style="float:left; width:65px; margin:15px;">
+                        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:60px; height:60px; border-radius: 50%;">
+                    </div>
+                    <p style="font-size: 15px; color: #013880; margin:15px;  margin-bottom:0px;"> <strong> {{ author_3.name }} </strong></p>
+                    <p style="font-size: 12px; margin:15px;  margin-bottom:0px; margin-top:0px"> <strong>{{ author_3.nilai_dominan1 }} Publications </strong> </p>
+                    <p style="font-size: 12px;"> <strong>{{ author_3.citations }} Citations </strong> </p>
+                    {% endfor %}
             </div>
         </div>
         
