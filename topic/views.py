@@ -235,7 +235,9 @@ def color(row):
     elif(row['Topik']==17):
         val='#7758fb'       
     elif(row['Topik']==18):
-        val='#63b9c8'       
+        val='#63b9c8'
+    elif(row['Topik']==19):
+        val='#fa74b6'
     return val
 
 def ganti_id(row):
@@ -257,8 +259,8 @@ def SVG_sub(tops):
         data=obj.svg_sub.all().order_by('Year').values()
         # print(data)
         temp=pd.DataFrame(data)
-        # temp2={'name':obj.subtopic_name}
-        temp2={'name':obj.no_subTopic}
+        temp2={'name':obj.subtopic_name}
+        # temp2={'name':obj.no_subTopic}
         listdict.append(temp2)
         # namatopik.append()
         df=pd.concat([df,temp])

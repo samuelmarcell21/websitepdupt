@@ -307,7 +307,9 @@ def color(row):
     elif(row['Topik']==17):
         val='#7758fb'       
     elif(row['Topik']==18):
-        val='#63b9c8'       
+        val='#63b9c8'
+    elif(row['Topik']==19):
+        val='#fa74b6'               
     return val
 
 
