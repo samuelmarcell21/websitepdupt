@@ -101,10 +101,13 @@ def index(request):
     return render(request, 'index.html', context)
 
 def find(request):
+
     topic = Topics.objects.all().order_by('-total_publication')[:3]
     topik = []
     for i in topic:
         topik.append(i.id_topic)
+    
+    print(topik)
 
     topik_1 = Topics.objects.filter(id_topic=topik[0]).first()
 
@@ -129,11 +132,8 @@ def find(request):
     for i in affiliation:
         univ.append(i.initial_univ)
 
-
-
-
     df=pd.DataFrame()
-    topik=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+    topik=[1,16,11]
     listdict=[]
     for top in topik:
         obj = Topics.objects.get(id_topic=top)
@@ -190,6 +190,7 @@ def find(request):
 
 def search(request):
     if request.method == 'POST':
+        global catch
         catch = request.POST['title']
         data = [catch]
         
@@ -343,7 +344,16 @@ def search(request):
             id_artikel.append(ngetest[i][9])
 
         # global user_list
-        user_list = Papers.objects.filter(id_pub__in=id_artikel).order_by('id_pub').values('title', 'cite', 'authors', 'year', 'id_topic')
+        global user_list
+
+        user_list = Papers.objects.filter(id_pub__in=id_artikel).order_by('id_pub').values('title', 'cite', 'authors', 'year', 'topic', 'author')
+
+        id_paper = []
+
+        for i in user_list:
+            id_paper.append(i['author'])
+
+        author = Authors.objects.filter(nidn__in=id_paper)
 
         # global hasiltopik
         # hasiltopik = topic_dict.get(str(topic))
@@ -352,6 +362,8 @@ def search(request):
 
         page = request.GET.get('page', 1)
         paginator = Paginator(user_list, 10)
+
+        global users
 
         try:
             users = paginator.page(page)
@@ -365,6 +377,24 @@ def search(request):
             'topik': topic_obj,
             'catch': catch,
             'users' : users,
+        }
+
+        return render(request, 'search.html', context)
+    
+    else:
+        page = request.GET.get('page', 1)
+        paginator = Paginator(user_list, 10)
+
+        try:
+            users = paginator.page(page)
+        except PageNotAnInteger:
+            users = paginator.page(1)
+        except EmptyPage:
+            users = paginator.page(paginator.num_pages)
+        
+        context = {
+            'users' : users,
+            'catch': catch,
         }
 
         return render(request, 'search.html', context)
