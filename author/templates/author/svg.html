@@ -294,14 +294,7 @@ PDUPT
             type: 'bar',
             data: {
                 labels: ["2018", "2019", "2020"],
-                datasets: [{%for dat in data2 %} {
-                        label: "{{dat.x}}",
-                        type: "line",
-                        borderColor: "{{dat.Color}}",
-                        data: {{dat.y}},
-                        fill: false
-                    },
-                    {% endfor %} 
+                datasets: [
                     {%for dat in data2 %}
                     {
                         label: "{{dat.x}}",
@@ -317,18 +310,7 @@ PDUPT
                 title: {
                     display: true,
                     text: 'Persebaran jumlah topik 3 tahun terakhir'
-                },
-                legend: {
-                    labels: {
-                        filter: function (legendItem, chartData) {
-                            // return true or false based on legendItem's datasetIndex (legendItem.datasetIndex)
-                            if ([0, 1, 2].includes(legendItem.datasetIndex)) {
-                                return false;
-                            }
-                            return true;
-                        }
-                    }
-                }
+                }                
             }
         }); 
         </script> 
