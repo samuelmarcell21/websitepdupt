@@ -76,7 +76,7 @@ def show_detailauthor(request, *args, **kwargs):
 
     sumcite = paper.aggregate(Sum('cite'))
     list_count,list_sum=vis_author(nidn_author)
-    return render(request, 'author/detail_author.html', {'users': users, 'author': author,'countpub':paper.count(),'sumcite':sumcite,'data_count':list_count,'data_sum':list_sum, 'nama_topik': nama_topik})
+    return render(request, 'author/detail_author.html', {'users': users, 'author': author,'countpub':paper.count(),'sumcite':int(sumcite['cite__sum']),'data_count':list_count,'data_sum':list_sum, 'nama_topik': nama_topik})
 
 # fungsi svg
 #fungsi scaling kolom batas atas
