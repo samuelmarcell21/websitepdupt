@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Topics
-from author.models import Papers
+from author.models import Papers, Authors
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Subtopics
 
@@ -49,6 +49,9 @@ def show_detailtopic(request, *args, **kwargs):
     topic_id = kwargs['id_topic']
     topic = Topics.objects.get(id_topic=topic_id)
     paper = Papers.objects.filter(topic=topic_id).values('author', 'title', 'cite', 'authors', 'year', 'topic')[:100]
+
+    author = Authors.objects.filter(topik_dominan1=topic_id).order_by('-nilai_dominan1')[:3]
+
     page = request.GET.get('page', 1)
     paginator = Paginator(paper, 20)
 
@@ -62,7 +65,7 @@ def show_detailtopic(request, *args, **kwargs):
     subtopik=topic.topik_subtopik.all().values('id_SubTopic','no_subTopic')
     # bisa dipilih dulu subtopik yang mau di gambar apa aja sebelum panggil fungsi svg_sub
     data_akhir,listvis2=SVG_sub(subtopik.values_list('id_SubTopic'))
-    return render(request, 'topic/detail_topic.html', {'topics': topic, 'users': users,'data':data_akhir,'data2':listvis2})
+    return render(request, 'topic/detail_topic.html', {'topics': topic, 'users': users,'data':data_akhir,'data2':listvis2, 'author': author})
 
 
 # fungsi svg

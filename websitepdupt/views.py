@@ -363,6 +363,9 @@ def search(request):
         page = request.GET.get('page', 1)
         paginator = Paginator(user_list, 10)
 
+        global author_rekomen
+        author_rekomen = Authors.objects.filter(topik_dominan1=topic+1).order_by('-nilai_dominan1')[:3]
+
         global users
 
         try:
@@ -377,6 +380,7 @@ def search(request):
             'topik': topic_obj,
             'catch': catch,
             'users' : users,
+            'author': author_rekomen,
         }
 
         return render(request, 'search.html', context)
@@ -395,6 +399,7 @@ def search(request):
         context = {
             'users' : users,
             'catch': catch,
+            'author': author_rekomen,
         }
 
         return render(request, 'search.html', context)
