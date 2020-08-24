@@ -6,6 +6,7 @@ urlpatterns =[
 	url(r'^$',views.showauthor),
 	url(r'^(?P<nidn>[0-9]{10})/$', views.show_detailauthor),
 	url(r'^SVG/$',views.SVG),
-	url('ajax/',views.AjaxHandlerView.as_view()),
+	url('ajax/',views.ajaxhome),
+	url('ajax/proses',views.ajaxproses),
 	# url(r'^coba/$',views.coba),
 ]

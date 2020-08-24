@@ -24,95 +24,44 @@
     <ul id='seconds'>
 
     </ul>
-    <form>
-        {% for top in datatopics %}
-        <input type='checkbox' name='user_ids[]' value="{{top.id_topic}}" id='checkbox_1' /> {{top.topic_name}}</input>
-        <br> {% endfor %}
-        <input name="confirm" type="button" value="confirm" onclick="submit_form();" />
+
+    <p id="message"></p>
+
+    <form method="GET">
+        <select id="Topics-selected">
+            {% for data in datatopics  %}
+                <option value="{{data.id_topic}}">{{data.topic_name}}</option>
+            {% endfor %}
+        </select>
+        <input type="button" value="Update" id="selection-button" method="GET">
     </form>
-    <div class="chart-container" style="position: relative; height:40vh; width:80vw">
-        <canvas id="mixed-chart"></canvas>
-    </div>
+    {% for data in datatopics  %}
+        {{data.topic_name}}<br>
+    {% endfor %}
+
+
 
 
 </body>
 
 <script>
-    function submit_form() {
-        $.post("ajax.php", {
-                selectedcheckboxes: user_ids,
-                confirm: "true"
-            },
-            function(data) {
-                $("#lightbox").html(data);
-            });
-    }
-    $(document).ready(function() {
-        $(".btn").click(function() {
-            $.ajax({
-                url: '',
-                type: 'get',
+    $( "#selection-button" ).click(function(event) {
+        var TopicsSelected = $('#Topics-selected').find(":selected").val();
+        $.ajax({
+                url: "/author/ajax/proses",
+                method: 'get',
                 data: {
-                    button_text: $(this).text()
+                    filter_category : parseInt(TopicsSelected)
                 },
-                success: function(response) {
-                    $(".btn").text(response.seconds)
+                success: function(data){
+                    console.log(data)
+                },
+                error: function(xhr, errmsg, err){
+                    console.log("error")
+                    console.log(error_data)
                 }
             });
-        });
     });
 
-    $(document).ready(function() {
-        $("#test").CreateMultiCheckBox({
-            width: '230px',
-            defaultText: 'Select Below',
-            height: '250px'
-        });
-    });
-
-    new Chart(document.getElementById("mixed-chart"), {
-        type: 'bar',
-        data: {
-            labels: ['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020'],
-            datasets: [
-            {%for dat in data_count %} {
-                        label: "{{dat.x}}",
-                        type: "line",
-                        borderColor: "{{dat.Color}}",
-                        data: {{dat.y}},
-                        fill: false
-                    },
-            {% endfor %} 
-            
-            {%for dat in data_sum %}
-                    {
-                        label: "{{dat.x}}",
-                        type: "bar",
-                        backgroundColor: "{{dat.Color}}",
-                        backgroundColorHover: "{{dat.Color}}",
-                        data: {{dat.y}},
-                    },
-            {% endfor %}           
-            
-            ]
-        },
-        options: {
-            title: {
-                display: true,
-                text: 'Persebaran jumlah topik 3 tahun terakhir'
-            },
-             legend: {
-               labels: {
-                 filter: function(legendItem, chartData) {
-                   // return true or false based on legendItem's datasetIndex (legendItem.datasetIndex)
-                   if ([0,1,2].includes(legendItem.datasetIndex)) {
-                         return false;
-                       }
-                      return true;
-                 }
-               }
-             }
-        }
-    });
 </script>
 </html>

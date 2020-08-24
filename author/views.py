@@ -4,7 +4,8 @@ from topic.models import Topics
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Sum
 from django.views.generic import View
-
+from time import time
+from django.http import HttpResponse
 #SVG
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
@@ -314,16 +315,18 @@ def color(row):
 
 
 
-class AjaxHandlerView(View):
-    def get(self,request):
-        text = request.GET.get('button_text')
-        print(text)
-        datatopics=Topics.objects.all().values()
 
-        return render(request, 'author/cobajax.html',)
+def ajaxhome(request):
+    datatopics=Topics.objects.all().values()
+    return render(request, 'author/cobajax.html',{'datatopics':datatopics})
 
 
-
+def ajaxproses(self, *args, **kwargs):
+    filter_category = self.request.GET.get("filter_category")
+    print('a')
+    queryset = Topics.objects.filter(id_topic=filter_category)
+    queryset_filtered = queryset.filter()
+    return queryset_filtered
 
 def vis_author(nidn):
     nidn_author=nidn 
