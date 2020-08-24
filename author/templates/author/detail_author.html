@@ -198,10 +198,14 @@
         
                 <div class="filter" style="width:400px; float:left">
                     Filter By: <br> <br>
-                    {% for topik in nama_topik %}
-                        <input type="checkbox" id="{{topik.topic_name}}" name="{{topik.topic_name}}" value="{{topik.topic_name}}">
-                        <label for="{{topik.topic_name}}">{{topik.topic_name}}</label><br>
-                    {% endfor %}
+                    <form action="/author/filter" method="get">
+                        <input type="hidden" name="nidn" value="{{author.nidn}}">
+                        {% for topik in nama_topik %}
+                            <input type="checkbox" id="{{topik.id_topic}}" name="Topics" value="{{topik.id_topic}}">
+                            <label for="{{topik.topic_name}}">{{topik.topic_name}}</label><br>
+                        {% endfor %}
+                        <input type="submit" value="Update" id="selection-button">
+                    </form>
                 </div>
             
                 {% for paper in users %}

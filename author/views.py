@@ -55,18 +55,18 @@ def showauthor(request):
 def show_detailauthor(request, *args, **kwargs):
     nidn_author = kwargs['nidn']
     author = Authors.objects.get(nidn=nidn_author)
-    topic_paper = Papers.objects.filter(author=nidn_author).values('topic').distinct()
-
+    paper_author = author.paper
+    # topic_paper = Papers.objects.filter(author=nidn_author).values('topic').distinct()
     topik = []
-    for i in topic_paper:
+    for i in author.paper.values('topic').distinct():
         topik.append(i['topic'])
-
+    print(topik)
     nama_topik = Topics.objects.filter(id_topic__in=topik).order_by('topic_name')
 
-    paper = Papers.objects.filter(author=nidn_author).values('author', 'title', 'cite', 'authors', 'year')[:100]
+    paper = paper_author.filter(author=nidn_author).values('author', 'title', 'cite', 'authors', 'year')[:100]
     
     page = request.GET.get('page', 1)
-    paginator = Paginator(paper, 20)
+    paginator = Paginator(paper, 5)
 
     try:
         users = paginator.page(page)
@@ -314,7 +314,39 @@ def color(row):
     return val
 
 
+def filter(request):
+    data=request.GET
+    print(data)
+    nidn_author = data['nidn']
+    author = Authors.objects.get(nidn=nidn_author)
+    paper_author = author.paper
+    # topic_paper = Papers.objects.filter(author=nidn_author).values('topic').distinct()
+    topik = []
+    for i in paper_author.values('topic').distinct():
+        topik.append(i['topic'])
+    # print(topik)
+    nama_topik = Topics.objects.filter(id_topic__in=topik).order_by('topic_name')
+    list_topik_filter=data.getlist('Topics')
+    paper = paper_author.filter(topic_id__in=list_topik_filter).values('author', 'title', 'cite', 'authors', 'year')[:100]
+    
+    page = request.GET.get('page', 1)
+    paginator = Paginator(paper, 5)
 
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+    
+    sumcite = paper_author.aggregate(Sum('cite'))
+    if(sumcite['cite__sum']):
+        sumcite=int(sumcite['cite__sum'])
+    else:
+        sumcite=0
+    list_count,list_sum=vis_author(nidn_author)
+    return render(request, 'author/detail_author.html', {'users': users, 'author': author,'countpub':paper_author.count(),'sumcite':sumcite,'data_count':list_count,'data_sum':list_sum, 'nama_topik': nama_topik})
 
 def ajaxhome(request):
     datatopics=Topics.objects.all().values()
