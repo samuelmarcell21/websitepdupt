@@ -170,18 +170,18 @@
         {% endif %}
     </div>
         
+    <div class="container" style="width:100%;">
         {% for authors in users %}
-        <div class="container" style="width:100%;">
-            <div class="author" style="font-size:10px; box-shadow: 1px 1px 8px gray; background-color:white; width: 445px; height:145px; text-align:left; padding-left:20px; padding-top:15px; padding-right:20px; margin-bottom:30px; float:left;">
-                {{ authors.authors }}
-            </div>
+        <div class="author" style="font-size:10px; box-shadow: 1px 1px 8px gray; background-color:white; width: 445px; height:145px; text-align:left; padding-left:20px; padding-top:15px; padding-right:20px; margin-bottom:30px; float:left;">
+            {{ authors.nidn }}
+        </div>
             <div class="paper" style="font-size:10px; box-shadow: 1px 1px 8px gray; background-color:white; width: 633px; height:145px; text-align:left; padding-left:20px; padding-right:20px; margin-bottom:30px; float:right;">
                 <p style="font-size: 16px; color:#013880; margin-top:10px;margin-bottom:5px;"><strong>{{ authors.title }}</strong></p>
                 <p style="margin-top:5px; margin-bottom:5px;">{{ authors.year }}, {{ authors.authors }} </p>
                 <p style="color:#013880; margin-top:5px; margin-bottom:5px;"> Machine Learning </p>
             </div>    
+            {% endfor %}
         </div>
-        {% endfor %}
         
     </main>
 {% endblock content %}
