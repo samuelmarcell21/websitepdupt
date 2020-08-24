@@ -283,7 +283,7 @@
     data: {
         labels: ['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020'],
         datasets: [
-        {%for dat in data_count %} {
+        {%for dat in data_sum %} {
                     label: "{{dat.x}}",
                     type: "line",
                     borderColor: "{{dat.Color}}",
@@ -292,7 +292,7 @@
                 },
         {% endfor %} 
         
-        {%for dat in data_sum %}
+        {%for dat in data_count %}
                 {
                     label: "{{dat.x}}",
                     type: "bar",
