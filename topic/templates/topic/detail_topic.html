@@ -148,6 +148,28 @@
             <p style="font-size: 18px;"> <strong> {{ topics.total_author }} Authors {{ topics.total_publication }} Publications {{ topics.total_cite }} Citations </strong> </p>
         </div>
 
+        <div class="rekomen-afiliasi" style="margin-top:60px; width:100%;">
+            <p style="font-size: 18px; color: #013880;"> <strong> Top 3 Affiliations </strong> </p>
+            {% for affiliation in affiliation %}
+            <div class="logo" style="width: 120px;">
+                <img style="width:111px; height:111px;" src="{% static 'author/img/'|add:affiliation.id_univ|add:'.png' %}" style="position: relative;" alt="Logo Afiliasi">
+            </div>     
+            {% endfor %}
+        </div>
+
+        <div class="rekomen-author" style="margin-top:50px;">
+            <p style="font-size: 18px; color: #013880;"> <strong> Top 3 Authors </strong> </p>
+                {% for authors in author %}
+                <div class="author" style="box-shadow: 1px 1px 8px gray; background-color:white; width: 40%; text-align:left; padding-left:20px; padding-right:20px;">
+                    <a href="/author/{{ authors.nidn }}" style="color: #013880;">
+                        <p style="margin-top: 20px; font-size:20px;"> <strong> {{ authors.name }} </strong></p>
+                    </a>
+                    <p style="font-size:13px;"> <strong> {{ authors.univ.name }} </strong></p>
+                    <p style="font-size:13px;"> <strong> nidn {{ authors.nidn }} i10-index {{ authors.i10_index }} h-index {{ authors.h_index }} </strong> </p>
+                </div>       
+                {% endfor %}
+        </div>
+
         <div class="SVG" style="font-size: 18px; color: #013880; margin-top:50px; width:100%; height:600px;">
             <p> <strong> Sub-Topic </strong> </p>
             <svg overflow='scroll' id='vis' width='1600' height='700' transform='scale(0.6) translate(-400 -200)' z-index='1'>

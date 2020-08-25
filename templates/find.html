@@ -433,8 +433,8 @@
                         <img style="width:60px; height:60px;" src="{% static 'author/img/'|add:affi_1.id_univ|add:'.png' %}" style="position: relative;" alt="Logo Afiliasi">
                     </div>
                     
-                    <p style="font-size: 15px; color: #013880; margin:15px;  margin-bottom:0px;"> <strong> {{ affi_1.initial_univ }} </strong></p>
-                    <p style="font-size: 12px; margin:15px;  margin-bottom:0px; margin-top:20px;"> <strong>{{ affi_1.total_author }} Authors </strong> </p>
+                    <p style="font-size: 15px; color: #013880; margin:15px;  margin-bottom:0px; margin-top: 12px;"> <strong> {{ affi_1.initial_univ }} </strong></p>
+                    <p style="font-size: 12px; margin:15px;  margin-bottom:0px; margin-top:0px;"> <strong>{{ affi_1.total_author }} Authors </strong> </p>
                     <p style="font-size: 12px;"> <strong>{{ affi_1.total_publication }} Publications </strong> </p>
                     {% endfor %}
 
@@ -470,8 +470,8 @@
                         <img style="width:60px; height:60px;" src="{% static 'author/img/'|add:affi_2.id_univ|add:'.png' %}" style="position: relative;" alt="Logo Afiliasi">
                     </div>
 
-                    <p style="font-size: 15px; color: #013880; margin:15px;  margin-bottom:0px;"> <strong> {{ affi_2.initial_univ }} </strong></p>
-                    <p style="font-size: 12px; margin:15px;  margin-bottom:0px; margin-top:20px;"> <strong>{{ affi_2.total_author }} Authors </strong> </p>
+                    <p style="font-size: 15px; color: #013880; margin:15px;  margin-bottom:0px; margin-top: 12px;"> <strong> {{ affi_2.initial_univ }} </strong></p>
+                    <p style="font-size: 12px; margin:15px;  margin-bottom:0px; margin-top:0px;"> <strong>{{ affi_2.total_author }} Authors </strong> </p>
                     <p style="font-size: 12px;"> <strong>{{ affi_2.total_publication }} Publications </strong> </p>
                     {% endfor %}
 
@@ -505,8 +505,8 @@
                         <img style="width:60px; height:60px;" src="{% static 'author/img/'|add:affi_3.id_univ|add:'.png' %}" style="position: relative;" alt="Logo Afiliasi">
                     </div>
 
-                    <p style="font-size: 15px; color: #013880; margin:15px;  margin-bottom:0px;"> <strong> {{ affi_3.initial_univ }} </strong></p>
-                    <p style="font-size: 12px; margin:15px;  margin-bottom:0px; margin-top:20px;"> <strong>{{ affi_3.total_author }} Authors </strong> </p>
+                    <p style="font-size: 15px; color: #013880; margin:15px;  margin-bottom:0px; margin-top: 12px;"> <strong> {{ affi_3.initial_univ }} </strong></p>
+                    <p style="font-size: 12px; margin:15px;  margin-bottom:0px; margin-top:0px;"> <strong>{{ affi_3.total_author }} Authors </strong> </p>
                     <p style="font-size: 12px;"> <strong>{{ affi_3.total_publication }} Publications </strong> </p>
                     {% endfor %}
 
@@ -530,7 +530,7 @@
                 <form action="" method="POST">
                     {% csrf_token %}
                 {% for topics in topik_filter %}
-                <input type="checkbox" id="id_topik" name="id_topik" value="{{ topics.id_topic }}">
+                <input type="checkbox" id="{{ topics.id_topic }}" name="id_topik" value="{{ topics.id_topic }}">
                 <label for="{{ topics.id_topic }}"> {{ topics.topic_name }}</label><br>
                 {% endfor %}
                 <input type="submit" value="Update" id="selection-button">    
@@ -640,8 +640,10 @@
                 <br><br><br><br><br><br><br><br><br><br>
             </div>
         </div>
-        <div class="visualisasiSVG" class="text-center" style="width:97%; height:auto; margin: 20px; background-color:white; border:1px solid gray; border-radius:20px;">
-            <canvas id="mixed-chart" width="600 px" height="400 px"></canvas>
+        <div class="visualisasiChart" style="width:97%; height:1000px; margin: 20px; background-color:white; border:1px solid gray; border-radius:20px; text-align:center;">
+            <div style="margin:70px">
+                <canvas id="mixed-chart" width="600 px" height="400 px"></canvas>
+            </div>
         </div>
   
 </main>
