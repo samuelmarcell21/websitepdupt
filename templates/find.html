@@ -527,11 +527,14 @@
         <div class="visualisasiSVG" class="text-center" style="width:97%; height:600px; margin: 20px; background-color:white; border:1px solid gray; border-radius:20px;  margin-top:550px;">
             <p style="font-family: 'Quicksand', sans-serif; margin-top: 15px; text-align:center;">Trending Topics by <strong style="color: #013880;" >Collaborator Finder</strong></p>
             <div class="filter" style="width:400px; float:left; margin-left:50px;">
+                <form action="" method="POST">
+                    {% csrf_token %}
                 {% for topics in topik_filter %}
                 <input type="checkbox" id="id_topik" name="id_topik" value="{{ topics.id_topic }}">
                 <label for="{{ topics.id_topic }}"> {{ topics.topic_name }}</label><br>
                 {% endfor %}
                 <input type="submit" value="Update" id="selection-button">    
+                </form>
             </div>
             <div class="svg" style="width:800px; height:500px; float:right">
                 <svg overflow='scroll' id='vis' width='1600' height='700' transform='scale(0.6) translate(-1000 -200)' z-index='1'>
