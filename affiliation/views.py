@@ -9,22 +9,86 @@ from django.db.models import Sum
 # Create your views here.
 def showaffiliation(request):
     if request.method == 'GET':
-        univ_list = ['Institut Pertanian Bogor', 'Institut Teknologi Bandung', 'Institut Teknologi Sepuluh Nopember', 'Universitas Airlangga', 'Universitas Diponegoro', 'Unviersitas Gadjah Mada', 'Universitas Hasanuddin', 'Universitas Indonesia', 'Universitas Padjajaran', 'Universitas Pendidikan Indonesia', 'Universitas Sumatera Utara']
-        result = Affiliations.objects.filter(name__in=univ_list).order_by('-total_publication')
-        page = request.GET.get('page', 1)
-        paginator = Paginator(result, 6)
+        chk = request.GET.getlist('sort')
+        if len(chk) > 0:
+            if chk[0]=='sortaz':
+                univ_list = ['Institut Pertanian Bogor', 'Institut Teknologi Bandung', 'Institut Teknologi Sepuluh Nopember', 'Universitas Airlangga', 'Universitas Diponegoro', 'Unviersitas Gadjah Mada', 'Universitas Hasanuddin', 'Universitas Indonesia', 'Universitas Padjajaran', 'Universitas Pendidikan Indonesia', 'Universitas Sumatera Utara']
+                result = Affiliations.objects.filter(name__in=univ_list).order_by('name')
+                page = request.GET.get('page', 1)
+                paginator = Paginator(result, 6)
 
-        try:
-            users = paginator.page(page)
-        except PageNotAnInteger:
-            users = paginator.page(1)
-        except EmptyPage:
-            users = paginator.page(paginator.num_pages)
-        print(result)
+                try:
+                    users = paginator.page(page)
+                except PageNotAnInteger:
+                    users = paginator.page(1)
+                except EmptyPage:
+                    users = paginator.page(paginator.num_pages)
 
-        return render(request, 'affiliation/affiliation.html', {'users':users})
+                return render(request, 'affiliation/affiliation.html', {'users':users})
+
+            elif chk[0]=='sortpublications':
+                univ_list = ['Institut Pertanian Bogor', 'Institut Teknologi Bandung', 'Institut Teknologi Sepuluh Nopember', 'Universitas Airlangga', 'Universitas Diponegoro', 'Unviersitas Gadjah Mada', 'Universitas Hasanuddin', 'Universitas Indonesia', 'Universitas Padjajaran', 'Universitas Pendidikan Indonesia', 'Universitas Sumatera Utara']
+                result = Affiliations.objects.filter(name__in=univ_list).order_by('-total_publication')
+                page = request.GET.get('page', 1)
+                paginator = Paginator(result, 6)
+
+                try:
+                    users = paginator.page(page)
+                except PageNotAnInteger:
+                    users = paginator.page(1)
+                except EmptyPage:
+                    users = paginator.page(paginator.num_pages)
+
+                return render(request, 'affiliation/affiliation.html', {'users':users})
+            
+            elif chk[0]=='sortcitations':
+                univ_list = ['Institut Pertanian Bogor', 'Institut Teknologi Bandung', 'Institut Teknologi Sepuluh Nopember', 'Universitas Airlangga', 'Universitas Diponegoro', 'Unviersitas Gadjah Mada', 'Universitas Hasanuddin', 'Universitas Indonesia', 'Universitas Padjajaran', 'Universitas Pendidikan Indonesia', 'Universitas Sumatera Utara']
+                result = Affiliations.objects.filter(name__in=univ_list).order_by('-total_cite')
+                page = request.GET.get('page', 1)
+                paginator = Paginator(result, 6)
+
+                try:
+                    users = paginator.page(page)
+                except PageNotAnInteger:
+                    users = paginator.page(1)
+                except EmptyPage:
+                    users = paginator.page(paginator.num_pages)
+
+                return render(request, 'affiliation/affiliation.html', {'users':users})
+
+            elif chk[0]=='sortauthors':
+                univ_list = ['Institut Pertanian Bogor', 'Institut Teknologi Bandung', 'Institut Teknologi Sepuluh Nopember', 'Universitas Airlangga', 'Universitas Diponegoro', 'Unviersitas Gadjah Mada', 'Universitas Hasanuddin', 'Universitas Indonesia', 'Universitas Padjajaran', 'Universitas Pendidikan Indonesia', 'Universitas Sumatera Utara']
+                result = Affiliations.objects.filter(name__in=univ_list).order_by('-total_author')
+                page = request.GET.get('page', 1)
+                paginator = Paginator(result, 6)
+
+                try:
+                    users = paginator.page(page)
+                except PageNotAnInteger:
+                    users = paginator.page(1)
+                except EmptyPage:
+                    users = paginator.page(paginator.num_pages)
+
+                return render(request, 'affiliation/affiliation.html', {'users':users})
+
+        else:
+            univ_list = ['Institut Pertanian Bogor', 'Institut Teknologi Bandung', 'Institut Teknologi Sepuluh Nopember', 'Universitas Airlangga', 'Universitas Diponegoro', 'Unviersitas Gadjah Mada', 'Universitas Hasanuddin', 'Universitas Indonesia', 'Universitas Padjajaran', 'Universitas Pendidikan Indonesia', 'Universitas Sumatera Utara']
+            result = Affiliations.objects.filter(name__in=univ_list).order_by('-total_publication')
+            page = request.GET.get('page', 1)
+            paginator = Paginator(result, 6)
+
+            try:
+                users = paginator.page(page)
+            except PageNotAnInteger:
+                users = paginator.page(1)
+            except EmptyPage:
+                users = paginator.page(paginator.num_pages)
+            print(result)
+
+            return render(request, 'affiliation/affiliation.html', {'users':users})
 
     elif request.method == 'POST':
+
         catch = request.POST['affiliation']
 
         univ_list = ['Institut Pertanian Bogor', 'Institut Teknologi Bandung', 'Institut Teknologi Sepuluh Nopember', 'Universitas Airlangga', 'Universitas Diponegoro', 'Unviersitas Gadjah Mada', 'Universitas Hasanuddin', 'Universitas Indonesia', 'Universitas Padjajaran', 'Universitas Pendidikan Indonesia', 'Universitas Sumatera Utara']

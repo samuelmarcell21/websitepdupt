@@ -15,19 +15,83 @@ import operator
 # Create your views here.
 def showtopic(request):
     if request.method == 'GET':
-        result = Topics.objects.all().order_by('-total_publication')
 
-        page = request.GET.get('page', 1)
-        paginator = Paginator(result, 6)
+        chk = request.GET.getlist('sort')
+        if len(chk) > 0:
+            if chk[0]=='sortaz':
+                result = Topics.objects.all().order_by('topic_name')
 
-        try:
-            users = paginator.page(page)
-        except PageNotAnInteger:
-            users = paginator.page(1)
-        except EmptyPage:
-            users = paginator.page(paginator.num_pages)
+                page = request.GET.get('page', 1)
+                paginator = Paginator(result, 6)
 
-        return render(request, 'topic/topic.html', {'users': users})
+                try:
+                    users = paginator.page(page)
+                except PageNotAnInteger:
+                    users = paginator.page(1)
+                except EmptyPage:
+                    users = paginator.page(paginator.num_pages)
+
+                return render(request, 'topic/topic.html', {'users': users})
+            
+            elif chk[0]=='sortcitations':
+                result = Topics.objects.all().order_by('-total_cite')
+
+                page = request.GET.get('page', 1)
+                paginator = Paginator(result, 6)
+
+                try:
+                    users = paginator.page(page)
+                except PageNotAnInteger:
+                    users = paginator.page(1)
+                except EmptyPage:
+                    users = paginator.page(paginator.num_pages)
+
+                return render(request, 'topic/topic.html', {'users': users})
+
+            elif chk[0]=='sortpublications':
+                result = Topics.objects.all().order_by('-total_publication')
+
+                page = request.GET.get('page', 1)
+                paginator = Paginator(result, 6)
+
+                try:
+                    users = paginator.page(page)
+                except PageNotAnInteger:
+                    users = paginator.page(1)
+                except EmptyPage:
+                    users = paginator.page(paginator.num_pages)
+
+                return render(request, 'topic/topic.html', {'users': users})
+
+            elif chk[0]=='sortauthors':
+                result = Topics.objects.all().order_by('-total_author')
+
+                page = request.GET.get('page', 1)
+                paginator = Paginator(result, 6)
+
+                try:
+                    users = paginator.page(page)
+                except PageNotAnInteger:
+                    users = paginator.page(1)
+                except EmptyPage:
+                    users = paginator.page(paginator.num_pages)
+
+                return render(request, 'topic/topic.html', {'users': users})
+
+        else:
+            result = Topics.objects.all().order_by('-total_publication')
+
+            page = request.GET.get('page', 1)
+            paginator = Paginator(result, 6)
+
+            try:
+                users = paginator.page(page)
+            except PageNotAnInteger:
+                users = paginator.page(1)
+            except EmptyPage:
+                users = paginator.page(paginator.num_pages)
+
+            return render(request, 'topic/topic.html', {'users': users})
 
     elif request.method == 'POST':
         catch = request.POST['topic']

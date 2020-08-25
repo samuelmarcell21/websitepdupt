@@ -191,14 +191,17 @@
     <div class="container" style="text-align:left; width:100%;">
         <div class="filter" style="width:400px; float:left">
             Filter By: <br> <br>
-            <input type="checkbox" id="sortaz" name="sortaz" value="sortaz">
-            <label for="sortaz">Sort By A-Z</label><br>
-            <input type="checkbox" id="sortcitations" name="sortcitations" value="sortcitations">
-            <label for="sortcitations">Sort By Citations</label><br>
-            <input type="checkbox" id="sortpublications" name="sortpublications" value="sortpublications">
-            <label for="sortpublications">Sort By Publications</label><br>
-            <input type="checkbox" id="sortauthors" name="sortauthors" value="sortauthors">
-            <label for="sortauthors">Sort By Total Authors</label><br>
+            <form action="/topic/" method="GET">
+                <input type="checkbox" id="sortaz" name="sort" value="sortaz">
+                <label for="sortaz">Sort By A-Z</label><br>
+                <input type="checkbox" id="sortcitations" name="sort" value="sortcitations">
+                <label for="sortcitations">Sort By Citations</label><br>
+                <input type="checkbox" id="sortpublications" name="sort" value="sortpublications">
+                <label for="sortpublications">Sort By Publications</label><br>
+                <input type="checkbox" id="sortauthors" name="sort" value="sortauthors">
+                <label for="sortauthors">Sort By Total Authors</label><br>
+                <input type="submit" value="Update" id="selection-button">
+            </form>
         </div>
         {% for topic in users %}
         <div class="item" style="font-size:20px; box-shadow: 1px 1px 8px gray; background-color:white; width: 680px; height:190px; float:right; text-align:left; padding-left:20px; padding-right: 20px; margin-bottom:50px;">

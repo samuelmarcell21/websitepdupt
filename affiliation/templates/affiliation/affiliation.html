@@ -175,15 +175,14 @@
     <div class="container" style="text-align:left; width:100%;">
         <div class="filter" style="width:400px; float:left">
             Filter By: <br> <br>
-            <form action="/affiliation/" method="POST">
-            {% csrf_token %}
-            <input type="checkbox" id="sortaz" name="sortaz" value="sortaz">
+            <form action="/affiliation/" method="GET">
+            <input type="checkbox" id="sortaz" name="sort" value="sortaz">
             <label for="sortaz">Sort By A-Z</label><br>
-            <input type="checkbox" id="sortcitations" name="sortcitations" value="sortcitations">
+            <input type="checkbox" id="sortcitations" name="sort" value="sortcitations">
             <label for="sortcitations">Sort By Citations</label><br>
-            <input type="checkbox" id="sortpublications" name="sortpublications" value="sortpublications">
+            <input type="checkbox" id="sortpublications" name="sort" value="sortpublications">
             <label for="sortpublications">Sort By Publications</label><br>
-            <input type="checkbox" id="sortauthors" name="sortauthors" value="sortauthors">
+            <input type="checkbox" id="sortauthors" name="sort" value="sortauthors">
             <label for="sortauthors">Sort By Total Authors</label><br>
             <input type="submit" value="Update" id="selection-button">
             </form>
