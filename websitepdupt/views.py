@@ -454,7 +454,9 @@ def search(request):
         # global hasiltopik
         # hasiltopik = topic_dict.get(str(topic))
 
-        topic_obj = Topics.objects.filter(id_topic=topic+1).values('topic_name')
+        topic_obj = Topics.objects.filter(id_topic=topic+1).values('topic_name').first()
+
+        print(topic_obj)
 
         page = request.GET.get('page', 1)
         paginator = Paginator(user_list, 10)
@@ -496,6 +498,7 @@ def search(request):
             'users' : users,
             'catch': catch,
             'author': author_rekomen,
+            'topic_obj': topic_obj,
         }
 
         return render(request, 'search.html', context)
