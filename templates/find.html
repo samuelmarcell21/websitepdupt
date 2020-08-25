@@ -432,7 +432,8 @@
                     <div class="logo_afiliasi1" style="width: 60px;float:left;margin:15px;">
                         <img style="width:60px; height:60px;" src="{% static 'author/img/'|add:affi_1.id_univ|add:'.png' %}" style="position: relative;" alt="Logo Afiliasi">
                     </div>
-
+                    
+                    <p style="font-size: 15px; color: #013880; margin:15px;  margin-bottom:0px;"> <strong> {{ affi_1.initial_univ }} </strong></p>
                     <p style="font-size: 12px; margin:15px;  margin-bottom:0px; margin-top:20px;"> <strong>{{ affi_1.total_author }} Authors </strong> </p>
                     <p style="font-size: 12px;"> <strong>{{ affi_1.total_publication }} Publications </strong> </p>
                     {% endfor %}
@@ -469,6 +470,7 @@
                         <img style="width:60px; height:60px;" src="{% static 'author/img/'|add:affi_2.id_univ|add:'.png' %}" style="position: relative;" alt="Logo Afiliasi">
                     </div>
 
+                    <p style="font-size: 15px; color: #013880; margin:15px;  margin-bottom:0px;"> <strong> {{ affi_2.initial_univ }} </strong></p>
                     <p style="font-size: 12px; margin:15px;  margin-bottom:0px; margin-top:20px;"> <strong>{{ affi_2.total_author }} Authors </strong> </p>
                     <p style="font-size: 12px;"> <strong>{{ affi_2.total_publication }} Publications </strong> </p>
                     {% endfor %}
@@ -503,6 +505,7 @@
                         <img style="width:60px; height:60px;" src="{% static 'author/img/'|add:affi_3.id_univ|add:'.png' %}" style="position: relative;" alt="Logo Afiliasi">
                     </div>
 
+                    <p style="font-size: 15px; color: #013880; margin:15px;  margin-bottom:0px;"> <strong> {{ affi_3.initial_univ }} </strong></p>
                     <p style="font-size: 12px; margin:15px;  margin-bottom:0px; margin-top:20px;"> <strong>{{ affi_3.total_author }} Authors </strong> </p>
                     <p style="font-size: 12px;"> <strong>{{ affi_3.total_publication }} Publications </strong> </p>
                     {% endfor %}
@@ -521,114 +524,124 @@
             </div>
         </div>
         
-        <div class="visualisasiSVG" class="text-center" style="width:97%; height:550px; margin: 20px; background-color:white; border:1px solid gray; border-radius:20px;  margin-top:550px;">
+        <div class="visualisasiSVG" class="text-center" style="width:97%; height:600px; margin: 20px; background-color:white; border:1px solid gray; border-radius:20px;  margin-top:550px;">
             <p style="font-family: 'Quicksand', sans-serif; margin-top: 15px; text-align:center;">Trending Topics by <strong style="color: #013880;" >Collaborator Finder</strong></p>
-            <svg overflow='scroll' id='vis' width='1600' height='700' transform='scale(0.6) translate(-100 -200)' z-index='1'>
-                <g>
-                    <g class="axis" transform="translate(0,0)">
-                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                            2010
-                        </text>
-                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+            <div class="filter" style="width:400px; float:left; margin-left:50px;">
+                {% for topics in topik_filter %}
+                <input type="checkbox" id="id_topik" name="id_topik" value="{{ topics.id_topic }}">
+                <label for="{{ topics.id_topic }}"> {{ topics.topic_name }}</label><br>
+                {% endfor %}
+                <input type="submit" value="Update" id="selection-button">    
+            </div>
+            <div class="svg" style="width:800px; height:500px; float:right">
+                <svg overflow='scroll' id='vis' width='1600' height='700' transform='scale(0.6) translate(-1000 -200)' z-index='1'>
+                    <g>
+                        <g class="axis" transform="translate(0,0)">
+                            <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                                2010
+                            </text>
+                            <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
 
-                        </line>
-                    </g>
-                    <g class="axis" transform="translate(150,0)">
-                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                            2011
-                        </text>
-                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+                            </line>
+                        </g>
+                        <g class="axis" transform="translate(150,0)">
+                            <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                                2011
+                            </text>
+                            <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
 
-                        </line>
-                    </g>
-                    <g class="axis" transform="translate(300,0)">
-                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                            2012
-                        </text>
-                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+                            </line>
+                        </g>
+                        <g class="axis" transform="translate(300,0)">
+                            <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                                2012
+                            </text>
+                            <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
 
-                        </line>
-                    </g>
-                    <g class="axis" transform="translate(450,0)">
-                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                            2013
-                        </text>
-                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+                            </line>
+                        </g>
+                        <g class="axis" transform="translate(450,0)">
+                            <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                                2013
+                            </text>
+                            <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
 
-                        </line>
-                    </g>
-                    <g class="axis" transform="translate(600,0)">
-                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                            2014
-                        </text>
-                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+                            </line>
+                        </g>
+                        <g class="axis" transform="translate(600,0)">
+                            <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                                2014
+                            </text>
+                            <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
 
-                        </line>
-                    </g>
-                    <g class="axis" transform="translate(750,0)">
-                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                            2015
-                        </text>
-                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+                            </line>
+                        </g>
+                        <g class="axis" transform="translate(750,0)">
+                            <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                                2015
+                            </text>
+                            <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
 
-                        </line>
-                    </g>
-                    <g class="axis" transform="translate(900,0)">
-                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                            2016
-                        </text>
-                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+                            </line>
+                        </g>
+                        <g class="axis" transform="translate(900,0)">
+                            <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                                2016
+                            </text>
+                            <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
 
-                        </line>
-                    </g>
-                    <g class="axis" transform="translate(1050,0)">
-                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                            2017
-                        </text>
-                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
+                            </line>
+                        </g>
+                        <g class="axis" transform="translate(1050,0)">
+                            <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                                2017
+                            </text>
+                            <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:1;">
 
-                        </line>
-                    </g>
-                    <g class="axis" transform="translate(1200,0)">
-                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                            2018
-                        </text>
-                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
+                            </line>
+                        </g>
+                        <g class="axis" transform="translate(1200,0)">
+                            <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                                2018
+                            </text>
+                            <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
 
-                        </line>
-                    </g>
-                    <g class="axis" transform="translate(1350,0)">
-                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                            2019
-                        </text>
-                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
+                            </line>
+                        </g>
+                        <g class="axis" transform="translate(1350,0)">
+                            <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                                2019
+                            </text>
+                            <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
 
-                        </line>
-                    </g>
-                    <g class="axis" transform="translate(1500,0)">
-                        <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
-                            2020
-                        </text>
-                        <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
+                            </line>
+                        </g>
+                        <g class="axis" transform="translate(1500,0)">
+                            <text x="94.888889" y="15" text-anchor="end" style="font-weight:bold;">
+                                2020
+                            </text>
+                            <line x1="100.88889" y1="25" x2="100.88889" y2="675" style="stroke:lightgray; stroke-width:2;">
 
-                        </line>
+                            </line>
+                        </g>
                     </g>
-                </g>
-                <g>
-                    {% for dat in data %}
-                    <path
-                        d="M {{dat.xAwalAtas}},{{dat.yAwalAtas}} C {{dat.xLengkung1}},{{dat.yLengkung1atas}} {{dat.xLengkung2}},{{dat.yLengkung2atas}} {{dat.xAkhirAtas}},{{dat.yAkhirAtas}} L {{dat.xAkhirBawah}},{{dat.yAkhirBawah}} C {{dat.xLengkung2}},{{dat.yLengkung2bawah}} {{dat.xLengkung1}},{{dat.yLengkung1bawah}} {{dat.xAwalBawah}},{{dat.yAwalBawah}}"
-                        style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: {{dat.Color}};"
-                        opacity="1"> </path>
-                    {% endfor %}
-                </g>
-            </svg>
+                    <g>
+                        {% for dat in data %}
+                        <path
+                            d="M {{dat.xAwalAtas}},{{dat.yAwalAtas}} C {{dat.xLengkung1}},{{dat.yLengkung1atas}} {{dat.xLengkung2}},{{dat.yLengkung2atas}} {{dat.xAkhirAtas}},{{dat.yAkhirAtas}} L {{dat.xAkhirBawah}},{{dat.yAkhirBawah}} C {{dat.xLengkung2}},{{dat.yLengkung2bawah}} {{dat.xLengkung1}},{{dat.yLengkung1bawah}} {{dat.xAwalBawah}},{{dat.yAwalBawah}}"
+                            style="stroke-dasharray: 10, 10; stroke: gray; stroke-width: 0; fill-opacity: 0.6; cursor: pointer; fill: {{dat.Color}};"
+                            opacity="1"> </path>
+                        {% endfor %}
+                    </g>
+                </svg>
+                <br><br><br><br><br><br><br><br><br><br>
+            </div>
         </div>
+        <div class="visualisasiSVG" class="text-center" style="width:97%; height:auto; margin: 20px; background-color:white; border:1px solid gray; border-radius:20px;">
+            <canvas id="mixed-chart" width="600 px" height="400 px"></canvas>
+        </div>
+  
 </main>
-
-
-
-
 
 {% endblock content %}
 
@@ -662,7 +675,36 @@
     <script src="https://my.its.ac.id/assets/plugins/cropperjs/dist/cropper.js"></script>
     <script src="https://my.its.ac.id/assets/plugins/jquery-croppers/dist/jquery-cropper.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    
     <script>
+        new Chart(document.getElementById("mixed-chart"), {
+            type: 'bar',
+            data: {
+                labels: ["2018", "2019", "2020"],
+                datasets: [
+                    {% for dat in data2 %}
+                    {
+                        label: "{{dat.x}}",
+                        type: "bar",
+                        backgroundColor: "{{dat.Color}}",
+                        backgroundColorHover: "{{dat.Color}}",
+                        data: {{dat.y}},
+                    },
+                    {% endfor %}
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Persebaran jumlah topik 3 tahun terakhir'
+                },
+
+            }
+        }); 
+    </script>
+    
+    <script>
+
         var svg = d3.select("#dataviz")
             svg.append("circle").attr("cx",554).attr("cy",128).attr("r", 6).style("fill", "green")
             svg.append("circle").attr("cx",554).attr("cy",150).attr("r", 6).style("fill", "yellow")

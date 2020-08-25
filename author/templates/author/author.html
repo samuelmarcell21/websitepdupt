@@ -177,10 +177,15 @@
     <div class="container" style="text-align:left; width:100%;">
         <div class="filter" style="width:400px; float:left">
             Filter By: <br> <br>
+            <form action="/author/" method="POST">
+            {% csrf_token %}
             {% for topics in topic %}
-            <input type="checkbox" id="{{ topics.id_topic }}" name="{{ topics.id_topic }}" value="{{ topics.id_topic }}">
+            <input type="checkbox" id="id_topik" name="id_topik" value="{{ topics.id_topic }}">
             <label for="{{ topics.id_topic }}"> {{ topics.topic_name }}</label><br>
             {% endfor %}
+            <input type="submit" value="Update" id="selection-button">
+            </form>
+
         </div>
         {% for authors in users %}
                 <div class="author" style="box-shadow: 1px 1px 8px gray; background-color:white; width: 680px; height:214px; float:right; text-align:left; padding-left:20px; margin-bottom:50px; padding-right:20px;">

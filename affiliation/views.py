@@ -63,7 +63,7 @@ def show_detailaffiliation(request, *args, **kwargs):
         users = paginator.page(paginator.num_pages)
     list_count,list_sum=vis_affil(id_univ)
     return render(request, 'affiliation/detail_affiliation.html', {'univs': univ, 'users': users,'data_count':list_count,'data_sum':list_sum, 'nama_topik': topic})
-
+    
 
 def color(row):
     if(row['Topik']==0):

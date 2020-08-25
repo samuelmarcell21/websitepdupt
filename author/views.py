@@ -50,8 +50,6 @@ def showauthor(request):
 
         return render(request, 'author/author.html', {'users': users, 'topic': topic})
 
-
-
 def show_detailauthor(request, *args, **kwargs):
     nidn_author = kwargs['nidn']
     author = Authors.objects.get(nidn=nidn_author)

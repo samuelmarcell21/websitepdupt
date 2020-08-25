@@ -186,7 +186,9 @@ def find(request):
         flag+=1
         listvis2.append(data)
 
-    return render(request, 'find.html', {'affi_1':affi_1, 'affi_2':affi_2, 'affi_3':affi_3, 'author_1':author_1, 'author_2':author_2, 'author_3':author_3, 'topik_1':topik_1, 'topik_2':topik_2, 'topik_3':topik_3, 'data':data_akhir,'nama_top':listdict,'data2':listvis2,'datatopics':datatopics})
+    topik_filter = Topics.objects.all().order_by('topic_name')
+
+    return render(request, 'find.html', {'affi_1':affi_1, 'affi_2':affi_2, 'affi_3':affi_3, 'author_1':author_1, 'author_2':author_2, 'author_3':author_3, 'topik_1':topik_1, 'topik_2':topik_2, 'topik_3':topik_3, 'data':data_akhir,'nama_top':listdict,'data2':listvis2,'datatopics':datatopics, 'topik_filter':topik_filter})
 
 def search(request):
     if request.method == 'POST':
