@@ -18,20 +18,38 @@ import operator
 
 def showauthor(request):
     if request.method == 'GET':
-        result = Authors.objects.all().order_by('-citations')[:100]
-        topic = Topics.objects.all().order_by('topic_name')
-        print(result)
-        page = request.GET.get('page', 1)
-        paginator = Paginator(result, 20)
+        chk = request.GET.getlist('id_topik')
+        if len(chk) > 0:
+            result = Authors.objects.filter(topik_dominan1=chk[0]).order_by('-nilai_dominan1')[:100]
+            topic = Topics.objects.all().order_by('topic_name')
+            print(result)
+            page = request.GET.get('page', 1)
+            paginator = Paginator(result, 20)
 
-        try:
-            users = paginator.page(page)
-        except PageNotAnInteger:
-            users = paginator.page(1)
-        except EmptyPage:
-            users = paginator.page(paginator.num_pages)
+            try:
+                users = paginator.page(page)
+            except PageNotAnInteger:
+                users = paginator.page(1)
+            except EmptyPage:
+                users = paginator.page(paginator.num_pages)
 
-        return render(request, 'author/author.html', {'users': users, 'topic': topic})
+            return render(request, 'author/author_filter.html', {'users': users, 'topic': topic, 'chk': chk[0]})
+
+        else:
+            result = Authors.objects.all().order_by('-citations')[:100]
+            topic = Topics.objects.all().order_by('topic_name')
+            print(result)
+            page = request.GET.get('page', 1)
+            paginator = Paginator(result, 20)
+
+            try:
+                users = paginator.page(page)
+            except PageNotAnInteger:
+                users = paginator.page(1)
+            except EmptyPage:
+                users = paginator.page(paginator.num_pages)
+
+            return render(request, 'author/author.html', {'users': users, 'topic': topic})
 
     elif request.method == 'POST':
         catch = request.POST['author']

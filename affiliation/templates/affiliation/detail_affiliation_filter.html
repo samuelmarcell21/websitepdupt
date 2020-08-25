@@ -206,7 +206,7 @@
             Filter By: <br> <br>
             <form action="/affiliation/{{univs.id_univ}}" method="GET">
             {% for topik in nama_topik %}
-            <input type="checkbox" id="{{topik.topic_name}}" name="id_topik" value="{{topik.id_topic}}">
+            <input type="checkbox" id="{{topik.topic_name}}" name="id_topik" value="{{topik.topic_name}}">
             <label for="{{topik.topic_name}}">{{topik.topic_name}}</label><br>
             {% endfor %}
             <input type="submit" value="Update" id="selection-button">

@@ -24,7 +24,7 @@ def showaffiliation(request):
                 except EmptyPage:
                     users = paginator.page(paginator.num_pages)
 
-                return render(request, 'affiliation/affiliation.html', {'users':users})
+                return render(request, 'affiliation/affiliation_filter.html', {'users':users, 'chk':chk[0]})
 
             elif chk[0]=='sortpublications':
                 univ_list = ['Institut Pertanian Bogor', 'Institut Teknologi Bandung', 'Institut Teknologi Sepuluh Nopember', 'Universitas Airlangga', 'Universitas Diponegoro', 'Unviersitas Gadjah Mada', 'Universitas Hasanuddin', 'Universitas Indonesia', 'Universitas Padjajaran', 'Universitas Pendidikan Indonesia', 'Universitas Sumatera Utara']
@@ -39,7 +39,7 @@ def showaffiliation(request):
                 except EmptyPage:
                     users = paginator.page(paginator.num_pages)
 
-                return render(request, 'affiliation/affiliation.html', {'users':users})
+                return render(request, 'affiliation/affiliation_filter.html', {'users':users, 'chk':chk[0]})
             
             elif chk[0]=='sortcitations':
                 univ_list = ['Institut Pertanian Bogor', 'Institut Teknologi Bandung', 'Institut Teknologi Sepuluh Nopember', 'Universitas Airlangga', 'Universitas Diponegoro', 'Unviersitas Gadjah Mada', 'Universitas Hasanuddin', 'Universitas Indonesia', 'Universitas Padjajaran', 'Universitas Pendidikan Indonesia', 'Universitas Sumatera Utara']
@@ -54,7 +54,7 @@ def showaffiliation(request):
                 except EmptyPage:
                     users = paginator.page(paginator.num_pages)
 
-                return render(request, 'affiliation/affiliation.html', {'users':users})
+                return render(request, 'affiliation/affiliation_filter.html', {'users':users, 'chk':chk[0]})
 
             elif chk[0]=='sortauthors':
                 univ_list = ['Institut Pertanian Bogor', 'Institut Teknologi Bandung', 'Institut Teknologi Sepuluh Nopember', 'Universitas Airlangga', 'Universitas Diponegoro', 'Unviersitas Gadjah Mada', 'Universitas Hasanuddin', 'Universitas Indonesia', 'Universitas Padjajaran', 'Universitas Pendidikan Indonesia', 'Universitas Sumatera Utara']
@@ -69,7 +69,7 @@ def showaffiliation(request):
                 except EmptyPage:
                     users = paginator.page(paginator.num_pages)
 
-                return render(request, 'affiliation/affiliation.html', {'users':users})
+                return render(request, 'affiliation/affiliation_filter.html', {'users':users, 'chk':chk[0]})
 
         else:
             univ_list = ['Institut Pertanian Bogor', 'Institut Teknologi Bandung', 'Institut Teknologi Sepuluh Nopember', 'Universitas Airlangga', 'Universitas Diponegoro', 'Unviersitas Gadjah Mada', 'Universitas Hasanuddin', 'Universitas Indonesia', 'Universitas Padjajaran', 'Universitas Pendidikan Indonesia', 'Universitas Sumatera Utara']
@@ -107,26 +107,50 @@ def showaffiliation(request):
         return render(request, 'affiliation/affiliation.html', {'users':users})
 
 def show_detailaffiliation(request, *args, **kwargs):
-    id_univ = kwargs['id_univ']
-    univ = Affiliations.objects.filter(id_univ=id_univ).first()
-    nidn = Authors.objects.filter(univ=id_univ).values('nidn').distinct()
-    topic = Topics.objects.all().order_by('topic_name')
-    nidn_fix = []
-    for i in nidn:
-        nidn_fix.append(i['nidn'])
-    paper = Papers.objects.filter(author__in=nidn_fix)[:100]
-    # models.Shop.objects.order_by().values('city').distinct()
-    page = request.GET.get('page', 1)
-    paginator = Paginator(paper, 20)
+    chk = request.GET.getlist('id_topik')
+    if len(chk) > 0:
+        id_univ = kwargs['id_univ']
+        univ = Affiliations.objects.filter(id_univ=id_univ).first()
+        nidn = Authors.objects.filter(univ=id_univ).values('nidn').distinct()
+        topic = Topics.objects.all().order_by('topic_name')
+        nidn_fix = []
+        for i in nidn:
+            nidn_fix.append(i['nidn'])
+        paper = Papers.objects.filter(author__in=nidn_fix, topic=chk[0])[:100]
+        # models.Shop.objects.order_by().values('city').distinct()
+        page = request.GET.get('page', 1)
+        paginator = Paginator(paper, 20)
 
-    try:
-        users = paginator.page(page)
-    except PageNotAnInteger:
-        users = paginator.page(1)
-    except EmptyPage:
-        users = paginator.page(paginator.num_pages)
-    list_count,list_sum=vis_affil(id_univ)
-    return render(request, 'affiliation/detail_affiliation.html', {'univs': univ, 'users': users,'data_count':list_count,'data_sum':list_sum, 'nama_topik': topic})
+        try:
+            users = paginator.page(page)
+        except PageNotAnInteger:
+            users = paginator.page(1)
+        except EmptyPage:
+            users = paginator.page(paginator.num_pages)
+        list_count,list_sum=vis_affil(id_univ)
+        return render(request, 'affiliation/detail_affiliation_filter.html', {'univs': univ, 'users': users,'data_count':list_count,'data_sum':list_sum, 'nama_topik': topic, 'chk':chk[0]})
+    
+    else:
+        id_univ = kwargs['id_univ']
+        univ = Affiliations.objects.filter(id_univ=id_univ).first()
+        nidn = Authors.objects.filter(univ=id_univ).values('nidn').distinct()
+        topic = Topics.objects.all().order_by('topic_name')
+        nidn_fix = []
+        for i in nidn:
+            nidn_fix.append(i['nidn'])
+        paper = Papers.objects.filter(author__in=nidn_fix)[:100]
+        # models.Shop.objects.order_by().values('city').distinct()
+        page = request.GET.get('page', 1)
+        paginator = Paginator(paper, 20)
+
+        try:
+            users = paginator.page(page)
+        except PageNotAnInteger:
+            users = paginator.page(1)
+        except EmptyPage:
+            users = paginator.page(paginator.num_pages)
+        list_count,list_sum=vis_affil(id_univ)
+        return render(request, 'affiliation/detail_affiliation.html', {'univs': univ, 'users': users,'data_count':list_count,'data_sum':list_sum, 'nama_topik': topic})
     
 
 def color(row):

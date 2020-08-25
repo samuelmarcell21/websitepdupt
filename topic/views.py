@@ -31,7 +31,7 @@ def showtopic(request):
                 except EmptyPage:
                     users = paginator.page(paginator.num_pages)
 
-                return render(request, 'topic/topic.html', {'users': users})
+                return render(request, 'topic/topic_filter.html', {'users': users, 'chk':chk[0]})
             
             elif chk[0]=='sortcitations':
                 result = Topics.objects.all().order_by('-total_cite')
@@ -46,7 +46,7 @@ def showtopic(request):
                 except EmptyPage:
                     users = paginator.page(paginator.num_pages)
 
-                return render(request, 'topic/topic.html', {'users': users})
+                return render(request, 'topic/topic_filter.html', {'users': users, 'chk':chk[0]})
 
             elif chk[0]=='sortpublications':
                 result = Topics.objects.all().order_by('-total_publication')
@@ -61,7 +61,7 @@ def showtopic(request):
                 except EmptyPage:
                     users = paginator.page(paginator.num_pages)
 
-                return render(request, 'topic/topic.html', {'users': users})
+                return render(request, 'topic/topic_filter.html', {'users': users, 'chk':chk[0]})
 
             elif chk[0]=='sortauthors':
                 result = Topics.objects.all().order_by('-total_author')
@@ -76,7 +76,7 @@ def showtopic(request):
                 except EmptyPage:
                     users = paginator.page(paginator.num_pages)
 
-                return render(request, 'topic/topic.html', {'users': users})
+                return render(request, 'topic/topic_filter.html', {'users': users, 'chk':chk[0]})
 
         else:
             result = Topics.objects.all().order_by('-total_publication')

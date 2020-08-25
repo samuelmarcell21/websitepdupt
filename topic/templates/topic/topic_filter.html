@@ -20,7 +20,6 @@
     <meta name="description" content="myITS SSO">
     <meta name="author" content="DPTSI ITS">
     <meta name="robots" content="noindex, nofollow">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <!-- Icons -->
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
@@ -114,17 +113,31 @@
 
 {% endblock navbar %}
 
+
+{% block footer %}
+<footer id="page-footer" class="bg-white opacity-0" style="opacity: 1; margin-top:100px; margin-top: 20px;">
+    <div class="content py-20 font-size-xs clearfix">
+        <div class="float-left" style="padding-top: 40px">
+            <div class="info">© 2020 Institut Teknologi Sepuluh Nopember</div>
+        </div>
+        <div class="float-right">
+            <img srcset="https://my.its.ac.id/assets/media/img/@2x/Logo-its.png 2x, https://my.its.ac.id/assets/media/img/Logo-its.png 1x" src="https://my.its.ac.id/assets/media/img/Logo-its.png" alt="Logo ITS" class="dark-logo mr-2" width="100px">
+            <img srcset="https://my.its.ac.id/assets/media/img/@2x/logo-ITSsemangatbaru.png 2x, https://my.its.ac.id/assets/media/img/logo-ITSsemangatbaru.png 1x" src="https://my.its.ac.id/assets/media/img/logo-ITSsemangatbaru.png" width="100px" alt="Logo ITS Semangat Baru" class="dark-logo">
+        </div>
+    </div>
+</footer>
+</div>
+{% endblock %}
+
 {% block content %}
 
 {% load static %}
 
-
 <main id="main-container" style="min-height: 829px;">
-
     <div class="container" style="width: 100%; margin-top:100px; margin-bottom:30px;">
-        <form action="/author/" class="form-inline justify-content-center" method="post">
+        <form action="/topic/" class="form-inline justify-content-center" method="post">
             {% csrf_token %}
-                <input type="text" class="form-control" placeholder="Search Author..." id="author" name="author" style="border-color: #013880; width:94%">
+                <input type="text" class="form-control" placeholder="Search Topic..." id="topic" name="topic" style="border-color: #013880; width:94%">
                 <button type="Submit" class="btn btn-primary" style="background-color: #013880; font-family: 'Quicksand', sans-serif; margin-left:15px;">
                     <i class="fas fa-search"></i>
                 </button>
@@ -140,7 +153,7 @@
                         <ul class="pagination justify-content-end">
                         {% if users.has_previous %}
                             <li class="page-item">
-                                <a class="page-link" href="?page={{ users.previous_page_number }}" tabindex="-1" style="color:#013880;">Previous</a>
+                                <a class="page-link" href="?sort={{chk}}&page={{ users.previous_page_number }}" tabindex="-1" style="color:#013880;">Previous</a>
                             </li>
                         {% else %}
                             <li class="page-item disabled">
@@ -153,13 +166,13 @@
                         {% if users.number == i %}
                             <li class="page-item active"><span class="page-link" style="background-color:#013880;">{{ i }} <span class="sr-only">(current)</span></span></li>
                         {% else %}
-                            <li class="page-item"><a href="?page={{ i }}" class="page-link" style="color:#013880;">{{ i }}</a></li>
+                            <li class="page-item"><a href="?sort={{chk}}&page={{ i }}" class="page-link" style="color:#013880;">{{ i }}</a></li>
                         {% endif %}
                         {% endfor %}
             
                         {% if users.has_next %}
                         <li class="page-item">
-                            <a class="page-link" href="?page={{ users.next_page_number }}" style="color:#013880;">Next</a>
+                            <a class="page-link" href="?sort={{chk}}&page={{ users.next_page_number }}" style="color:#013880;">Next</a>
                         </li>
                             {% else %}
                         <li class="page-item disabled">
@@ -173,47 +186,36 @@
             </nav>
         {% endif %}
     </div>
-        
+
+    
     <div class="container" style="text-align:left; width:100%;">
         <div class="filter" style="width:400px; float:left">
             Filter By: <br> <br>
-            <form action="/author/" method="GET">
-            {% for topics in topic %}
-            <input type="checkbox" id="{{ topics.id_topic }}" name="id_topik" value="{{ topics.id_topic }}">
-            <label for="{{ topics.id_topic }}"> {{ topics.topic_name }}</label><br>
-            {% endfor %}
-            <input type="submit" value="Update" id="selection-button">
+            <form action="/topic/" method="GET">
+                <input type="checkbox" id="sortaz" name="sort" value="sortaz">
+                <label for="sortaz">Sort By A-Z</label><br>
+                <input type="checkbox" id="sortcitations" name="sort" value="sortcitations">
+                <label for="sortcitations">Sort By Citations</label><br>
+                <input type="checkbox" id="sortpublications" name="sort" value="sortpublications">
+                <label for="sortpublications">Sort By Publications</label><br>
+                <input type="checkbox" id="sortauthors" name="sort" value="sortauthors">
+                <label for="sortauthors">Sort By Total Authors</label><br>
+                <input type="submit" value="Update" id="selection-button">
             </form>
-
         </div>
-        {% for authors in users %}
-                <div class="author" style="box-shadow: 1px 1px 8px gray; background-color:white; width: 680px; height:214px; float:right; text-align:left; padding-left:20px; margin-bottom:50px; padding-right:20px;">
-                    <a href="{{ authors.nidn }}" style="color: #013880;">
-                        <p style="margin-top: 20px; font-size:20px;"> <strong> {{ authors.name }} </strong></p>
-                    </a>
-                    <p style="font-size:13px;"> <strong> {{ authors.univ.name }} </strong></p>
-                    <p style="font-size:13px;"> <strong> nidn {{ authors.nidn }} i10-index {{ authors.i10_index }} h-index {{ authors.h_index }} </strong> </p>
-                    <p style="font-size:13px; color: #013880;"> <strong style="outline-style: solid;"> {{ authors.topik_dominan1.topic_name }} </strong> &nbsp; &nbsp; <strong> {{ authors.nilai_dominan1 }} Publications </strong> &nbsp; &nbsp; <strong style="outline-style: solid;"> {{ authors.topik_dominan2.topic_name }} </strong> &nbsp; &nbsp; <strong> {{ authors.nilai_dominan2 }} Publications </strong></p>
-                </div>    
+        {% for topic in users %}
+        <div class="item" style="font-size:20px; box-shadow: 1px 1px 8px gray; background-color:white; width: 680px; height:190px; float:right; text-align:left; padding-left:20px; padding-right: 20px; margin-bottom:50px;">
+            <a href="{{ topic.id_topic }}" style="color: #013880;">
+                <p style="margin-top: 20px; font-size:20px;"> <strong> {{ topic.topic_name }} </strong></p>
+            </a>
+            <p> <strong style="font-size:16px"> {{ topic.total_author }} </strong> <strong style="font-size: 13px;"> Authors </strong> <strong style="font-size:16px"> {{ topic.total_publication }} </strong> <strong style="font-size: 13px;"> Publications </strong></p>
+            <p> <strong style="font-size:16px"> {{ topic.total_cite }} </strong> <strong style="font-size: 13px;"> Citations </strong> </p>
+        </div>    
         {% endfor %}
-        </div>
-        
-    </main>
-{% endblock content %}
-
-{% block footer %}
-<footer id="page-footer" class="bg-white opacity-0" style="opacity: 1; margin-top: 20px;">
-    <div class="content py-20 font-size-xs clearfix">
-        <div class="float-left" style="padding-top: 40px">
-            <div class="info">© 2020 Institut Teknologi Sepuluh Nopember</div>
-        </div>
-        <div class="float-right">
-            <img srcset="https://my.its.ac.id/assets/media/img/@2x/Logo-its.png 2x, https://my.its.ac.id/assets/media/img/Logo-its.png 1x" src="https://my.its.ac.id/assets/media/img/Logo-its.png" alt="Logo ITS" class="dark-logo mr-2" width="100px">
-            <img srcset="https://my.its.ac.id/assets/media/img/@2x/logo-ITSsemangatbaru.png 2x, https://my.its.ac.id/assets/media/img/logo-ITSsemangatbaru.png 1x" src="https://my.its.ac.id/assets/media/img/logo-ITSsemangatbaru.png" width="100px" alt="Logo ITS Semangat Baru" class="dark-logo">
-        </div>
     </div>
-</footer>
-{% endblock %}
+</main>
+
+{% endblock content %}
 
 {% block script %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -231,7 +233,4 @@
     <script src="https://my.its.ac.id/assets/plugins/cropperjs/dist/cropper.js"></script>
     <script src="https://my.its.ac.id/assets/plugins/jquery-croppers/dist/jquery-cropper.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 {% endblock %}
