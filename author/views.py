@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from author.models import Authors, Papers, Papers_Update, Svg_top
+from author.models import Authors, Papers, Papers_Update, Svg_top,Data_sumcount_author
 from topic.models import Topics
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Sum
@@ -93,7 +93,17 @@ def show_detailauthor(request, *args, **kwargs):
 
     sumcite = paper.aggregate(Sum('cite'))
     list_count,list_sum=vis_author(nidn_author)
-    return render(request, 'author/detail_author.html', {'users': users, 'author': author,'countpub':paper.count(),'sumcite':int(sumcite['cite__sum']),'data_count':list_count,'data_sum':list_sum, 'nama_topik': nama_topik})
+    # list_count,list_sum=[0,0]
+
+    ##data sum cite
+    topik_sumcount=[author.topik_dominan1_id,author.topik_dominan2_id,author.topik_dominan3_id]  
+    data_sumcount=[]
+    for top in topik_sumcount:
+        temp=getData_sumcount_author(top,nidn_author)
+        data_sumcount+=(list(temp.values('topic','year','pubcount','sumcite')))
+    print(data_sumcount)
+    return render(request, 'author/detail_author.html', {'users': users, 'author': author,'countpub':paper.count(),'sumcite':int(sumcite['cite__sum']),
+    'data_count':list_count,'data_sum':list_sum, 'nama_topik': nama_topik,'data_sumcount':data_sumcount})
 
 # fungsi svg
 #fungsi scaling kolom batas atas
@@ -428,3 +438,7 @@ def vis_author(nidn):
 
     return(list_count,list_sum)
     # return render(request, 'author/cobajax.html',{'data_count':list_count,'data_sum':list_sum,'author':author})
+
+def getData_sumcount_author(top,nidn):
+    data=Data_sumcount_author.objects.filter(topic_id=top,author_id=nidn).order_by('-year')
+    return(data)
