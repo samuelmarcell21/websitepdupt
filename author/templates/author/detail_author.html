@@ -144,8 +144,8 @@
                     {% comment %} <div class="chart-container content" style="height: 300; width: 600px; text-align:left">
                         <canvas id="doughnut-chart"></canvas>
                     </div> {% endcomment %}
-                    <div class="chart-container content" style="height:40vh; width:80vw">
-                        <canvas id="mixed-chart"></canvas>
+                    <div class="chart-container content" style="height:40vh; width:80vw;">
+                        <canvas id="mixed-chart" style="background-color: #FFFFFF;"></canvas>
                     </div>
                 </div>
             </div>  
@@ -313,7 +313,7 @@
             display: true,
             text: 'Persebaran jumlah topik 3 tahun terakhir'
         },
-            legend: {
+        legend: {
             labels: {
                 filter: function(legendItem, chartData) {
                 // return true or false based on legendItem's datasetIndex (legendItem.datasetIndex)
@@ -323,6 +323,9 @@
                     return true;
                 }
             }
+        },
+            chartArea: {
+                backgroundColor: 'rgba(255, 255, 255, 0.9)'
             }
     }
     });
