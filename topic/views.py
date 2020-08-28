@@ -3,7 +3,7 @@ from .models import Topics
 from author.models import Papers, Authors
 from affiliation.models import Affiliations
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import Subtopics
+from .models import Subtopics,Data_sumcount_topic
 
 #SVG
 import pandas as pd
@@ -132,7 +132,11 @@ def show_detailtopic(request, *args, **kwargs):
     subtopik=topic.topik_subtopik.all().values('id_SubTopic','no_subTopic')
     # bisa dipilih dulu subtopik yang mau di gambar apa aja sebelum panggil fungsi svg_sub
     data_akhir,listvis2=SVG_sub(subtopik.values_list('id_SubTopic'))
-    return render(request, 'topic/detail_topic.html', {'topics': topic, 'users': users,'data':data_akhir,'data2':listvis2, 'author': author, 'affiliation': affiliation})
+
+
+    ##sumcount
+    data_sumcount=getData_sumcount_topik(topic_id)
+    return render(request, 'topic/detail_topic.html', {'topics': topic, 'users': users,'data':data_akhir,'data2':listvis2, 'author': author, 'affiliation': affiliation,'data_sumcount':data_sumcount})
 
 
 # fungsi svg
@@ -380,3 +384,7 @@ def SVG_sub(tops):
         listvis2.append(data)
     return(data_akhir,listvis2)
     # return render(request, 'author/SVG.html',{'data':data_akhir,'nama_top':listdict,'data2':listvis2,'datatopics':datatopics})
+
+def getData_sumcount_topik(top):
+    data=Data_sumcount_topic.objects.filter(topic_id=top).order_by('-year')
+    return(data)
