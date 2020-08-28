@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
 from author.models import Papers, Authors
-from topic.models import Topics
+from topic.models import Topics, Data_sumcount_topic
 from affiliation.models import Affiliations
 
 
@@ -170,25 +170,34 @@ def find(request):
         # print(HASIL)
         data_akhir=HASIL.to_dict('records')
 
-        #Visualisasi samping svg
-        dfvis2=df[['topic_id','Year','batasAtas']]
-        dfvis2 = dfvis2.rename(columns={"topic_id": "Topik"})
-        dfvis2 = dfvis2.astype({"Topik": float, "Year": float, "batasAtas": float})
-        dfvis2= dfvis2[dfvis2['Year']>2017]
-        dfvis2['Color']=dfvis2.apply(color,axis=1)
-        listvis2=[]
-        flag=0
-        for top in dfvis2.Topik.unique():
-            datay=[]
-            for index,row in dfvis2[dfvis2['Topik']==top].iterrows():
-                datay.append(row['batasAtas'])
-            data={'x':listdict[flag]['name'],'y':datay,'Color':row['Color']}
-            flag+=1
-            listvis2.append(data)
+        # #Visualisasi samping svg
+        # dfvis2=df[['topic_id','Year','batasAtas']]
+        # dfvis2 = dfvis2.rename(columns={"topic_id": "Topik"})
+        # dfvis2 = dfvis2.astype({"Topik": float, "Year": float, "batasAtas": float})
+        # dfvis2= dfvis2[dfvis2['Year']>2017]
+        # dfvis2['Color']=dfvis2.apply(color,axis=1)
+        # listvis2=[]
+        # flag=0
+        # for top in dfvis2.Topik.unique():
+        #     datay=[]
+        #     for index,row in dfvis2[dfvis2['Topik']==top].iterrows():
+        #         datay.append(row['batasAtas'])
+        #     data={'x':listdict[flag]['name'],'y':datay,'Color':row['Color']}
+        #     flag+=1
+        #     listvis2.append(data)
+
+        ## code sumcount
+        data_sumcount=[]
+        for top in topik:
+            temp=getData_sumcount_topik(topik[0])
+            data_sumcount+=(list(temp.values('topic','year','pubcount','sumcite')))
+            
+        # print(data_sumcount)
 
         topik_filter = Topics.objects.all().order_by('topic_name')
 
-        return render(request, 'find.html', {'affi_1':affi_1, 'affi_2':affi_2, 'affi_3':affi_3, 'author_1':author_1, 'author_2':author_2, 'author_3':author_3, 'topik_1':topik_1, 'topik_2':topik_2, 'topik_3':topik_3, 'data':data_akhir,'nama_top':listdict,'data2':listvis2,'datatopics':datatopics, 'topik_filter':topik_filter})
+        return render(request, 'find.html', {'affi_1':affi_1, 'affi_2':affi_2, 'affi_3':affi_3, 'author_1':author_1, 'author_2':author_2, 'author_3':author_3, 'topik_1':topik_1, 'topik_2':topik_2, 'topik_3':topik_3,
+        'data':data_akhir,'nama_top':listdict,'datatopics':datatopics, 'topik_filter':topik_filter,'data_sumcount1':data_sumcount})
 
     else:
         chk = request.POST.getlist('id_topik')
@@ -791,3 +800,8 @@ def vis_author(nidn):
 
     return(list_count,list_sum)
     # return render(request, 'author/cobajax.html',{'data_count':list_count,'data_sum':list_sum,'author':author})
+
+
+def getData_sumcount_topik(top):
+    data=Data_sumcount_topic.objects.filter(topic_id=top).order_by('-year')
+    return(data)

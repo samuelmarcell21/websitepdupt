@@ -31,3 +31,12 @@ class Svg_sub(models.Model):
     batasBawah = models.CharField(max_length=25)
     class Meta:
         db_table = "svg_sub"        
+
+class Data_sumcount_topic(models.Model):
+    id = models.CharField(max_length=25, primary_key=True)
+    topic =models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="id_topic",to_field='id_topic',related_name="topik_sumcount")
+    year = models.CharField(max_length=25)
+    pubcount = models.CharField(max_length=25)
+    sumcite = models.CharField(max_length=25)
+    class Meta:
+        db_table = "data_sum_count_topic" 
