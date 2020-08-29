@@ -92,8 +92,7 @@ def show_detailauthor(request, *args, **kwargs):
         users = paginator.page(paginator.num_pages)
 
     sumcite = paper.aggregate(Sum('cite'))
-    list_count,list_sum=vis_author(nidn_author)
-    # list_count,list_sum=[0,0]
+    df_countsum,list_count,list_sum=vis_author(nidn_author)
 
     ##data sum cite
     topik_sumcount=[author.topik_dominan1_id,author.topik_dominan2_id,author.topik_dominan3_id]  
@@ -101,9 +100,11 @@ def show_detailauthor(request, *args, **kwargs):
     for top in topik_sumcount:
         temp=getData_sumcount_author(top,nidn_author)
         data_sumcount+=(list(temp.values('topic','year','pubcount','sumcite')))
-    print(data_sumcount)
+    print(df_countsum)
     return render(request, 'author/detail_author.html', {'users': users, 'author': author,'countpub':paper.count(),'sumcite':int(sumcite['cite__sum']),
     'data_count':list_count,'data_sum':list_sum, 'nama_topik': nama_topik,'data_sumcount':data_sumcount})
+    # return render(request, 'author/detail_author.html', {'users': users, 'author': author,'countpub':paper.count(),'sumcite':int(sumcite['cite__sum']),
+    # 'nama_topik': nama_topik,'data_sumcount':data_sumcount})
 
 # fungsi svg
 #fungsi scaling kolom batas atas
@@ -387,42 +388,40 @@ def ajaxproses(self, *args, **kwargs):
     return queryset_filtered
 
 def vis_author(nidn):
-    nidn_author=nidn 
-    author = Authors.objects.get(nidn=nidn_author)
-    df=pd.DataFrame(columns=['Topic','Year','Count','Sumcite'])
-    YEAR=['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020']
+    data=Data_sumcount_author.objects.filter(author_id=nidn).order_by('-topic_id')
+    author = Authors.objects.get(nidn=nidn)
+    print(nidn)
     TOPIK=[author.topik_dominan1_id,author.topik_dominan2_id,author.topik_dominan3_id]
     TOPIK_NAMA=[author.topik_dominan1.topic_name,author.topik_dominan2.topic_name,author.topik_dominan3.topic_name]
-    print(TOPIK)
-    for top in TOPIK:
-        papers_top = author.paper.filter(topic_id=top)
-        year_dis = papers_top.values('year').distinct()
-        df_temp=pd.DataFrame(columns=['Topic','Year','Count','Sumcite'])
+    df=pd.DataFrame(columns=['Topik','Year','Count','Sumcite'])
+    YEAR=['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020']
+    for top in data.values('topic_id').distinct():
+
+        dataPerTopik=Data_sumcount_author.objects.filter(author_id=nidn,topic_id=top['topic_id'])
+        df_temp=pd.DataFrame(columns=['Topik','Year','Count','Sumcite'])
         count=[0]*11
         sumcite=[0]*11
-        topic=[top]*11
-        for year in year_dis:
-            cou=papers_top.filter(year=year['year']).count()
-            sumc=papers_top.filter(year=year['year']).aggregate(Sum('cite'))['cite__sum']
-            if(sumc is None):
-                sumc=0
-            yea=int(year['year'])-2010
-            count[yea]=cou
-            sumcite[yea]=int(sumc)
-        df_temp['Topic']=topic
+        topic=[top['topic_id']]*11
+        for dat in dataPerTopik:
+            yea=int(dat.year)-2010
+            count[yea]=int(dat.pubcount)
+            sumcite[yea]=int(dat.sumcite)
+            # print(dat)
+        df_temp['Topik']=topic
         df_temp['Year']=YEAR
         df_temp['Count']=count
         df_temp['Sumcite']=sumcite
         # print(df_temp)
         df=pd.concat([df,df_temp])
+    # print(df)
     df=df.reset_index(drop=True)
     list_count=[]
     list_sum=[]
-    df = df.rename(columns={"Topic": "Topik"})
     df = df.astype({"Topik": int})
     df['Color']=df.apply(color,axis=1)
     flag=0
-    for top in df.Topik.unique():
+    print(df.Topik.unique())
+    for top in TOPIK:
         datacount=[]
         datasum=[]
         for index,row in df[df['Topik']==top].iterrows():
@@ -435,9 +434,10 @@ def vis_author(nidn):
         list_sum.append(datas)
     # print(list_count)
     # print(list_sum)
+    return(df,list_count,list_sum)
 
-    return(list_count,list_sum)
-    # return render(request, 'author/cobajax.html',{'data_count':list_count,'data_sum':list_sum,'author':author})
+    
+    
 
 def getData_sumcount_author(top,nidn):
     data=Data_sumcount_author.objects.filter(topic_id=top,author_id=nidn).order_by('-year')
