@@ -19,3 +19,13 @@ class Affiliations(models.Model):
     initial_univ = models.CharField(max_length=20)
     class Meta:
         db_table = "university"
+
+class Data_sumcount_nidn(models.Model):
+    id = models.CharField(max_length=25, primary_key=True)
+    univ = models.ForeignKey(Affiliations, on_delete=models.CASCADE,db_column="id_univ",to_field='id_univ',related_name="univ_sumcount")
+    topic =models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="id_topic",to_field='id_topic',related_name="topik_univ_sumcount")
+    year = models.CharField(max_length=25)
+    pubcount = models.CharField(max_length=25)
+    sumcite = models.CharField(max_length=25)
+    class Meta:
+        db_table = "data_sum_count_univ"         

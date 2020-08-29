@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from author.models import Authors, Papers, Papers_Update, Svg_top,Data_sumcount_author
-from topic.models import Topics
+from topic.models import Topics,Data_sumcount_topic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Sum
 from django.views.generic import View
