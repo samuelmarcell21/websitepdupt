@@ -238,7 +238,7 @@ def vis_affil(id_univ):
     df = df.astype({"Topik": int})
     df['Color']=df.apply(color,axis=1)
     flag=0
-    print(df.Topik.unique())
+    # print(df.Topik.unique())
     for top in TOPIK:
         datacount=[]
         datasum=[]
@@ -250,8 +250,8 @@ def vis_affil(id_univ):
         flag+=1
         list_count.append(datac)
         list_sum.append(datas)
-    print(list_count)
-    print(list_sum)
+    # print(list_count)
+    # print(list_sum)
     return(df,list_count,list_sum)
 
 def sortData_sumcount_univ(df_countsum,id_univ):

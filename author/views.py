@@ -415,7 +415,7 @@ def vis_author(nidn):
     df = df.astype({"Topik": int})
     df['Color']=df.apply(color,axis=1)
     flag=0
-    print(df.Topik.unique())
+    # print(df.Topik.unique())
     for top in TOPIK:
         datacount=[]
         datasum=[]
