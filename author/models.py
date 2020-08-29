@@ -46,37 +46,30 @@ class Papers(models.Model):
     title = models.CharField(max_length=1000)
     cite = models.CharField(max_length=10)
     authors = models.CharField(max_length=2000)
-    keywords = models.CharField(max_length=1000)
-    abstract = models.CharField(max_length=2000)
     year = models.CharField(max_length=4)
-    source_title = models.CharField(max_length=1000)
-    volume = models.CharField(max_length=100)
-    DOI = models.CharField(max_length=100)
-    link = models.CharField(max_length=500)
     topic = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="id_topic",to_field='id_topic',related_name="id_topic_paper")
     subtopic = models.CharField(max_length=20 , db_column="id_subtopic")
-    flag = models.IntegerField()
     class Meta:
         db_table = "dataset_publication"
 
-class Papers_Update(models.Model):
-    id_pub = models.CharField(max_length=25,primary_key=True)
-    nidn = models.CharField(max_length=25)
-    title = models.CharField(max_length=1000)
-    cite = models.CharField(max_length=10)
-    authors = models.CharField(max_length=2000)
-    keywords = models.CharField(max_length=1000)
-    abstract = models.CharField(max_length=2000)
-    year = models.CharField(max_length=4)
-    source_title = models.CharField(max_length=1000)
-    volume = models.CharField(max_length=100)
-    DOI = models.CharField(max_length=100)
-    link = models.CharField(max_length=500)
-    topic = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="id_topic",to_field='id_topic',related_name="id_topic_paper1")
-    subtopic = models.CharField(max_length=20)
-    flag = models.IntegerField()
-    class Meta:
-        db_table = "dataset_publication_update"       
+# class Papers_Update(models.Model):
+#     id_pub = models.CharField(max_length=25,primary_key=True)
+#     nidn = models.CharField(max_length=25)
+#     title = models.CharField(max_length=1000)
+#     cite = models.CharField(max_length=10)
+#     authors = models.CharField(max_length=2000)
+#     keywords = models.CharField(max_length=1000)
+#     abstract = models.CharField(max_length=2000)
+#     year = models.CharField(max_length=4)
+#     source_title = models.CharField(max_length=1000)
+#     volume = models.CharField(max_length=100)
+#     DOI = models.CharField(max_length=100)
+#     link = models.CharField(max_length=500)
+#     topic = models.ForeignKey(Topics, on_delete=models.CASCADE,db_column="id_topic",to_field='id_topic',related_name="id_topic_paper1")
+#     subtopic = models.CharField(max_length=20)
+#     flag = models.IntegerField()
+#     class Meta:
+#         db_table = "dataset_publication_update"       
  
 class Svg_top(models.Model):
     id = models.CharField(max_length=25, primary_key=True)
