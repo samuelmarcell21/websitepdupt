@@ -96,15 +96,11 @@ def show_detailauthor(request, *args, **kwargs):
 
     ##data sum cite
     topik_sumcount=[author.topik_dominan1_id,author.topik_dominan2_id,author.topik_dominan3_id]  
-    data_sumcount=[]
-    for top in topik_sumcount:
-        temp=getData_sumcount_author(top,nidn_author)
-        data_sumcount+=(list(temp.values('topic','year','pubcount','sumcite')))
-    print(df_countsum)
+    data_sumcount=sortData_sumcount_author(df_countsum,nidn_author)
+    data_sumcount=data_sumcount.to_dict('records')
+    print(data_sumcount)
     return render(request, 'author/detail_author.html', {'users': users, 'author': author,'countpub':paper.count(),'sumcite':int(sumcite['cite__sum']),
     'data_count':list_count,'data_sum':list_sum, 'nama_topik': nama_topik,'data_sumcount':data_sumcount})
-    # return render(request, 'author/detail_author.html', {'users': users, 'author': author,'countpub':paper.count(),'sumcite':int(sumcite['cite__sum']),
-    # 'nama_topik': nama_topik,'data_sumcount':data_sumcount})
 
 # fungsi svg
 #fungsi scaling kolom batas atas
@@ -439,6 +435,22 @@ def vis_author(nidn):
     
     
 
-def getData_sumcount_author(top,nidn):
-    data=Data_sumcount_author.objects.filter(topic_id=top,author_id=nidn).order_by('-year')
-    return(data)
+def sortData_sumcount_author(df_countsum,nidn):
+    author = Authors.objects.get(nidn=nidn)
+    TOPIK=[author.topik_dominan1_id,author.topik_dominan2_id,author.topik_dominan3_id]
+    count_topik = df_countsum[['Topik', 'Count']].groupby(['Topik']).agg('sum')
+    count_topik=count_topik.sort_values(by=['Count'],ascending=False)
+    count_topik=count_topik.reset_index(level=['Topik'])
+    count_topik['Urutan']=count_topik.index+1
+    urutan_dict=count_topik[['Topik','Urutan']].to_dict('records')
+    def urutan(row):
+        for dat in urutan_dict:
+            if(row['Topik']==dat['Topik']):
+                val=dat['Urutan']
+                break
+        return val
+    df_countsum['Urutan']=df_countsum.apply(urutan,axis=1)
+    df_countsum=df_countsum.sort_values(by=['Urutan','Year'])
+    return(df_countsum)
+    
+    
