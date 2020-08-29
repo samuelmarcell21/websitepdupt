@@ -98,7 +98,7 @@ def show_detailauthor(request, *args, **kwargs):
     topik_sumcount=[author.topik_dominan1_id,author.topik_dominan2_id,author.topik_dominan3_id]  
     data_sumcount=sortData_sumcount_author(df_countsum,nidn_author)
     data_sumcount=data_sumcount.to_dict('records')
-    print(data_sumcount)
+    # print(data_sumcount)
     return render(request, 'author/detail_author.html', {'users': users, 'author': author,'countpub':paper.count(),'sumcite':int(sumcite['cite__sum']),
     'data_count':list_count,'data_sum':list_sum, 'nama_topik': nama_topik,'data_sumcount':data_sumcount})
 
@@ -450,6 +450,8 @@ def sortData_sumcount_author(df_countsum,nidn):
         return val
     df_countsum['Urutan']=df_countsum.apply(urutan,axis=1)
     df_countsum=df_countsum.sort_values(by=['Urutan','Year'],ascending=[True,False])
+    df_countsum=df_countsum.reset_index(drop=True)
+    df_countsum=df_countsum[df_countsum['Count'] != 0]
     return(df_countsum)
     
     
