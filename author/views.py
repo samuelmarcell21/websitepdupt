@@ -449,7 +449,7 @@ def sortData_sumcount_author(df_countsum,nidn):
                 break
         return val
     df_countsum['Urutan']=df_countsum.apply(urutan,axis=1)
-    df_countsum=df_countsum.sort_values(by=['Urutan','Year'])
+    df_countsum=df_countsum.sort_values(by=['Urutan','Year'],ascending=[True,False])
     return(df_countsum)
     
     

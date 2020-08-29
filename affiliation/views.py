@@ -110,7 +110,7 @@ def show_detailaffiliation(request, *args, **kwargs):
     chk = request.GET.getlist('id_topik')
     if len(chk) > 0:
         id_univ = kwargs['id_univ']
-        univ = Affiliations.objects.filter(id_univ=id_univ).first()
+        univ = Affiliations.objects.get(id_univ=id_univ)
         nidn = Authors.objects.filter(univ=id_univ).values('nidn').distinct()
         topic = Topics.objects.all().order_by('topic_name')
         nidn_fix = []
@@ -128,12 +128,17 @@ def show_detailaffiliation(request, *args, **kwargs):
         except EmptyPage:
             users = paginator.page(paginator.num_pages)
         df_countsum,list_count,list_sum=vis_affil(id_univ)
+        ##data sum count, ada 2 pilihan mau nampilin selama 10 tahun terakhir, atau tahun2 yang punya nilai aja
+        topik_sumcount=[univ.topik_dominan1_id,univ.topik_dominan2_id,univ.topik_dominan3_id]  
+        data_sumcount=sortData_sumcount_univ(df_countsum,id_univ)
+        data_sumcount=data_sumcount.to_dict('records')
+        print(data_sumcount)
         return render(request, 'affiliation/detail_affiliation_filter.html', {'univs': univ, 'users': users,'data_count':list_count,
-        'data_sum':list_sum, 'nama_topik': topic, 'chk':chk[0]})
+        'data_sum':list_sum, 'nama_topik': topic, 'chk':chk[0],'data_sumcount':data_sumcount})
     
     else:
         id_univ = kwargs['id_univ']
-        univ = Affiliations.objects.filter(id_univ=id_univ).first()
+        univ = Affiliations.objects.get(id_univ=id_univ)
         nidn = Authors.objects.filter(univ=id_univ).values('nidn').distinct()
         topic = Topics.objects.all().order_by('topic_name')
         nidn_fix = []
@@ -151,7 +156,12 @@ def show_detailaffiliation(request, *args, **kwargs):
         except EmptyPage:
             users = paginator.page(paginator.num_pages)
         df_countsum,list_count,list_sum=vis_affil(id_univ)
-        return render(request, 'affiliation/detail_affiliation.html', {'univs': univ, 'users': users,'data_count':list_count,'data_sum':list_sum, 'nama_topik': topic})
+        topik_sumcount=[univ.topik_dominan1_id,univ.topik_dominan2_id,univ.topik_dominan3_id]  
+        data_sumcount=sortData_sumcount_univ(df_countsum,id_univ)
+        data_sumcount=data_sumcount.to_dict('records')
+        
+        return render(request, 'affiliation/detail_affiliation.html', {'univs': univ, 'users': users,'data_count':list_count,
+        'data_sum':list_sum, 'nama_topik': topic,'data_sumcount':data_sumcount})
     
 
 def color(row):
@@ -243,3 +253,21 @@ def vis_affil(id_univ):
     print(list_count)
     print(list_sum)
     return(df,list_count,list_sum)
+
+def sortData_sumcount_univ(df_countsum,id_univ):
+    univ = Affiliations.objects.get(id_univ=id_univ)
+    TOPIK=[univ.topik_dominan1_id,univ.topik_dominan2_id,univ.topik_dominan3_id]
+    count_topik = df_countsum[['Topik', 'Count']].groupby(['Topik']).agg('sum')
+    count_topik=count_topik.sort_values(by=['Count'],ascending=False)
+    count_topik=count_topik.reset_index(level=['Topik'])
+    count_topik['Urutan']=count_topik.index+1
+    urutan_dict=count_topik[['Topik','Urutan']].to_dict('records')
+    def urutan(row):
+        for dat in urutan_dict:
+            if(row['Topik']==dat['Topik']):
+                val=dat['Urutan']
+                break
+        return val
+    df_countsum['Urutan']=df_countsum.apply(urutan,axis=1)
+    df_countsum=df_countsum.sort_values(by=['Urutan','Year'],ascending=[True,False])
+    return(df_countsum)
