@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from author.models import Authors, Papers, Papers_Update, Svg_top,Data_sumcount_author
+from author.models import Authors, Papers, Svg_top,Data_sumcount_author
 from topic.models import Topics,Data_sumcount_topic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Sum
@@ -94,7 +94,7 @@ def show_detailauthor(request, *args, **kwargs):
     sumcite = paper.aggregate(Sum('cite'))
     df_countsum,list_count,list_sum=vis_author(nidn_author)
 
-    ##data sum cite
+    ##data sum count, ada 2 pilihan mau nampilin selama 10 tahun terakhir, atau tahun2 yang punya nilai aja
     topik_sumcount=[author.topik_dominan1_id,author.topik_dominan2_id,author.topik_dominan3_id]  
     data_sumcount=sortData_sumcount_author(df_countsum,nidn_author)
     data_sumcount=data_sumcount.to_dict('records')
@@ -392,7 +392,6 @@ def vis_author(nidn):
     df=pd.DataFrame(columns=['Topik','Year','Count','Sumcite'])
     YEAR=['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020']
     for top in data.values('topic_id').distinct():
-
         dataPerTopik=Data_sumcount_author.objects.filter(author_id=nidn,topic_id=top['topic_id'])
         df_temp=pd.DataFrame(columns=['Topik','Year','Count','Sumcite'])
         count=[0]*11

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from affiliation.models import Affiliations
+from affiliation.models import Affiliations,Data_sumcount_univ
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from author.models import Authors, Papers
 from topic.models import Topics
@@ -127,8 +127,9 @@ def show_detailaffiliation(request, *args, **kwargs):
             users = paginator.page(1)
         except EmptyPage:
             users = paginator.page(paginator.num_pages)
-        list_count,list_sum=vis_affil(id_univ)
-        return render(request, 'affiliation/detail_affiliation_filter.html', {'univs': univ, 'users': users,'data_count':list_count,'data_sum':list_sum, 'nama_topik': topic, 'chk':chk[0]})
+        df_countsum,list_count,list_sum=vis_affil(id_univ)
+        return render(request, 'affiliation/detail_affiliation_filter.html', {'univs': univ, 'users': users,'data_count':list_count,
+        'data_sum':list_sum, 'nama_topik': topic, 'chk':chk[0]})
     
     else:
         id_univ = kwargs['id_univ']
@@ -149,7 +150,7 @@ def show_detailaffiliation(request, *args, **kwargs):
             users = paginator.page(1)
         except EmptyPage:
             users = paginator.page(paginator.num_pages)
-        list_count,list_sum=vis_affil(id_univ)
+        df_countsum,list_count,list_sum=vis_affil(id_univ)
         return render(request, 'affiliation/detail_affiliation.html', {'univs': univ, 'users': users,'data_count':list_count,'data_sum':list_sum, 'nama_topik': topic})
     
 
@@ -197,39 +198,38 @@ def color(row):
     return val
 
 def vis_affil(id_univ):
+    data=Data_sumcount_univ.objects.filter(univ_id=id_univ).order_by('-topic_id')
     univ= Affiliations.objects.get(id_univ=id_univ)
     YEAR=['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020']
     TOPIK=[univ.topik_dominan1_id,univ.topik_dominan2_id,univ.topik_dominan3_id]
     TOPIK_NAMA=[univ.topik_dominan1.topic_name,univ.topik_dominan2.topic_name,univ.topik_dominan3.topic_name]
-    # print(dir(univ.aut))
-    # print(univ.aut.paper)
     df=pd.DataFrame(columns=['Topic','Year','Count','Sumcite'])
-    df['Topic']=[TOPIK[0]]*11 + [TOPIK[1]]*11 + [TOPIK[2]]*11
-    df['Year']=(YEAR)*3
-    df = df.astype({"Topic": int,"Year": int})
-    # flag=0
-    df['Count']=0
-    df['Sumcite']=0
-    for aut in univ.aut.all():
-        # print(flag,'/',univ.aut.count())
-        # flag +=1
-        for top in TOPIK:
-            papers_top = aut.paper.filter(topic_id=top)
-            year_dis = papers_top.values('year').distinct()
-            for year in year_dis:
-                cou=papers_top.filter(year=year['year']).count()
-                sumc=papers_top.filter(year=year['year']).aggregate(Sum('cite'))['cite__sum']
-                if(sumc is None):
-                    sumc=0
-                df.loc[(df["Topic"] == int(top)) & (df["Year"] == int(year['year'])), "Count"] += cou
-                df.loc[(df["Topic"] == int(top)) & (df["Year"] == int(year['year'])), "Sumcite"] += sumc
-    df = df.rename(columns={"Topic": "Topik"})
+    YEAR=['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020']
+    for top in data.values('topic_id').distinct():
+        dataPerTopik=Data_sumcount_univ.objects.filter(univ_id=id_univ,topic_id=top['topic_id'])
+        df_temp=pd.DataFrame(columns=['Topik','Year','Count','Sumcite'])
+        count=[0]*11
+        sumcite=[0]*11
+        topic=[top['topic_id']]*11
+        for dat in dataPerTopik:
+            yea=int(dat.year)-2010
+            count[yea]=int(dat.pubcount)
+            sumcite[yea]=int(dat.sumcite)
+            # print(dat)
+        df_temp['Topik']=topic
+        df_temp['Year']=YEAR
+        df_temp['Count']=count
+        df_temp['Sumcite']=sumcite
+        # print(df_temp)
+        df=pd.concat([df,df_temp])
+    df=df.reset_index(drop=True)
+    list_count=[]
+    list_sum=[]
     df = df.astype({"Topik": int})
     df['Color']=df.apply(color,axis=1)
     flag=0
-    list_count=[]
-    list_sum=[]
-    for top in df.Topik.unique():
+    print(df.Topik.unique())
+    for top in TOPIK:
         datacount=[]
         datasum=[]
         for index,row in df[df['Topik']==top].iterrows():
@@ -239,7 +239,7 @@ def vis_affil(id_univ):
         datas={'x':TOPIK_NAMA[flag],'y':datasum,'Color':row['Color']}
         flag+=1
         list_count.append(datac)
-        list_sum.append(datas)     
+        list_sum.append(datas)
     print(list_count)
-    print(list_sum)           
-    return(list_count,list_sum)
+    print(list_sum)
+    return(df,list_count,list_sum)

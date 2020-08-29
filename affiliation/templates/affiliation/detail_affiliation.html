@@ -159,6 +159,14 @@
                     <canvas id="mixed-chart"style="background-color: #FFFFFF;"></canvas>
                 </div>
         </div>
+        <div>
+            {% for dat in data_sumcount %}
+                <p>{{dat.Year}} | {{dat.Count}} | {{dat.Sumcite}}</p>
+                {% if dat.Year == '2010' %}
+                    <p>GANTI TOPIK</p>
+            {% endif %}
+        {% endfor %}
+        </div>
     </div>  
     <div class="container" style="width:100%; margin-top:340px;">
         <div class="publication" style="font-size: 18px; color: #013880; margin-top:50px; width:100%;">
